@@ -18,6 +18,7 @@ export default function Layout({ children }: LayoutProps) {
       case '/bmi-calculator': return 'BMI Calculator';
       case '/age-calculator': return 'Age Calculator';
       case '/loan-calculator': return 'Loan Calculator';
+      case '/percentage-calculator': return 'Percentage Calculator';
       default: return 'Tool';
     }
   };

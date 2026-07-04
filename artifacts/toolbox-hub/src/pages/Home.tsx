@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Search, ShieldAlert, QrCode, FileText, Activity, Calendar, TrendingUp } from 'lucide-react';
+import { Search, ShieldAlert, QrCode, FileText, Activity, Calendar, TrendingUp, Percent } from 'lucide-react';
 import ToolCard from '../components/ToolCard';
 
 const TOOLS = [
@@ -38,6 +38,12 @@ const TOOLS = [
     description: 'Calculate monthly payments and total interest',
     icon: TrendingUp,
     href: '/loan-calculator',
+  },
+  {
+    title: 'Percentage Calculator',
+    description: 'Calculate percentages, changes, and portions',
+    icon: Percent,
+    href: '/percentage-calculator',
   },
 ];
 
