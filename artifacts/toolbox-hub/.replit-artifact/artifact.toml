@@ -1,0 +1,27 @@
+kind = "web"
+previewPath = "/"
+title = "ToolBox Hub"
+version = "1.0.0"
+id = "artifacts/toolbox-hub"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 24692
+
+[services.development]
+run = "pnpm --filter @workspace/toolbox-hub run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/toolbox-hub", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/toolbox-hub/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "24692"
+BASE_PATH = "/"
