@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Search, ShieldAlert, QrCode, FileText, Activity, Calendar, TrendingUp, Percent, Tag } from 'lucide-react';
+import { Search, ShieldAlert, QrCode, FileText, Activity, Calendar, TrendingUp, Percent, Tag, CaseSensitive } from 'lucide-react';
 import ToolCard from '../components/ToolCard';
 
 const TOOLS = [
@@ -50,6 +50,12 @@ const TOOLS = [
     description: 'Find the final price, savings, and tax on any deal',
     icon: Tag,
     href: '/discount-calculator',
+  },
+  {
+    title: 'Text Case Converter',
+    description: 'Convert text to uppercase, lowercase, title case, and more',
+    icon: CaseSensitive,
+    href: '/text-case-converter',
   },
 ];
 

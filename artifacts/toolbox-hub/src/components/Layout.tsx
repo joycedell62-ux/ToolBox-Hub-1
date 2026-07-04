@@ -20,6 +20,7 @@ export default function Layout({ children }: LayoutProps) {
       case '/loan-calculator': return 'Loan Calculator';
       case '/percentage-calculator': return 'Percentage Calculator';
       case '/discount-calculator': return 'Discount Calculator';
+      case '/text-case-converter': return 'Text Case Converter';
       default: return 'Tool';
     }
   };

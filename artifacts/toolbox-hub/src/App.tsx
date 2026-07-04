@@ -14,6 +14,7 @@ import AgeCalculator from './pages/AgeCalculator';
 import LoanCalculator from './pages/LoanCalculator';
 import PercentageCalculator from './pages/PercentageCalculator';
 import DiscountCalculator from './pages/DiscountCalculator';
+import TextCaseConverter from './pages/TextCaseConverter';
 
 const queryClient = new QueryClient();
 
@@ -30,6 +31,7 @@ function Router() {
         <Route path="/loan-calculator" component={LoanCalculator} />
         <Route path="/percentage-calculator" component={PercentageCalculator} />
         <Route path="/discount-calculator" component={DiscountCalculator} />
+        <Route path="/text-case-converter" component={TextCaseConverter} />
         <Route component={NotFound} />
       </Switch>
     </Layout>
