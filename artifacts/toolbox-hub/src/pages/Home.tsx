@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Search, ShieldAlert, QrCode, FileText, Activity, Calendar, TrendingUp, Percent } from 'lucide-react';
+import { Search, ShieldAlert, QrCode, FileText, Activity, Calendar, TrendingUp, Percent, Tag } from 'lucide-react';
 import ToolCard from '../components/ToolCard';
 
 const TOOLS = [
@@ -44,6 +44,12 @@ const TOOLS = [
     description: 'Calculate percentages, changes, and portions',
     icon: Percent,
     href: '/percentage-calculator',
+  },
+  {
+    title: 'Discount Calculator',
+    description: 'Find the final price, savings, and tax on any deal',
+    icon: Tag,
+    href: '/discount-calculator',
   },
 ];
 

@@ -13,6 +13,7 @@ import BmiCalculator from './pages/BmiCalculator';
 import AgeCalculator from './pages/AgeCalculator';
 import LoanCalculator from './pages/LoanCalculator';
 import PercentageCalculator from './pages/PercentageCalculator';
+import DiscountCalculator from './pages/DiscountCalculator';
 
 const queryClient = new QueryClient();
 
@@ -28,6 +29,7 @@ function Router() {
         <Route path="/age-calculator" component={AgeCalculator} />
         <Route path="/loan-calculator" component={LoanCalculator} />
         <Route path="/percentage-calculator" component={PercentageCalculator} />
+        <Route path="/discount-calculator" component={DiscountCalculator} />
         <Route component={NotFound} />
       </Switch>
     </Layout>

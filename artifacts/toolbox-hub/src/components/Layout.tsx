@@ -19,6 +19,7 @@ export default function Layout({ children }: LayoutProps) {
       case '/age-calculator': return 'Age Calculator';
       case '/loan-calculator': return 'Loan Calculator';
       case '/percentage-calculator': return 'Percentage Calculator';
+      case '/discount-calculator': return 'Discount Calculator';
       default: return 'Tool';
     }
   };
