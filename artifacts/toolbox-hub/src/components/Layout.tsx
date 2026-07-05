@@ -21,6 +21,7 @@ export default function Layout({ children }: LayoutProps) {
       case '/percentage-calculator': return 'Percentage Calculator';
       case '/discount-calculator': return 'Discount Calculator';
       case '/text-case-converter': return 'Text Case Converter';
+      case '/random-number-generator': return 'Random Number Generator';
       default: return 'Tool';
     }
   };
