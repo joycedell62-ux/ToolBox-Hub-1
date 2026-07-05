@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import {
   Search, ShieldAlert, QrCode, FileText, Activity, Calendar,
   TrendingUp, Percent, Tag, CaseSensitive, Shuffle, X,
-  Zap, Lock, Smartphone, Gift, ChevronRight,
+  Zap, Lock, Smartphone, Gift, ChevronRight, Award,
 } from 'lucide-react';
 import { LucideIcon } from 'lucide-react';
 import ToolCard from '../components/ToolCard';
@@ -96,6 +96,14 @@ const TOOLS: Tool[] = [
     description: 'Generate random numbers within any range, with history and no-duplicate mode.',
     icon: Shuffle,
     href: '/random-number-generator',
+    category: 'Utility Tools',
+    isNew: true,
+  },
+  {
+    title: 'Certificate Generator',
+    description: 'Design professional certificates for courses, events, competitions, and more.',
+    icon: Award,
+    href: '/certificate-generator',
     category: 'Utility Tools',
     isNew: true,
   },

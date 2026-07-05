@@ -22,6 +22,7 @@ export default function Layout({ children }: LayoutProps) {
       case '/discount-calculator': return 'Discount Calculator';
       case '/text-case-converter': return 'Text Case Converter';
       case '/random-number-generator': return 'Random Number Generator';
+      case '/certificate-generator': return 'Certificate Generator';
       default: return 'Tool';
     }
   };

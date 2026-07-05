@@ -16,6 +16,7 @@ import PercentageCalculator from './pages/PercentageCalculator';
 import DiscountCalculator from './pages/DiscountCalculator';
 import TextCaseConverter from './pages/TextCaseConverter';
 import RandomNumberGenerator from './pages/RandomNumberGenerator';
+import CertificateGenerator from './pages/CertificateGenerator';
 
 const queryClient = new QueryClient();
 
@@ -34,6 +35,7 @@ function Router() {
         <Route path="/discount-calculator" component={DiscountCalculator} />
         <Route path="/text-case-converter" component={TextCaseConverter} />
         <Route path="/random-number-generator" component={RandomNumberGenerator} />
+        <Route path="/certificate-generator" component={CertificateGenerator} />
         <Route component={NotFound} />
       </Switch>
     </Layout>
