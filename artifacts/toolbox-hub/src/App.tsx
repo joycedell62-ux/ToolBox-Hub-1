@@ -17,6 +17,7 @@ import DiscountCalculator from './pages/DiscountCalculator';
 import TextCaseConverter from './pages/TextCaseConverter';
 import RandomNumberGenerator from './pages/RandomNumberGenerator';
 import CertificateGenerator from './pages/CertificateGenerator';
+import ResumeBuilder from './pages/ResumeBuilder';
 
 const queryClient = new QueryClient();
 
@@ -36,6 +37,7 @@ function Router() {
         <Route path="/text-case-converter" component={TextCaseConverter} />
         <Route path="/random-number-generator" component={RandomNumberGenerator} />
         <Route path="/certificate-generator" component={CertificateGenerator} />
+        <Route path="/resume-builder" component={ResumeBuilder} />
         <Route component={NotFound} />
       </Switch>
     </Layout>

@@ -23,6 +23,7 @@ export default function Layout({ children }: LayoutProps) {
       case '/text-case-converter': return 'Text Case Converter';
       case '/random-number-generator': return 'Random Number Generator';
       case '/certificate-generator': return 'Certificate Generator';
+      case '/resume-builder': return 'Resume Builder';
       default: return 'Tool';
     }
   };

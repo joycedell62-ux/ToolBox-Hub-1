@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import {
   Search, ShieldAlert, QrCode, FileText, Activity, Calendar,
   TrendingUp, Percent, Tag, CaseSensitive, Shuffle, X,
-  Zap, Lock, Smartphone, Gift, ChevronRight, Award,
+  Zap, Lock, Smartphone, Gift, ChevronRight, Award, ClipboardList,
 } from 'lucide-react';
 import { LucideIcon } from 'lucide-react';
 import ToolCard from '../components/ToolCard';
@@ -104,6 +104,14 @@ const TOOLS: Tool[] = [
     description: 'Design professional certificates for courses, events, competitions, and more.',
     icon: Award,
     href: '/certificate-generator',
+    category: 'Utility Tools',
+    isNew: true,
+  },
+  {
+    title: 'Resume Builder',
+    description: 'Build a professional resume with 5 templates, live preview, and PDF download.',
+    icon: ClipboardList,
+    href: '/resume-builder',
     category: 'Utility Tools',
     isNew: true,
   },
