@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import {
   Search, ShieldAlert, QrCode, FileText, Activity, Calendar,
   TrendingUp, Percent, Tag, CaseSensitive, Shuffle, X,
-  Zap, Lock, Smartphone, Gift, ChevronRight, Award, ClipboardList,
+  Zap, Lock, Smartphone, Gift, ChevronRight, Award, ClipboardList, Receipt,
 } from 'lucide-react';
 import { LucideIcon } from 'lucide-react';
 import ToolCard from '../components/ToolCard';
@@ -115,6 +115,14 @@ const TOOLS: Tool[] = [
     category: 'Utility Tools',
     isNew: true,
   },
+  {
+    title: 'Invoice Generator',
+    description: 'Create professional invoices with 5 templates, live preview, and PDF export.',
+    icon: Receipt,
+    href: '/invoice-generator',
+    category: 'Utility Tools',
+    isNew: true,
+  },
 ];
 
 // ─── Category config ──────────────────────────────────────────────────────────
@@ -133,7 +141,7 @@ const DOT_PATTERN = `url("data:image/svg+xml,%3Csvg width='20' height='20' xmlns
 // ─── Stat items ───────────────────────────────────────────────────────────────
 
 const STATS = [
-  { icon: Gift,       label: '10+ Free Tools',  sub: 'Always free, no limits' },
+  { icon: Gift,       label: '13+ Free Tools',  sub: 'Always free, no limits' },
   { icon: Lock,       label: 'No Sign-up',       sub: 'Use instantly, no account' },
   { icon: Zap,        label: 'Instant Results',  sub: 'Everything runs in browser' },
   { icon: Smartphone, label: 'Mobile Ready',     sub: 'Works on any device' },
@@ -193,7 +201,7 @@ export default function Home() {
           {/* Badge */}
           <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 text-blue-100 text-xs font-semibold px-4 py-2 rounded-full mb-8 animate-in fade-in slide-in-from-bottom-2 duration-500">
             <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" aria-hidden="true" />
-            10+ Free Tools Available — No sign-up required
+            13+ Free Tools Available — No sign-up required
           </div>
 
           {/* Title */}
