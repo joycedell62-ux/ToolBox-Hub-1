@@ -42,6 +42,40 @@ import PhotoCollageMaker from './pages/PhotoCollageMaker';
 import ColorPicker from './pages/ColorPicker';
 import BlurImage from './pages/BlurImage';
 import SharpenImage from './pages/SharpenImage';
+// Sprint 5 — Calculators
+import CalorieCalculator from './pages/CalorieCalculator';
+import BodyFatCalculator from './pages/BodyFatCalculator';
+import PregnancyCalculator from './pages/PregnancyCalculator';
+import OvulationCalculator from './pages/OvulationCalculator';
+import SalaryCalculator from './pages/SalaryCalculator';
+import TaxCalculator from './pages/TaxCalculator';
+import CurrencyConverter from './pages/CurrencyConverter';
+import ElectricityBillCalculator from './pages/ElectricityBillCalculator';
+import FuelCostCalculator from './pages/FuelCostCalculator';
+// Sprint 5 — Daily Life
+import GroceryList from './pages/GroceryList';
+import MealPlanner from './pages/MealPlanner';
+import WeeklyPlanner from './pages/WeeklyPlanner';
+import MonthlyPlanner from './pages/MonthlyPlanner';
+import TodoList from './pages/TodoList';
+import ShoppingList from './pages/ShoppingList';
+import ChoreChart from './pages/ChoreChart';
+import BirthdayReminder from './pages/BirthdayReminder';
+import AnniversaryReminder from './pages/AnniversaryReminder';
+import GiftIdeaGenerator from './pages/GiftIdeaGenerator';
+// V2 Text Tools
+import ReadingTimeCalculator from './pages/ReadingTimeCalculator';
+import FindReplace from './pages/FindReplace';
+import RemoveDuplicates from './pages/RemoveDuplicates';
+import TextSorter from './pages/TextSorter';
+import NotesPad from './pages/NotesPad';
+import MarkdownEditor from './pages/MarkdownEditor';
+// V2 Developer Tools
+import JsonFormatter from './pages/JsonFormatter';
+import Base64Tool from './pages/Base64Tool';
+import UrlEncoder from './pages/UrlEncoder';
+import HashGenerator from './pages/HashGenerator';
+import UuidGenerator from './pages/UuidGenerator';
 
 const queryClient = new QueryClient();
 
@@ -86,6 +120,40 @@ function Router() {
         <Route path="/color-picker" component={ColorPicker} />
         <Route path="/blur-image" component={BlurImage} />
         <Route path="/sharpen-image" component={SharpenImage} />
+        {/* Sprint 5 — Calculators */}
+        <Route path="/calorie-calculator" component={CalorieCalculator} />
+        <Route path="/body-fat-calculator" component={BodyFatCalculator} />
+        <Route path="/pregnancy-calculator" component={PregnancyCalculator} />
+        <Route path="/ovulation-calculator" component={OvulationCalculator} />
+        <Route path="/salary-calculator" component={SalaryCalculator} />
+        <Route path="/tax-calculator" component={TaxCalculator} />
+        <Route path="/currency-converter" component={CurrencyConverter} />
+        <Route path="/electricity-bill-calculator" component={ElectricityBillCalculator} />
+        <Route path="/fuel-cost-calculator" component={FuelCostCalculator} />
+        {/* Sprint 5 — Daily Life */}
+        <Route path="/grocery-list" component={GroceryList} />
+        <Route path="/meal-planner" component={MealPlanner} />
+        <Route path="/weekly-planner" component={WeeklyPlanner} />
+        <Route path="/monthly-planner" component={MonthlyPlanner} />
+        <Route path="/todo-list" component={TodoList} />
+        <Route path="/shopping-list" component={ShoppingList} />
+        <Route path="/chore-chart" component={ChoreChart} />
+        <Route path="/birthday-reminder" component={BirthdayReminder} />
+        <Route path="/anniversary-reminder" component={AnniversaryReminder} />
+        <Route path="/gift-idea-generator" component={GiftIdeaGenerator} />
+        {/* V2 Text Tools */}
+        <Route path="/reading-time-calculator" component={ReadingTimeCalculator} />
+        <Route path="/find-replace" component={FindReplace} />
+        <Route path="/remove-duplicates" component={RemoveDuplicates} />
+        <Route path="/text-sorter" component={TextSorter} />
+        <Route path="/notes-pad" component={NotesPad} />
+        <Route path="/markdown-editor" component={MarkdownEditor} />
+        {/* V2 Developer Tools */}
+        <Route path="/json-formatter" component={JsonFormatter} />
+        <Route path="/base64" component={Base64Tool} />
+        <Route path="/url-encoder" component={UrlEncoder} />
+        <Route path="/hash-generator" component={HashGenerator} />
+        <Route path="/uuid-generator" component={UuidGenerator} />
         <Route component={NotFound} />
       </Switch>
     </Layout>

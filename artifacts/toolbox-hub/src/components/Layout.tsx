@@ -46,8 +46,42 @@ export default function Layout({ children }: LayoutProps) {
       case '/photo-collage-maker':    return 'Photo Collage Maker';
       case '/color-picker':           return 'Color Picker';
       case '/blur-image':             return 'Blur Image';
-      case '/sharpen-image':          return 'Sharpen Image';
-      default:                        return 'Tool';
+      case '/sharpen-image':              return 'Sharpen Image';
+      // Sprint 5 — Calculators
+      case '/calorie-calculator':         return 'Calorie Calculator';
+      case '/body-fat-calculator':        return 'Body Fat Calculator';
+      case '/pregnancy-calculator':       return 'Pregnancy Calculator';
+      case '/ovulation-calculator':       return 'Ovulation Calculator';
+      case '/salary-calculator':          return 'Salary Calculator';
+      case '/tax-calculator':             return 'Tax Calculator';
+      case '/currency-converter':         return 'Currency Converter';
+      case '/electricity-bill-calculator':return 'Electricity Bill Calculator';
+      case '/fuel-cost-calculator':       return 'Fuel Cost Calculator';
+      // Sprint 5 — Daily Life
+      case '/grocery-list':               return 'Grocery List';
+      case '/meal-planner':               return 'Meal Planner';
+      case '/weekly-planner':             return 'Weekly Planner';
+      case '/monthly-planner':            return 'Monthly Planner';
+      case '/todo-list':                  return 'Daily To-Do List';
+      case '/shopping-list':              return 'Shopping List';
+      case '/chore-chart':                return 'Chore Chart Generator';
+      case '/birthday-reminder':          return 'Birthday Reminder';
+      case '/anniversary-reminder':       return 'Anniversary Reminder';
+      case '/gift-idea-generator':        return 'Gift Idea Generator';
+      // V2 Text Tools
+      case '/reading-time-calculator':    return 'Reading Time Calculator';
+      case '/find-replace':               return 'Find & Replace';
+      case '/remove-duplicates':          return 'Remove Duplicate Lines';
+      case '/text-sorter':                return 'Text Sorter';
+      case '/notes-pad':                  return 'Notes Pad';
+      case '/markdown-editor':            return 'Markdown Editor';
+      // V2 Developer Tools
+      case '/json-formatter':             return 'JSON Formatter';
+      case '/base64':                     return 'Base64 Encoder / Decoder';
+      case '/url-encoder':                return 'URL Encoder / Decoder';
+      case '/hash-generator':             return 'Hash Generator';
+      case '/uuid-generator':             return 'UUID Generator';
+      default:                            return 'Tool';
     }
   };
 

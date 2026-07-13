@@ -9,13 +9,18 @@ import {
   // Image Tools icons
   Maximize2, Crop, ArrowLeftRight, Images, Stamp,
   LayoutGrid, Pipette, Focus,
+  // New tool icons
+  Flame, Dumbbell, Baby, Heart, DollarSign, Landmark, Coins, Lightbulb,
+  ShoppingBag, Utensils, CalendarDays, CheckSquare, ListTodo, Clipboard, Star,
+  BookOpen, Replace, Filter, ArrowUpDown, StickyNote, FileText as FileText2,
+  Code, Binary, Link2, Shield, Fingerprint,
 } from 'lucide-react';
 import { LucideIcon } from 'lucide-react';
 import ToolCard from '../components/ToolCard';
 
 // ─── Tool registry ────────────────────────────────────────────────────────────
 
-type Category = 'Text Tools' | 'Calculators' | 'Utility Tools' | 'Developer Tools' | 'PDF Tools' | 'Image Tools';
+type Category = 'Text Tools' | 'Calculators' | 'Utility Tools' | 'Developer Tools' | 'PDF Tools' | 'Image Tools' | 'Daily Life';
 
 interface Tool {
   title: string;
@@ -291,6 +296,251 @@ const TOOLS: Tool[] = [
     category: 'Image Tools',
     isNew: true,
   },
+  // ── Sprint 5 — Calculators ─────────────────────────────────────────────────
+  {
+    title: 'Calorie Calculator',
+    description: 'Calculate your daily calorie needs using BMR, TDEE, and goal targets.',
+    icon: Flame,
+    href: '/calorie-calculator',
+    category: 'Calculators',
+    isNew: true,
+  },
+  {
+    title: 'Body Fat Calculator',
+    description: 'Estimate body fat percentage using the US Navy tape measurement method.',
+    icon: Dumbbell,
+    href: '/body-fat-calculator',
+    category: 'Calculators',
+    isNew: true,
+  },
+  {
+    title: 'Pregnancy Calculator',
+    description: 'Find your due date, trimester info, and days remaining from your LMP.',
+    icon: Baby,
+    href: '/pregnancy-calculator',
+    category: 'Calculators',
+    isNew: true,
+  },
+  {
+    title: 'Ovulation Calculator',
+    description: 'Find your fertile window and ovulation date from your last period.',
+    icon: Heart,
+    href: '/ovulation-calculator',
+    category: 'Calculators',
+    isNew: true,
+  },
+  {
+    title: 'Salary Calculator',
+    description: 'Convert between hourly, weekly, monthly, and annual salaries instantly.',
+    icon: DollarSign,
+    href: '/salary-calculator',
+    category: 'Calculators',
+    isNew: true,
+  },
+  {
+    title: 'Tax Calculator',
+    description: 'Estimate 2024 US federal income tax with bracket breakdown and effective rate.',
+    icon: Landmark,
+    href: '/tax-calculator',
+    category: 'Calculators',
+    isNew: true,
+  },
+  {
+    title: 'Currency Converter',
+    description: 'Convert between 30+ currencies with offline rates and comparison table.',
+    icon: Coins,
+    href: '/currency-converter',
+    category: 'Calculators',
+    isNew: true,
+  },
+  {
+    title: 'Electricity Bill Calculator',
+    description: 'Add appliances by wattage and hours to estimate your electricity cost.',
+    icon: Lightbulb,
+    href: '/electricity-bill-calculator',
+    category: 'Calculators',
+    isNew: true,
+  },
+  {
+    title: 'Fuel Cost Calculator',
+    description: 'Calculate trip fuel cost in imperial or metric — per mile and per km.',
+    icon: Zap,
+    href: '/fuel-cost-calculator',
+    category: 'Calculators',
+    isNew: true,
+  },
+  // ── Sprint 5 — Daily Life ──────────────────────────────────────────────────
+  {
+    title: 'Grocery List',
+    description: 'Organise your grocery list by aisle, check off items, and print it.',
+    icon: ShoppingBag,
+    href: '/grocery-list',
+    category: 'Daily Life',
+    isNew: true,
+  },
+  {
+    title: 'Meal Planner',
+    description: 'Plan breakfast, lunch, dinner, and snacks across your whole week.',
+    icon: Utensils,
+    href: '/meal-planner',
+    category: 'Daily Life',
+    isNew: true,
+  },
+  {
+    title: 'Weekly Planner',
+    description: 'Plan your week with prioritised task lists for each day.',
+    icon: CalendarDays,
+    href: '/weekly-planner',
+    category: 'Daily Life',
+    isNew: true,
+  },
+  {
+    title: 'Monthly Planner',
+    description: 'Full calendar grid with click-to-add notes on any day.',
+    icon: Calendar,
+    href: '/monthly-planner',
+    category: 'Daily Life',
+    isNew: true,
+  },
+  {
+    title: 'Daily To-Do List',
+    description: 'Track tasks with High/Medium/Low priority, filter, and clear completed.',
+    icon: CheckSquare,
+    href: '/todo-list',
+    category: 'Daily Life',
+    isNew: true,
+    popular: true,
+  },
+  {
+    title: 'Shopping List',
+    description: 'Add items with quantities and prices, see your estimated total.',
+    icon: ListTodo,
+    href: '/shopping-list',
+    category: 'Daily Life',
+    isNew: true,
+  },
+  {
+    title: 'Chore Chart Generator',
+    description: 'Assign weekly chores to family members and track daily completion.',
+    icon: Clipboard,
+    href: '/chore-chart',
+    category: 'Daily Life',
+    isNew: true,
+  },
+  {
+    title: 'Birthday Reminder',
+    description: 'Track upcoming birthdays with days-until countdown — never forget one.',
+    icon: Gift,
+    href: '/birthday-reminder',
+    category: 'Daily Life',
+    isNew: true,
+  },
+  {
+    title: 'Anniversary Reminder',
+    description: 'Track wedding anniversaries and milestones with years elapsed.',
+    icon: Heart,
+    href: '/anniversary-reminder',
+    category: 'Daily Life',
+    isNew: true,
+  },
+  {
+    title: 'Gift Idea Generator',
+    description: 'Get curated gift ideas by age group, occasion, and budget.',
+    icon: Star,
+    href: '/gift-idea-generator',
+    category: 'Daily Life',
+    isNew: true,
+  },
+  // ── V2 Text Tools ──────────────────────────────────────────────────────────
+  {
+    title: 'Reading Time Calculator',
+    description: 'Paste text to get word count, reading time, speaking time, and stats.',
+    icon: BookOpen,
+    href: '/reading-time-calculator',
+    category: 'Text Tools',
+    isNew: true,
+  },
+  {
+    title: 'Find & Replace',
+    description: 'Find and replace words or patterns in any text — with regex support.',
+    icon: Replace,
+    href: '/find-replace',
+    category: 'Text Tools',
+    isNew: true,
+  },
+  {
+    title: 'Remove Duplicate Lines',
+    description: 'Paste any list and remove duplicate lines instantly — with sort and trim options.',
+    icon: Filter,
+    href: '/remove-duplicates',
+    category: 'Text Tools',
+    isNew: true,
+  },
+  {
+    title: 'Text Sorter',
+    description: 'Sort lines A→Z, Z→A, by length, or randomly with case and numeric options.',
+    icon: ArrowUpDown,
+    href: '/text-sorter',
+    category: 'Text Tools',
+    isNew: true,
+  },
+  {
+    title: 'Notes Pad',
+    description: 'A fast multi-note notepad with colour coding, auto-save, and download.',
+    icon: StickyNote,
+    href: '/notes-pad',
+    category: 'Text Tools',
+    isNew: true,
+  },
+  {
+    title: 'Markdown Editor',
+    description: 'Write Markdown with live preview, auto-save, and export as .md or .html.',
+    icon: FileText2,
+    href: '/markdown-editor',
+    category: 'Text Tools',
+    isNew: true,
+  },
+  // ── V2 Developer Tools ─────────────────────────────────────────────────────
+  {
+    title: 'JSON Formatter',
+    description: 'Format, minify, and validate JSON — with 2 or 4 space indent options.',
+    icon: Code,
+    href: '/json-formatter',
+    category: 'Developer Tools',
+    isNew: true,
+  },
+  {
+    title: 'Base64 Encoder / Decoder',
+    description: 'Encode and decode text to Base64 — with URL-safe mode support.',
+    icon: Binary,
+    href: '/base64',
+    category: 'Developer Tools',
+    isNew: true,
+  },
+  {
+    title: 'URL Encoder / Decoder',
+    description: 'Percent-encode and decode URLs — full URL or component mode.',
+    icon: Link2,
+    href: '/url-encoder',
+    category: 'Developer Tools',
+    isNew: true,
+  },
+  {
+    title: 'Hash Generator',
+    description: 'Generate SHA-1, SHA-256, SHA-384, and SHA-512 hashes using Web Crypto API.',
+    icon: Shield,
+    href: '/hash-generator',
+    category: 'Developer Tools',
+    isNew: true,
+  },
+  {
+    title: 'UUID Generator',
+    description: 'Generate up to 100 random v4 UUIDs with uppercase and curly-brace options.',
+    icon: Fingerprint,
+    href: '/uuid-generator',
+    category: 'Developer Tools',
+    isNew: true,
+  },
 ];
 
 // ─── Category config ──────────────────────────────────────────────────────────
@@ -298,6 +548,7 @@ const TOOLS: Tool[] = [
 const CATEGORIES: { name: Category; emoji: string; color: string; bg: string; border: string }[] = [
   { name: 'Text Tools',      emoji: '📄', color: 'text-violet-700', bg: 'bg-violet-50',  border: 'border-violet-100' },
   { name: 'Calculators',     emoji: '🧮', color: 'text-emerald-700', bg: 'bg-emerald-50', border: 'border-emerald-100' },
+  { name: 'Daily Life',      emoji: '🏠', color: 'text-teal-700',   bg: 'bg-teal-50',    border: 'border-teal-100' },
   { name: 'Utility Tools',   emoji: '🔧', color: 'text-blue-700',   bg: 'bg-blue-50',    border: 'border-blue-100' },
   { name: 'Developer Tools', emoji: '💻', color: 'text-orange-700', bg: 'bg-orange-50',  border: 'border-orange-100' },
   { name: 'PDF Tools',       emoji: '📑', color: 'text-red-700',    bg: 'bg-red-50',     border: 'border-red-100' },
@@ -311,7 +562,7 @@ const DOT_PATTERN = `url("data:image/svg+xml,%3Csvg width='20' height='20' xmlns
 // ─── Stat items ───────────────────────────────────────────────────────────────
 
 const STATS = [
-  { icon: Gift,       label: '33+ Free Tools',  sub: 'Always free, no limits' },
+  { icon: Gift,       label: '63+ Free Tools',  sub: 'Always free, no limits' },
   { icon: Lock,       label: 'No Sign-up',       sub: 'Use instantly, no account' },
   { icon: Zap,        label: 'Instant Results',  sub: 'Everything runs in browser' },
   { icon: Smartphone, label: 'Mobile Ready',     sub: 'Works on any device' },
@@ -371,7 +622,7 @@ export default function Home() {
           {/* Badge */}
           <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 text-blue-100 text-xs font-semibold px-4 py-2 rounded-full mb-8 animate-in fade-in slide-in-from-bottom-2 duration-500">
             <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" aria-hidden="true" />
-            33+ Free Tools Available — No sign-up required
+            63+ Free Tools Available — No sign-up required
           </div>
 
           {/* Title */}
