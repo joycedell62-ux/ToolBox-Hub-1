@@ -3,13 +3,19 @@ import {
   Search, ShieldAlert, QrCode, FileText, Activity, Calendar,
   TrendingUp, Percent, Tag, CaseSensitive, Shuffle, X,
   Zap, Lock, Smartphone, Gift, ChevronRight, Award, ClipboardList, Receipt,
+  // PDF Tools icons
+  Layers, Scissors, Minimize2, FileCode, FileOutput, FileImage,
+  Image, RotateCcw, Unlock, ShieldCheck,
+  // Image Tools icons
+  Maximize2, Crop, ArrowLeftRight, Images, Stamp,
+  LayoutGrid, Pipette, Focus,
 } from 'lucide-react';
 import { LucideIcon } from 'lucide-react';
 import ToolCard from '../components/ToolCard';
 
 // ─── Tool registry ────────────────────────────────────────────────────────────
 
-type Category = 'Text Tools' | 'Calculators' | 'Utility Tools' | 'Developer Tools';
+type Category = 'Text Tools' | 'Calculators' | 'Utility Tools' | 'Developer Tools' | 'PDF Tools' | 'Image Tools';
 
 interface Tool {
   title: string;
@@ -123,6 +129,168 @@ const TOOLS: Tool[] = [
     category: 'Utility Tools',
     isNew: true,
   },
+  // ── PDF Tools ──────────────────────────────────────────────────────────────
+  {
+    title: 'PDF Merge',
+    description: 'Combine multiple PDF files into one — drag, reorder, and download.',
+    icon: Layers,
+    href: '/pdf-merge',
+    category: 'PDF Tools',
+    isNew: true,
+  },
+  {
+    title: 'PDF Split',
+    description: 'Extract pages or split a PDF into multiple files by range.',
+    icon: Scissors,
+    href: '/pdf-split',
+    category: 'PDF Tools',
+    isNew: true,
+  },
+  {
+    title: 'PDF Compressor',
+    description: 'Reduce PDF file size while keeping it readable — no server upload.',
+    icon: Minimize2,
+    href: '/pdf-compressor',
+    category: 'PDF Tools',
+    isNew: true,
+  },
+  {
+    title: 'Word to PDF',
+    description: 'Convert DOCX files to PDF with formatting preserved — in your browser.',
+    icon: FileCode,
+    href: '/word-to-pdf',
+    category: 'PDF Tools',
+    isNew: true,
+  },
+  {
+    title: 'PDF to Word',
+    description: 'Extract text from PDF and download as an editable Word document.',
+    icon: FileOutput,
+    href: '/pdf-to-word',
+    category: 'PDF Tools',
+    isNew: true,
+  },
+  {
+    title: 'JPG to PDF',
+    description: 'Combine one or more images into a single PDF — drag to reorder.',
+    icon: FileImage,
+    href: '/jpg-to-pdf',
+    category: 'PDF Tools',
+    isNew: true,
+  },
+  {
+    title: 'PDF to JPG',
+    description: 'Convert PDF pages into high-quality JPG images — download all as ZIP.',
+    icon: Image,
+    href: '/pdf-to-jpg',
+    category: 'PDF Tools',
+    isNew: true,
+  },
+  {
+    title: 'Rotate PDF',
+    description: 'Rotate selected or all PDF pages 90°, 180°, or 270° and download.',
+    icon: RotateCcw,
+    href: '/rotate-pdf',
+    category: 'PDF Tools',
+    isNew: true,
+  },
+  {
+    title: 'Unlock PDF',
+    description: 'Remove password protection from a PDF — you must know the password.',
+    icon: Unlock,
+    href: '/unlock-pdf',
+    category: 'PDF Tools',
+    isNew: true,
+  },
+  {
+    title: 'Protect PDF',
+    description: 'Add password protection and permissions to your PDF files.',
+    icon: ShieldCheck,
+    href: '/protect-pdf',
+    category: 'PDF Tools',
+    isNew: true,
+  },
+  // ── Image Tools ────────────────────────────────────────────────────────────
+  {
+    title: 'Image Compressor',
+    description: 'Reduce image file size with adjustable compression — before & after preview.',
+    icon: Minimize2,
+    href: '/image-compressor',
+    category: 'Image Tools',
+    isNew: true,
+  },
+  {
+    title: 'Image Resizer',
+    description: 'Resize images by pixels, percentage, or social media presets.',
+    icon: Maximize2,
+    href: '/image-resizer',
+    category: 'Image Tools',
+    isNew: true,
+  },
+  {
+    title: 'Image Cropper',
+    description: 'Crop images with freeform or fixed aspect ratios — right in your browser.',
+    icon: Crop,
+    href: '/image-cropper',
+    category: 'Image Tools',
+    isNew: true,
+  },
+  {
+    title: 'Image Converter',
+    description: 'Convert images between JPG, PNG, WebP, and BMP formats — bulk supported.',
+    icon: ArrowLeftRight,
+    href: '/image-converter',
+    category: 'Image Tools',
+    isNew: true,
+  },
+  {
+    title: 'Image to PDF',
+    description: 'Combine multiple images into a professional PDF — drag to reorder.',
+    icon: Images,
+    href: '/image-to-pdf',
+    category: 'Image Tools',
+    isNew: true,
+  },
+  {
+    title: 'Watermark Image',
+    description: 'Add text or image watermarks with opacity, size, and position controls.',
+    icon: Stamp,
+    href: '/watermark-image',
+    category: 'Image Tools',
+    isNew: true,
+  },
+  {
+    title: 'Photo Collage Maker',
+    description: 'Create beautiful photo collages with multiple layouts and borders.',
+    icon: LayoutGrid,
+    href: '/photo-collage-maker',
+    category: 'Image Tools',
+    isNew: true,
+  },
+  {
+    title: 'Color Picker',
+    description: 'Pick colors from uploaded images — get HEX, RGB, HSL, and CMYK values.',
+    icon: Pipette,
+    href: '/color-picker',
+    category: 'Image Tools',
+    isNew: true,
+  },
+  {
+    title: 'Blur Image',
+    description: 'Blur an entire image or selected regions with adjustable intensity.',
+    icon: Layers,
+    href: '/blur-image',
+    category: 'Image Tools',
+    isNew: true,
+  },
+  {
+    title: 'Sharpen Image',
+    description: 'Enhance image sharpness with adjustable convolution enhancement.',
+    icon: Focus,
+    href: '/sharpen-image',
+    category: 'Image Tools',
+    isNew: true,
+  },
 ];
 
 // ─── Category config ──────────────────────────────────────────────────────────
@@ -132,6 +300,8 @@ const CATEGORIES: { name: Category; emoji: string; color: string; bg: string; bo
   { name: 'Calculators',     emoji: '🧮', color: 'text-emerald-700', bg: 'bg-emerald-50', border: 'border-emerald-100' },
   { name: 'Utility Tools',   emoji: '🔧', color: 'text-blue-700',   bg: 'bg-blue-50',    border: 'border-blue-100' },
   { name: 'Developer Tools', emoji: '💻', color: 'text-orange-700', bg: 'bg-orange-50',  border: 'border-orange-100' },
+  { name: 'PDF Tools',       emoji: '📑', color: 'text-red-700',    bg: 'bg-red-50',     border: 'border-red-100' },
+  { name: 'Image Tools',     emoji: '🖼️', color: 'text-pink-700',   bg: 'bg-pink-50',    border: 'border-pink-100' },
 ];
 
 // ─── Hero background dot pattern ──────────────────────────────────────────────
@@ -141,7 +311,7 @@ const DOT_PATTERN = `url("data:image/svg+xml,%3Csvg width='20' height='20' xmlns
 // ─── Stat items ───────────────────────────────────────────────────────────────
 
 const STATS = [
-  { icon: Gift,       label: '13+ Free Tools',  sub: 'Always free, no limits' },
+  { icon: Gift,       label: '33+ Free Tools',  sub: 'Always free, no limits' },
   { icon: Lock,       label: 'No Sign-up',       sub: 'Use instantly, no account' },
   { icon: Zap,        label: 'Instant Results',  sub: 'Everything runs in browser' },
   { icon: Smartphone, label: 'Mobile Ready',     sub: 'Works on any device' },
@@ -201,7 +371,7 @@ export default function Home() {
           {/* Badge */}
           <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 text-blue-100 text-xs font-semibold px-4 py-2 rounded-full mb-8 animate-in fade-in slide-in-from-bottom-2 duration-500">
             <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" aria-hidden="true" />
-            13+ Free Tools Available — No sign-up required
+            33+ Free Tools Available — No sign-up required
           </div>
 
           {/* Title */}

@@ -20,6 +20,28 @@ import CertificateGenerator from './pages/CertificateGenerator';
 import ResumeBuilder from './pages/ResumeBuilder';
 import InvoiceGenerator from './pages/InvoiceGenerator';
 import About from './pages/About';
+// PDF Tools
+import PdfMerge from './pages/PdfMerge';
+import PdfSplit from './pages/PdfSplit';
+import PdfCompressor from './pages/PdfCompressor';
+import WordToPdf from './pages/WordToPdf';
+import PdfToWord from './pages/PdfToWord';
+import JpgToPdf from './pages/JpgToPdf';
+import PdfToJpg from './pages/PdfToJpg';
+import RotatePdf from './pages/RotatePdf';
+import UnlockPdf from './pages/UnlockPdf';
+import ProtectPdf from './pages/ProtectPdf';
+// Image Tools
+import ImageCompressor from './pages/ImageCompressor';
+import ImageResizer from './pages/ImageResizer';
+import ImageCropper from './pages/ImageCropper';
+import ImageConverter from './pages/ImageConverter';
+import ImageToPdf from './pages/ImageToPdf';
+import WatermarkImage from './pages/WatermarkImage';
+import PhotoCollageMaker from './pages/PhotoCollageMaker';
+import ColorPicker from './pages/ColorPicker';
+import BlurImage from './pages/BlurImage';
+import SharpenImage from './pages/SharpenImage';
 
 const queryClient = new QueryClient();
 
@@ -42,6 +64,28 @@ function Router() {
         <Route path="/resume-builder" component={ResumeBuilder} />
         <Route path="/invoice-generator" component={InvoiceGenerator} />
         <Route path="/about" component={About} />
+        {/* PDF Tools */}
+        <Route path="/pdf-merge" component={PdfMerge} />
+        <Route path="/pdf-split" component={PdfSplit} />
+        <Route path="/pdf-compressor" component={PdfCompressor} />
+        <Route path="/word-to-pdf" component={WordToPdf} />
+        <Route path="/pdf-to-word" component={PdfToWord} />
+        <Route path="/jpg-to-pdf" component={JpgToPdf} />
+        <Route path="/pdf-to-jpg" component={PdfToJpg} />
+        <Route path="/rotate-pdf" component={RotatePdf} />
+        <Route path="/unlock-pdf" component={UnlockPdf} />
+        <Route path="/protect-pdf" component={ProtectPdf} />
+        {/* Image Tools */}
+        <Route path="/image-compressor" component={ImageCompressor} />
+        <Route path="/image-resizer" component={ImageResizer} />
+        <Route path="/image-cropper" component={ImageCropper} />
+        <Route path="/image-converter" component={ImageConverter} />
+        <Route path="/image-to-pdf" component={ImageToPdf} />
+        <Route path="/watermark-image" component={WatermarkImage} />
+        <Route path="/photo-collage-maker" component={PhotoCollageMaker} />
+        <Route path="/color-picker" component={ColorPicker} />
+        <Route path="/blur-image" component={BlurImage} />
+        <Route path="/sharpen-image" component={SharpenImage} />
         <Route component={NotFound} />
       </Switch>
     </Layout>

@@ -1,0 +1,1 @@
+- [ToolBox Hub architecture](toolbox-hub-arch.md) — routing, export pattern, Gold Standard, packages, integration checklist for new tools

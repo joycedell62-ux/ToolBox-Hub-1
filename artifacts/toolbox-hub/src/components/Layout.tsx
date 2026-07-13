@@ -27,6 +27,26 @@ export default function Layout({ children }: LayoutProps) {
       case '/certificate-generator':  return 'Certificate Generator';
       case '/resume-builder':         return 'Resume Builder';
       case '/invoice-generator':      return 'Invoice Generator';
+      case '/pdf-merge':              return 'PDF Merge';
+      case '/pdf-split':              return 'PDF Split';
+      case '/pdf-compressor':         return 'PDF Compressor';
+      case '/word-to-pdf':            return 'Word to PDF';
+      case '/pdf-to-word':            return 'PDF to Word';
+      case '/jpg-to-pdf':             return 'JPG to PDF';
+      case '/pdf-to-jpg':             return 'PDF to JPG';
+      case '/rotate-pdf':             return 'Rotate PDF';
+      case '/unlock-pdf':             return 'Unlock PDF';
+      case '/protect-pdf':            return 'Protect PDF';
+      case '/image-compressor':       return 'Image Compressor';
+      case '/image-resizer':          return 'Image Resizer';
+      case '/image-cropper':          return 'Image Cropper';
+      case '/image-converter':        return 'Image Converter';
+      case '/image-to-pdf':           return 'Image to PDF';
+      case '/watermark-image':        return 'Watermark Image';
+      case '/photo-collage-maker':    return 'Photo Collage Maker';
+      case '/color-picker':           return 'Color Picker';
+      case '/blur-image':             return 'Blur Image';
+      case '/sharpen-image':          return 'Sharpen Image';
       default:                        return 'Tool';
     }
   };

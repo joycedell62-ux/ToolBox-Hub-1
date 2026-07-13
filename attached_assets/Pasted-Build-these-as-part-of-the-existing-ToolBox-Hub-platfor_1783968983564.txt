@@ -1,0 +1,81 @@
+Build these as part of the existing ToolBox Hub platform. Do not create separate websites. Every tool must share the same navigation, branding, dashboard, responsive design, search, and user experience. Follow the ToolBox Hub Gold Standard.
+📄 PDF Master Suite
+1. PDF Merge
+Merge multiple PDF files with drag-and-drop, page reordering, preview, and PDF download.
+2. PDF Split
+Split PDF files by page range or extract selected pages.
+3. PDF Compressor
+Compress PDF size while maintaining readable quality.
+4. Word to PDF
+Convert DOCX files to PDF with preserved formatting.
+5. PDF to Word
+Convert PDF documents into editable Word files.
+6. JPG to PDF
+Combine one or more images into a single PDF.
+7. PDF to JPG
+Convert PDF pages into high-quality JPG images.
+8. Rotate PDF
+Rotate selected or all PDF pages before downloading.
+9. Unlock PDF
+Remove password protection from PDFs when the user provides the correct password.
+10. Protect PDF
+Add password protection and permissions to PDF files.
+🖼️ Image Master Suite
+11. Image Compressor
+Reduce image size with adjustable compression and before/after preview.
+12. Image Resizer
+Resize images using pixels, percentages, or preset social media sizes.
+13. Image Cropper
+Crop images using freeform or fixed aspect ratios.
+14. Image Converter
+Convert between JPG, PNG, WEBP, BMP, GIF, TIFF, and SVG (where applicable).
+15. Image to PDF
+Combine multiple images into a professional PDF document.
+16. Watermark Image
+Add text or image watermarks with opacity, size, and position controls.
+17. Photo Collage Maker
+Create beautiful photo collages with multiple layouts and borders.
+18. Color Picker
+Pick colors from uploaded images and display HEX, RGB, HSL, and CMYK values.
+19. Blur Image
+Blur selected areas or the entire image with adjustable intensity.
+20. Sharpen Image
+Improve image sharpness with adjustable enhancement controls.
+🌟 Global Requirements (Applies to All 20 Tools)
+Every tool must include:
+💙 ToolBox Hub blue & white branding
+📱 Fully responsive (mobile, tablet, desktop)
+⚡ Fast loading and optimized performance
+🔒 Privacy-first (process files in the browser whenever possible)
+🌐 Compatible with Chrome, Safari, Edge, Firefox, Opera, and Brave
+📂 Drag-and-drop file upload
+👀 Live preview (where applicable)
+⬇️ Download button
+🖨️ Print option (where applicable)
+🔄 Reset button
+💡 Helpful Tips
+❓ Frequently Asked Questions (FAQ)
+🔗 Related Tools suggestions
+⭐ "Was this tool helpful?" feedback section
+♿ Accessibility best practices
+🚫 No sign-up required
+🌍 SEO-friendly page titles and descriptions
+📊 Consistent ToolBox Hub layout and navigation
+🌙 Future-ready for Dark Mode
+📶 Offline support where technically possible
+📈 Updated Progress
+✅ Already Planned
+Homepage
+QR Code Generator
+Certificate Generator
+Resume Builder
+Business Suite
+Dashboard
+Brand System
+🚀 Sprint 2
+10 PDF Tools
+10 Image Tools
+Total after this sprint: approximately 34 professional tools, putting us very close to our 50-tool Version 1.0 goal.
+💙 Founder Note (Adding to Our Master Blueprint)
+From today onward, every prompt we send to Replit will begin with this instruction:
+"This is part of the ToolBox Hub platform. Every new tool must integrate into the existing website, share the same design system, navigation, branding, dashboard, and user experience. Never build standalone pages or inconsistent interfaces. ToolBox Hub must feel like one complete software platform."
