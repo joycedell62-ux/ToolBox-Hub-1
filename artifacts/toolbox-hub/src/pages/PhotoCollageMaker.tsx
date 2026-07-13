@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback, useEffect } from 'react';
+import React, { useState, useRef, useCallback, useEffect, useMemo } from 'react';
 import { Link } from 'wouter';
 import {
   Upload, Download, Image as ImageIcon, Lightbulb,
@@ -166,8 +166,8 @@ export default function PhotoCollageMaker() {
 
   const removeFile = (idx: number) => setFiles(prev => prev.filter((_, i) => i !== idx));
 
-  const selectedLayout = LAYOUTS.find(l => l.id === layoutId)!;
-  const size = SIZE_PRESETS.find(s => s.id === sizePreset)!;
+  const selectedLayout = useMemo(() => LAYOUTS.find(l => l.id === layoutId)!, [layoutId]);
+  const size = useMemo(() => SIZE_PRESETS.find(s => s.id === sizePreset)!, [sizePreset]);
 
   const renderCollage = useCallback(async () => {
     if (files.length < selectedLayout.minPhotos) return;
@@ -205,7 +205,7 @@ export default function PhotoCollageMaker() {
     if (files.length >= selectedLayout.minPhotos) {
       renderCollage();
     }
-  }, [files, layoutId, gap, bgColor, sizePreset, renderCollage, selectedLayout.minPhotos]);
+  }, [files, selectedLayout, renderCollage]);
 
   const handleDownload = async (format: 'jpg' | 'png') => {
     if (!previewDataUrl) {

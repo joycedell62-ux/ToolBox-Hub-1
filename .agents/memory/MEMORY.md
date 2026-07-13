@@ -1,2 +1,3 @@
 - [ToolBox Hub architecture](toolbox-hub-arch.md) — routing, export pattern, Gold Standard, packages, integration checklist for new tools
 - [ToolBox Hub build workflow](toolbox-hub-build-workflow.md) — permanent Blueprint + UI/UX docs in repo; sprints are tool-list-only; standards never restated
+- [ToolBox Hub render-loop trap](toolbox-hub-render-loops.md) — derived object in useCallback deps → effect setState → infinite loop; fix with useMemo; safe vs unsafe effect patterns + audit
