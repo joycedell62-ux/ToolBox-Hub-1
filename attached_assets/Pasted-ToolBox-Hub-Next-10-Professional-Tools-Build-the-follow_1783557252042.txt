@@ -1,0 +1,131 @@
+ToolBox Hub – Next 10 Professional Tools
+Build the following 10 professional tools for ToolBox Hub. Every tool must follow the ToolBox Hub Gold Standard with modern blue and white branding, mobile-first responsive design, privacy-first processing, fast performance, accessibility, browser compatibility, offline support where technically possible, helpful tips, FAQ, related tools, feedback section, and no sign-up required.
+1. Invoice Generator
+Create professional business invoices.
+Features:
+Business logo upload
+Business information
+Customer information
+Multiple products/services
+Automatic subtotal, tax, discount and total calculations
+Invoice number
+Due date
+Notes
+Live preview
+Download PDF
+Print
+Reset form
+2. Receipt Generator
+Create professional payment receipts.
+Features:
+Business details
+Receipt number
+Customer details
+Payment method
+Item list
+Total amount
+Paid stamp
+Live preview
+Download PDF
+Print
+3. Quotation Generator
+Generate professional quotations.
+Features:
+Company details
+Customer details
+Multiple quotation items
+Tax
+Discount
+Validity period
+Terms & conditions
+Signature section
+PDF download
+Print
+4. Business Card Generator
+Create modern business cards.
+Features:
+At least 10 templates
+Logo upload
+QR Code
+Front and back design
+Live preview
+Download PNG
+Download PDF
+Print
+5. Event Ticket Generator
+Generate beautiful event tickets.
+Features:
+Event name
+Date
+Time
+Venue
+Seat number
+Ticket ID
+QR Code
+Barcode
+Organizer logo
+Download PDF
+Print
+6. Promo Code Generator
+Generate unique promotional codes.
+Features:
+Custom prefix
+Random code generator
+Expiry date
+Usage limit
+Copy button
+Export CSV
+Bulk generation
+7. Lucky Draw Generator
+Random winner picker.
+Features:
+Add unlimited participants
+Spin animation
+Multiple winners
+Remove previous winners
+Export winners
+Reset draw
+8. Barcode Generator
+Generate multiple barcode formats.
+Features:
+Code128
+EAN-13
+UPC
+Code39
+Live preview
+Download PNG
+Download SVG
+Print
+9. QR Code Scanner
+Scan QR codes.
+Features:
+Camera scanning
+Image upload
+Decode QR content
+Copy result
+Open website after user confirmation
+Mobile friendly
+10. Cover Letter Builder
+Professional cover letter creator.
+Features:
+Multiple templates
+Live preview
+Optional profile photo
+Professional formatting
+Download PDF
+Print
+Reset
+🎯 Global Requirements
+Every tool must:
+Follow ToolBox Hub branding (blue and white)
+Have a modern, clean, friendly design
+Be fully responsive on mobile, tablet, laptop, and desktop
+Work in Chrome, Safari, Edge, Firefox, Opera, and Brave
+Be fast and optimized
+Store data locally where appropriate
+Include Helpful Tips
+Include Frequently Asked Questions (FAQ)
+Include Related Tools suggestions
+Include a "Was this tool helpful?" feedback section
+Require no account or sign-up
+Be accessible and easy for anyone to use
