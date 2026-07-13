@@ -22,7 +22,12 @@ _Replace the heading above with the project's name, and this line with one sente
 
 ## Where things live
 
-_Populate as you build — short repo map plus pointers to the source-of-truth file for DB schema, API contracts, theme files, etc._
+- **ToolBox Hub permanent build docs** (read before any tool sprint — these are the source of truth for how tools are built):
+  - `artifacts/toolbox-hub/docs/01-MASTER-BLUEPRINT.md` — vision, navigation, branding, categories, platform rules, 3-file rule
+  - `artifacts/toolbox-hub/docs/02-UI-UX-STANDARDS.md` — colors, buttons, cards, mobile, animations, accessibility, offline, search, dashboard, Gold Standard checklist
+  - `artifacts/toolbox-hub/docs/03-SPRINT-TEMPLATE.md` — the per-sprint prompt format (tool list only)
+- Tool pages: `artifacts/toolbox-hub/src/pages/`; reference Gold Standard tool: `UuidGenerator.tsx`
+- Routing: `artifacts/toolbox-hub/src/App.tsx`; homepage/dashboard + TOOLS array: `src/pages/Home.tsx`; layout shell + breadcrumb titles: `src/components/Layout.tsx`
 
 ## Architecture decisions
 
@@ -34,7 +39,7 @@ _Describe the high-level user-facing capabilities of this app once they exist._
 
 ## User preferences
 
-_Populate as you build — explicit user instructions worth remembering across sessions._
+- **ToolBox Hub build workflow:** Three permanent prompts are stored as docs in `artifacts/toolbox-hub/docs/` (Master Blueprint, UI/UX Standards, Sprint Template). The Blueprint + UI/UX Standards are always in force and must be applied to every tool without being restated. The user sends sprints containing ONLY the tool list (10–20 tools at a time); build each tool against the permanent standards. Do not require the user to re-post standards each sprint.
 
 ## Gotchas
 
