@@ -18,10 +18,16 @@ import {
   Briefcase, Megaphone, Sparkles, AtSign, Target, Mail, Cake, CalendarHeart,
   Send, Feather, MessageCircle, Wand2, Laugh, Dice5, Scale, MessageSquare,
   Snowflake, Brain, ListChecks,
+  // Sprint — Branding, Marketing, Writing V2, Utility V2 icons
+  Clapperboard, Mic, BookText, BookMarked, MessagesSquare, GraduationCap,
+  FileSignature, Newspaper, Palette, Paintbrush, Type, LayoutTemplate,
+  Contact, ImagePlus, PanelTop, Share2, Package, MailOpen, MousePointerClick,
+  CalendarRange, PenLine, ScanLine, Barcode, ScanBarcode, PenTool, Pen,
+  Hash, FileCheck,
 } from 'lucide-react';
 import { LucideIcon } from 'lucide-react';
 
-export type Category = 'Text Tools' | 'Calculators' | 'Utility Tools' | 'Developer Tools' | 'PDF Tools' | 'Image Tools' | 'Daily Life' | 'Writing Generators' | 'Fun & Lifestyle';
+export type Category = 'Text Tools' | 'Calculators' | 'Utility Tools' | 'Developer Tools' | 'PDF Tools' | 'Image Tools' | 'Daily Life' | 'Writing Generators' | 'Fun & Lifestyle' | 'Branding & Design' | 'Marketing Tools';
 
 export interface Tool {
   title: string;
@@ -563,6 +569,44 @@ export const TOOLS: Tool[] = [
   { title: 'Icebreaker Questions', description: 'Icebreakers for meetings, classrooms, and workshops.', icon: Snowflake, href: '/icebreaker-questions', category: 'Fun & Lifestyle', isNew: true },
   { title: 'Random Fact Generator', description: 'Surprising facts about science, history, space, and more.', icon: Brain, href: '/random-fact-generator', category: 'Fun & Lifestyle', isNew: true },
   { title: 'Bucket List Generator', description: 'Build your bucket list with curated adventure ideas.', icon: ListChecks, href: '/bucket-list-generator', category: 'Fun & Lifestyle', isNew: true },
+  // ── Writing Generators V2 ──
+  { title: 'Script Generator', description: 'Script outlines for YouTube, movies, podcasts, and plays.', icon: Clapperboard, href: '/script-generator', category: 'Writing Generators', isNew: true },
+  { title: 'Speech Generator', description: 'Speeches for weddings, graduations, business, and more.', icon: Mic, href: '/speech-generator', category: 'Writing Generators', isNew: true },
+  { title: 'Story Generator', description: 'Short stories from your genre, characters, and setting.', icon: BookText, href: '/story-generator', category: 'Writing Generators', isNew: true },
+  { title: 'Book Outline Generator', description: 'Chapter-by-chapter outlines from your genre and premise.', icon: BookMarked, href: '/book-outline-generator', category: 'Writing Generators', isNew: true },
+  { title: 'Book Chapter Generator', description: 'Chapter draft scaffolds with beats, POV, and style.', icon: BookOpen, href: '/book-chapter-generator', category: 'Writing Generators', isNew: true },
+  { title: 'Dialogue Generator', description: 'Character dialogue from relationship, conflict, and tone.', icon: MessagesSquare, href: '/dialogue-generator', category: 'Writing Generators', isNew: true },
+  { title: 'Essay Generator', description: 'Structured essays: argumentative, expository, and more.', icon: GraduationCap, href: '/essay-generator', category: 'Writing Generators', isNew: true },
+  { title: 'Proposal Generator', description: 'Business and project proposals with scope and budget.', icon: FileSignature, href: '/proposal-generator', category: 'Writing Generators', isNew: true },
+  { title: 'Press Release Generator', description: 'Standard-format press releases from your announcement.', icon: Newspaper, href: '/press-release-generator', category: 'Writing Generators', isNew: true },
+  // ── Branding & Design ──
+  { title: 'Logo Generator', description: 'Design a simple logo with icons, shapes, colors, and text.', icon: Palette, href: '/logo-generator', category: 'Branding & Design', isNew: true },
+  { title: 'Logo Idea Generator', description: 'Logo concepts with icon, color, and typography ideas.', icon: Lightbulb, href: '/logo-idea-generator', category: 'Branding & Design', isNew: true },
+  { title: 'Color Palette Generator', description: 'Harmonious color palettes with lockable swatches.', icon: Paintbrush, href: '/color-palette-generator', category: 'Branding & Design', isNew: true },
+  { title: 'Font Pairing Generator', description: 'Curated heading + body font pairings with live preview.', icon: Type, href: '/font-pairing-generator', category: 'Branding & Design', isNew: true },
+  { title: 'Brand Style Guide Generator', description: 'One-page brand style guide from your colors and voice.', icon: LayoutTemplate, href: '/brand-style-guide-generator', category: 'Branding & Design', isNew: true },
+  { title: 'Business Card Designer', description: 'Design and download a business card from templates.', icon: Contact, href: '/business-card-designer', category: 'Branding & Design', isNew: true },
+  { title: 'Flyer Generator', description: 'Event and promo flyers with templates and palettes.', icon: FileImage, href: '/flyer-generator', category: 'Branding & Design', isNew: true },
+  { title: 'Poster Generator', description: 'Bold typographic posters, ready to download as PNG.', icon: ImagePlus, href: '/poster-generator', category: 'Branding & Design', isNew: true },
+  { title: 'Banner Creator', description: 'Banners in preset sizes for web and social covers.', icon: PanelTop, href: '/banner-creator', category: 'Branding & Design', isNew: true },
+  { title: 'Social Media Brand Kit', description: 'Matching avatar, cover, and post templates for socials.', icon: Share2, href: '/social-media-brand-kit', category: 'Branding & Design', isNew: true },
+  // ── Marketing Tools ──
+  { title: 'Product Name Generator', description: 'Catchy product name ideas from category and keywords.', icon: Package, href: '/product-name-generator', category: 'Marketing Tools', isNew: true },
+  { title: 'Ad Copy Generator', description: 'Platform-aware ad headlines and body copy variants.', icon: Megaphone, href: '/ad-copy-generator', category: 'Marketing Tools', isNew: true },
+  { title: 'Email Subject Line Generator', description: 'Subject line variants with character counts.', icon: MailOpen, href: '/email-subject-line-generator', category: 'Marketing Tools', isNew: true },
+  { title: 'Call-to-Action Generator', description: 'CTA button text and supporting copy for any goal.', icon: MousePointerClick, href: '/cta-generator', category: 'Marketing Tools', isNew: true },
+  { title: 'Marketing Plan Generator', description: 'Structured plan with goals, channels, timeline, KPIs.', icon: ClipboardList, href: '/marketing-plan-generator', category: 'Marketing Tools', isNew: true },
+  { title: 'Content Calendar Generator', description: 'A 4-week content calendar of post ideas per platform.', icon: CalendarRange, href: '/content-calendar-generator', category: 'Marketing Tools', isNew: true },
+  { title: 'Product Description Generator', description: 'Benefit-driven product descriptions in your tone.', icon: PenLine, href: '/product-description-generator', category: 'Marketing Tools', isNew: true },
+  // ── Utility V2 ──
+  { title: 'QR Scanner', description: 'Scan QR codes with your device camera — fully private.', icon: ScanLine, href: '/qr-scanner', category: 'Utility Tools', isNew: true },
+  { title: 'Barcode Generator', description: 'Generate CODE128, EAN-13, UPC, and CODE39 barcodes.', icon: Barcode, href: '/barcode-generator', category: 'Utility Tools', isNew: true },
+  { title: 'Barcode Scanner', description: 'Scan product barcodes with your camera, offline.', icon: ScanBarcode, href: '/barcode-scanner', category: 'Utility Tools', isNew: true },
+  { title: 'Signature Generator', description: 'Typed signature styles in cursive fonts, PNG download.', icon: PenTool, href: '/signature-generator', category: 'Utility Tools', isNew: true },
+  { title: 'Digital Signature Creator', description: 'Draw your signature and download a transparent PNG.', icon: Pen, href: '/digital-signature-creator', category: 'Utility Tools', isNew: true },
+  { title: 'Invoice Number Generator', description: 'Sequential invoice numbers with custom prefix format.', icon: Hash, href: '/invoice-number-generator', category: 'Utility Tools', isNew: true },
+  { title: 'Password Strength Checker', description: 'Check password strength and crack time — private.', icon: ShieldCheck, href: '/password-strength-checker', category: 'Utility Tools', isNew: true },
+  { title: 'File Checksum Generator', description: 'MD5, SHA-1, and SHA-256 checksums for any file.', icon: FileCheck, href: '/file-checksum-generator', category: 'Utility Tools', isNew: true },
 ];
 
 // ─── Category config ──────────────────────────────────────────────────────────
@@ -576,6 +620,8 @@ export const CATEGORIES: { name: Category; emoji: string; color: string; bg: str
   { name: 'PDF Tools',       emoji: '📑', color: 'text-red-700',    bg: 'bg-red-50',     border: 'border-red-100' },
   { name: 'Image Tools',     emoji: '🖼️', color: 'text-pink-700',   bg: 'bg-pink-50',    border: 'border-pink-100' },
   { name: 'Writing Generators', emoji: '✍️', color: 'text-indigo-700', bg: 'bg-indigo-50',  border: 'border-indigo-100' },
+  { name: 'Branding & Design',  emoji: '🎨', color: 'text-fuchsia-700', bg: 'bg-fuchsia-50', border: 'border-fuchsia-100' },
+  { name: 'Marketing Tools',    emoji: '📢', color: 'text-cyan-700',    bg: 'bg-cyan-50',    border: 'border-cyan-100' },
   { name: 'Fun & Lifestyle',    emoji: '🎉', color: 'text-amber-700',  bg: 'bg-amber-50',   border: 'border-amber-100' },
 ];
 

@@ -32,7 +32,7 @@ const DOT_PATTERN = `url("data:image/svg+xml,%3Csvg width='20' height='20' xmlns
 // ─── Stat items ───────────────────────────────────────────────────────────────
 
 const STATS = [
-  { icon: Gift,       label: '82+ Free Tools',  sub: 'Always free, no limits' },
+  { icon: Gift,       label: '116+ Free Tools',  sub: 'Always free, no limits' },
   { icon: Lock,       label: 'No Sign-up',       sub: 'Use instantly, no account' },
   { icon: Zap,        label: 'Instant Results',  sub: 'Everything runs in browser' },
   { icon: Smartphone, label: 'Mobile Ready',     sub: 'Works on any device' },
@@ -103,7 +103,7 @@ export default function Home() {
           {/* Badge */}
           <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 text-blue-100 text-xs font-semibold px-4 py-2 rounded-full mb-8 animate-in fade-in slide-in-from-bottom-2 duration-500">
             <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" aria-hidden="true" />
-            82+ Free Tools Available — No sign-up required
+            116+ Free Tools Available — No sign-up required
           </div>
 
           {/* Title */}
@@ -253,6 +253,38 @@ export default function Home() {
               </div>
             ))}
           </div>
+
+          {/* ── Launch banner ── */}
+          <section
+            className="relative overflow-hidden rounded-2xl border border-blue-100 shadow-sm p-6 sm:p-8 text-center"
+            style={{ background: 'linear-gradient(135deg, #eff6ff 0%, #eef2ff 100%)' }}
+          >
+            <h2 className="text-xl sm:text-2xl font-extrabold text-gray-900">🎉 ToolBox Hub 2.0 is Live!</h2>
+            <p className="text-sm sm:text-base text-gray-600 mt-2 max-w-xl mx-auto leading-relaxed">
+              We're just getting started. New tools and improvements are added regularly.
+              <br />💙 Thank you for being part of our journey.
+            </p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mt-5">
+              <button
+                onClick={scrollToTools}
+                className="w-full sm:w-auto px-6 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl transition-colors text-sm"
+              >
+                🚀 Explore Tools
+              </button>
+              <a
+                href={`mailto:hello@toolboxhub.app?subject=${encodeURIComponent('Tool suggestion — ToolBox Hub')}`}
+                className="w-full sm:w-auto px-6 py-2.5 bg-white border border-gray-200 hover:border-blue-200 hover:bg-blue-50 text-gray-700 font-semibold rounded-xl transition-colors text-sm"
+              >
+                💡 Suggest a Tool
+              </a>
+              <a
+                href={`mailto:hello@toolboxhub.app?subject=${encodeURIComponent('Feedback — ToolBox Hub')}`}
+                className="w-full sm:w-auto px-6 py-2.5 bg-white border border-gray-200 hover:border-blue-200 hover:bg-blue-50 text-gray-700 font-semibold rounded-xl transition-colors text-sm"
+              >
+                💬 Leave Feedback
+              </a>
+            </div>
+          </section>
 
           {/* ── Your Favorites ── */}
           {favoriteTools.length > 0 && (

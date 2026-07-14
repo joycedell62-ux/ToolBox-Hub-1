@@ -5,6 +5,7 @@ import { getToolByHref } from '../lib/tools';
 import { pushRecent } from '../lib/toolPrefs';
 import GlobalSearch from './GlobalSearch';
 import ToolActionBar from './ToolActionBar';
+import WelcomeBanner from './WelcomeBanner';
 
 const APP_VERSION = 'v2.0';
 
@@ -12,6 +13,7 @@ const STATIC_TITLES: Record<string, string> = {
   '/about': 'About',
   '/privacy': 'Privacy Policy',
   '/terms': 'Terms of Use',
+  '/vision': 'Our Vision',
 };
 
 interface LayoutProps {
@@ -74,6 +76,8 @@ export default function Layout({ children }: LayoutProps) {
         </div>
       </header>
 
+      {isHome && <WelcomeBanner />}
+
       <main className="flex-1 flex flex-col">
         {/* Breadcrumb + tool actions — shown on tool pages */}
         {!isHome && !isAbout && (
@@ -91,6 +95,37 @@ export default function Layout({ children }: LayoutProps) {
 
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 w-full flex-1 flex flex-col">
           {children}
+
+          {/* End-of-page thank-you — on every tool page */}
+          {tool && (
+            <div className="mt-12 rounded-2xl border border-blue-100 bg-blue-50/60 p-6 sm:p-8 text-center">
+              <p className="font-bold text-gray-900">💙 Thank you for using ToolBox Hub!</p>
+              <p className="text-sm text-gray-600 mt-1.5 max-w-lg mx-auto leading-relaxed">
+                We're constantly adding new tools and improving existing ones.
+                If you have an idea or feedback, we'd love to hear from you.
+              </p>
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mt-4">
+                <a
+                  href={mailto('Tool suggestion — ToolBox Hub')}
+                  className="w-full sm:w-auto px-5 py-2 bg-white border border-gray-200 hover:border-blue-200 hover:bg-blue-50 text-gray-700 font-medium rounded-xl transition-colors text-sm"
+                >
+                  💡 Suggest a Tool
+                </a>
+                <a
+                  href={mailto('Feedback — ToolBox Hub')}
+                  className="w-full sm:w-auto px-5 py-2 bg-white border border-gray-200 hover:border-blue-200 hover:bg-blue-50 text-gray-700 font-medium rounded-xl transition-colors text-sm"
+                >
+                  💬 Give Feedback
+                </a>
+                <Link
+                  href="/"
+                  className="w-full sm:w-auto px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl transition-colors text-sm"
+                >
+                  🚀 Explore More Tools
+                </Link>
+              </div>
+            </div>
+          )}
         </div>
       </main>
 
@@ -117,6 +152,7 @@ export default function Layout({ children }: LayoutProps) {
                 <li><Link href="/" className="text-gray-600 hover:text-blue-600 transition-colors">All Tools</Link></li>
                 <li><Link href="/#tools" className="text-gray-600 hover:text-blue-600 transition-colors">Categories</Link></li>
                 <li><Link href="/about" className="text-gray-600 hover:text-blue-600 transition-colors">About</Link></li>
+                <li><Link href="/vision" className="text-gray-600 hover:text-blue-600 transition-colors">Our Vision</Link></li>
               </ul>
             </div>
 

@@ -54,7 +54,12 @@ pdfjsLib.GlobalWorkerOptions.workerSrc = workerUrl;
 CATEGORIES order: Text Tools, Calculators, Daily Life, Utility Tools, Developer Tools, PDF Tools, Image Tools
 
 ## Current tool count
-82+ tools (63 prior + 19 Writing/Fun sprint; GiftIdeaGenerator was upgraded in place, stays in Daily Life)
+116+ tools (82 prior + 34 branding/marketing/writing-V2/utility-V2 sprint). Categories now also include 'Branding & Design' 🎨 and 'Marketing Tools' 📢. Site has Welcome banner (first visit, localStorage), 2.0 launch banner on Home, /vision page, and per-tool thank-you CTA in Layout.
+
+## Package gotchas
+- `@zxing/browser` requires installing `@zxing/library` too (peer, unresolved otherwise → Vite dep-optimize crash, blank app).
+- Chunked SHA hashing for big files needs js-sha256/js-sha1 (Web Crypto has no streaming digest).
+- Skipped by design: Username Availability Checker (needs network; site is offline-only).
 
 ## Shared cross-cutting layer (do NOT duplicate per page)
 - Layout.tsx renders GlobalSearch (header), ToolActionBar (trust badges + favorite/copy/share/report) on every tool route, breadcrumbs, rich footer, and pushes recents.

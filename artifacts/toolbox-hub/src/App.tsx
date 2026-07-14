@@ -20,6 +20,7 @@ import CertificateGenerator from './pages/CertificateGenerator';
 import ResumeBuilder from './pages/ResumeBuilder';
 import InvoiceGenerator from './pages/InvoiceGenerator';
 import About from './pages/About';
+import Vision from './pages/Vision';
 import Privacy from './pages/Privacy';
 import Terms from './pages/Terms';
 // PDF Tools
@@ -99,6 +100,44 @@ import ConversationStarterGenerator from './pages/ConversationStarterGenerator';
 import IcebreakerGenerator from './pages/IcebreakerGenerator';
 import RandomFactGenerator from './pages/RandomFactGenerator';
 import BucketListGenerator from './pages/BucketListGenerator';
+// Writing Generators V2
+import ScriptGenerator from './pages/ScriptGenerator';
+import SpeechGenerator from './pages/SpeechGenerator';
+import StoryGenerator from './pages/StoryGenerator';
+import BookOutlineGenerator from './pages/BookOutlineGenerator';
+import BookChapterGenerator from './pages/BookChapterGenerator';
+import DialogueGenerator from './pages/DialogueGenerator';
+import EssayGenerator from './pages/EssayGenerator';
+import ProposalGenerator from './pages/ProposalGenerator';
+import PressReleaseGenerator from './pages/PressReleaseGenerator';
+// Branding & Design
+import LogoGenerator from './pages/LogoGenerator';
+import LogoIdeaGenerator from './pages/LogoIdeaGenerator';
+import ColorPaletteGenerator from './pages/ColorPaletteGenerator';
+import FontPairingGenerator from './pages/FontPairingGenerator';
+import BrandStyleGuideGenerator from './pages/BrandStyleGuideGenerator';
+import BusinessCardDesigner from './pages/BusinessCardDesigner';
+import FlyerGenerator from './pages/FlyerGenerator';
+import PosterGenerator from './pages/PosterGenerator';
+import BannerCreator from './pages/BannerCreator';
+import SocialMediaBrandKitGenerator from './pages/SocialMediaBrandKitGenerator';
+// Marketing Tools
+import ProductNameGenerator from './pages/ProductNameGenerator';
+import AdCopyGenerator from './pages/AdCopyGenerator';
+import EmailSubjectLineGenerator from './pages/EmailSubjectLineGenerator';
+import CallToActionGenerator from './pages/CallToActionGenerator';
+import MarketingPlanGenerator from './pages/MarketingPlanGenerator';
+import ContentCalendarGenerator from './pages/ContentCalendarGenerator';
+import ProductDescriptionGenerator from './pages/ProductDescriptionGenerator';
+// Utility V2
+import QrScanner from './pages/QrScanner';
+import BarcodeGenerator from './pages/BarcodeGenerator';
+import BarcodeScanner from './pages/BarcodeScanner';
+import SignatureGenerator from './pages/SignatureGenerator';
+import DigitalSignatureCreator from './pages/DigitalSignatureCreator';
+import InvoiceNumberGenerator from './pages/InvoiceNumberGenerator';
+import PasswordStrengthChecker from './pages/PasswordStrengthChecker';
+import FileChecksumGenerator from './pages/FileChecksumGenerator';
 
 const queryClient = new QueryClient();
 
@@ -123,6 +162,7 @@ function Router() {
         <Route path="/resume-builder" component={ResumeBuilder} />
         <Route path="/invoice-generator" component={InvoiceGenerator} />
         <Route path="/about" component={About} />
+        <Route path="/vision" component={Vision} />
         {/* PDF Tools */}
         <Route path="/pdf-merge" component={PdfMerge} />
         <Route path="/pdf-split" component={PdfSplit} />
@@ -200,6 +240,44 @@ function Router() {
         <Route path="/icebreaker-questions" component={IcebreakerGenerator} />
         <Route path="/random-fact-generator" component={RandomFactGenerator} />
         <Route path="/bucket-list-generator" component={BucketListGenerator} />
+        {/* Writing Generators V2 */}
+        <Route path="/script-generator" component={ScriptGenerator} />
+        <Route path="/speech-generator" component={SpeechGenerator} />
+        <Route path="/story-generator" component={StoryGenerator} />
+        <Route path="/book-outline-generator" component={BookOutlineGenerator} />
+        <Route path="/book-chapter-generator" component={BookChapterGenerator} />
+        <Route path="/dialogue-generator" component={DialogueGenerator} />
+        <Route path="/essay-generator" component={EssayGenerator} />
+        <Route path="/proposal-generator" component={ProposalGenerator} />
+        <Route path="/press-release-generator" component={PressReleaseGenerator} />
+        {/* Branding & Design */}
+        <Route path="/logo-generator" component={LogoGenerator} />
+        <Route path="/logo-idea-generator" component={LogoIdeaGenerator} />
+        <Route path="/color-palette-generator" component={ColorPaletteGenerator} />
+        <Route path="/font-pairing-generator" component={FontPairingGenerator} />
+        <Route path="/brand-style-guide-generator" component={BrandStyleGuideGenerator} />
+        <Route path="/business-card-designer" component={BusinessCardDesigner} />
+        <Route path="/flyer-generator" component={FlyerGenerator} />
+        <Route path="/poster-generator" component={PosterGenerator} />
+        <Route path="/banner-creator" component={BannerCreator} />
+        <Route path="/social-media-brand-kit" component={SocialMediaBrandKitGenerator} />
+        {/* Marketing Tools */}
+        <Route path="/product-name-generator" component={ProductNameGenerator} />
+        <Route path="/ad-copy-generator" component={AdCopyGenerator} />
+        <Route path="/email-subject-line-generator" component={EmailSubjectLineGenerator} />
+        <Route path="/cta-generator" component={CallToActionGenerator} />
+        <Route path="/marketing-plan-generator" component={MarketingPlanGenerator} />
+        <Route path="/content-calendar-generator" component={ContentCalendarGenerator} />
+        <Route path="/product-description-generator" component={ProductDescriptionGenerator} />
+        {/* Utility V2 */}
+        <Route path="/qr-scanner" component={QrScanner} />
+        <Route path="/barcode-generator" component={BarcodeGenerator} />
+        <Route path="/barcode-scanner" component={BarcodeScanner} />
+        <Route path="/signature-generator" component={SignatureGenerator} />
+        <Route path="/digital-signature-creator" component={DigitalSignatureCreator} />
+        <Route path="/invoice-number-generator" component={InvoiceNumberGenerator} />
+        <Route path="/password-strength-checker" component={PasswordStrengthChecker} />
+        <Route path="/file-checksum-generator" component={FileChecksumGenerator} />
         <Route component={NotFound} />
       </Switch>
     </Layout>
