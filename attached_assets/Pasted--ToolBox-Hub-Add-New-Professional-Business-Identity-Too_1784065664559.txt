@@ -1,0 +1,146 @@
+🚀 ToolBox Hub - Add New Professional Business & Identity Tools
+Build the following new tools for ToolBox Hub. All tools must match the existing ToolBox Hub design system, be mobile-first, responsive, fast, SEO-friendly, and consistent with the current UI.
+🪪 1. Professional ID Card Generator
+Features:
+Employee ID
+Student ID
+Teacher ID
+Visitor Badge
+Event Pass
+Church ID
+Membership Card
+Hospital Staff ID
+Upload Photo
+Upload Logo
+QR Code
+Barcode
+Live Preview
+Portrait & Landscape
+Download PNG
+Download PDF
+Print
+Multiple Templates
+Color Picker
+Font Selector
+💳 2. Business Card Generator
+Features:
+Modern Templates
+Upload Logo
+QR Code
+Social Media Icons
+Website
+Phone
+Email
+Address
+Double-sided Design
+Live Preview
+Download PNG
+Download PDF
+Print
+✍️ 3. Email Signature Generator
+Generate professional email signatures.
+Include:
+Name
+Position
+Company
+Phone
+Email
+Website
+Logo
+Social Media Links
+QR Code
+Copy HTML
+Gmail Compatible
+Outlook Compatible
+Apple Mail Compatible
+🖋️ 4. Digital Signature Generator
+Allow users to:
+Draw their signature
+Type signature in stylish fonts
+Transparent Background
+Download PNG
+Change Color
+Adjust Stroke Width
+🎨 5. Logo Generator
+Create a simple professional logo maker.
+Features:
+Company Name
+Tagline
+Icons
+Shapes
+Colors
+Fonts
+Logo Layouts
+Download PNG
+Transparent Background
+🎨 6. Color Palette Generator
+Generate:
+Modern Color Palettes
+Brand Colors
+HEX
+RGB
+HSL
+Copy Color Codes
+Accessibility Contrast Checker
+🔤 7. Font Pair Generator
+Recommend beautiful font combinations for:
+Business
+Blogs
+Websites
+Posters
+Logos
+Social Media
+📄 8. Cover Letter Generator
+Professional templates.
+Export to:
+PDF
+DOCX
+Print
+🖼️ 9. Passport Photo Maker
+Generate passport photos for different countries.
+Include:
+Crop
+Resize
+Background Options
+Print Layout
+Download
+📅 10. Appointment Card Generator
+Generate:
+Hospital Appointment Cards
+Salon Cards
+Business Appointment Cards
+Clinic Cards
+Consultation Cards
+🏷️ 11. Barcode Generator
+Generate:
+Code128
+EAN-13
+UPC
+ISBN
+Code39
+Download PNG or SVG.
+📦 12. Shipping Label Generator
+Generate shipping labels with:
+Sender
+Receiver
+Barcode
+QR Code
+Tracking Number
+Print Ready
+⭐ Requirements for ALL Tools
+Mobile First
+Beautiful UI
+Modern Cards
+Live Preview
+Download
+Print
+Copy where applicable
+SEO Optimized
+Fast Performance
+Accessibility Friendly
+Dark Mode Compatible
+Match ToolBox Hub Design
+Add each tool to the correct category
+Index each tool in the website search
+Add each tool to "New Tools"
+🎯

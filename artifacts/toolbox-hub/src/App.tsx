@@ -138,6 +138,13 @@ import DigitalSignatureCreator from './pages/DigitalSignatureCreator';
 import InvoiceNumberGenerator from './pages/InvoiceNumberGenerator';
 import PasswordStrengthChecker from './pages/PasswordStrengthChecker';
 import FileChecksumGenerator from './pages/FileChecksumGenerator';
+// Professional & Identity
+import IdCardGenerator from './pages/IdCardGenerator';
+import EmailSignatureGenerator from './pages/EmailSignatureGenerator';
+import CoverLetterGenerator from './pages/CoverLetterGenerator';
+import PassportPhotoMaker from './pages/PassportPhotoMaker';
+import AppointmentCardGenerator from './pages/AppointmentCardGenerator';
+import ShippingLabelGenerator from './pages/ShippingLabelGenerator';
 
 const queryClient = new QueryClient();
 
@@ -278,6 +285,13 @@ function Router() {
         <Route path="/invoice-number-generator" component={InvoiceNumberGenerator} />
         <Route path="/password-strength-checker" component={PasswordStrengthChecker} />
         <Route path="/file-checksum-generator" component={FileChecksumGenerator} />
+        {/* Professional & Identity */}
+        <Route path="/id-card-generator" component={IdCardGenerator} />
+        <Route path="/email-signature-generator" component={EmailSignatureGenerator} />
+        <Route path="/cover-letter-generator" component={CoverLetterGenerator} />
+        <Route path="/passport-photo-maker" component={PassportPhotoMaker} />
+        <Route path="/appointment-card-generator" component={AppointmentCardGenerator} />
+        <Route path="/shipping-label-generator" component={ShippingLabelGenerator} />
         <Route component={NotFound} />
       </Switch>
     </Layout>

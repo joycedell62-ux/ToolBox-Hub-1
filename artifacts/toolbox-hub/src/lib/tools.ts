@@ -23,7 +23,7 @@ import {
   FileSignature, Newspaper, Palette, Paintbrush, Type, LayoutTemplate,
   Contact, ImagePlus, PanelTop, Share2, Package, MailOpen, MousePointerClick,
   CalendarRange, PenLine, ScanLine, Barcode, ScanBarcode, PenTool, Pen,
-  Hash, FileCheck,
+  Hash, FileCheck, CreditCard,
 } from 'lucide-react';
 import { LucideIcon } from 'lucide-react';
 
@@ -607,6 +607,13 @@ export const TOOLS: Tool[] = [
   { title: 'Invoice Number Generator', description: 'Sequential invoice numbers with custom prefix format.', icon: Hash, href: '/invoice-number-generator', category: 'Utility Tools', isNew: true },
   { title: 'Password Strength Checker', description: 'Check password strength and crack time — private.', icon: ShieldCheck, href: '/password-strength-checker', category: 'Utility Tools', isNew: true },
   { title: 'File Checksum Generator', description: 'MD5, SHA-1, and SHA-256 checksums for any file.', icon: FileCheck, href: '/file-checksum-generator', category: 'Utility Tools', isNew: true },
+  // ── Professional & Identity ──
+  { title: 'ID Card Generator', description: 'Employee, student, visitor and event ID cards with photo, QR code and barcode.', icon: CreditCard, href: '/id-card-generator', category: 'Branding & Design', isNew: true },
+  { title: 'Email Signature Generator', description: 'Generate professional HTML email signatures for Gmail, Outlook and Apple Mail.', icon: AtSign, href: '/email-signature-generator', category: 'Branding & Design', isNew: true },
+  { title: 'Cover Letter Generator', description: 'Professional cover letters in formal, modern, and creative styles. Export to PDF.', icon: FileSignature, href: '/cover-letter-generator', category: 'Writing Generators', isNew: true },
+  { title: 'Passport Photo Maker', description: 'Resize and crop photos to passport standards for US, UK, EU, India and more.', icon: ScanLine, href: '/passport-photo-maker', category: 'Image Tools', isNew: true },
+  { title: 'Appointment Card Generator', description: 'Hospital, salon, clinic and business appointment cards with QR code.', icon: CalendarRange, href: '/appointment-card-generator', category: 'Branding & Design', isNew: true },
+  { title: 'Shipping Label Generator', description: 'Shipping labels with sender, receiver, barcode and tracking number. Print-ready.', icon: Package, href: '/shipping-label-generator', category: 'Utility Tools', isNew: true },
 ];
 
 // ─── Category config ──────────────────────────────────────────────────────────
