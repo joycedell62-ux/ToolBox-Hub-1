@@ -76,8 +76,6 @@ export default function Layout({ children }: LayoutProps) {
         </div>
       </header>
 
-      {isHome && <WelcomeBanner />}
-
       <main className="flex-1 flex flex-col">
         {/* Breadcrumb + tool actions — shown on tool pages */}
         {!isHome && !isAbout && (
