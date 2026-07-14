@@ -32,7 +32,7 @@ const COLLECTIONS = [
     desc: 'Essays, stories, scripts, and polished letters — in minutes.',
     grad: 'from-blue-600 to-indigo-700',
     emoji: '✍️',
-    tools: ['/word-counter', '/essay-generator', '/story-generator', '/blog-post-idea-generator'],
+    tools: ['/word-counter', '/essay-generator', '/story-generator', '/script-generator'],
     cta: '/word-counter',
   },
   {
