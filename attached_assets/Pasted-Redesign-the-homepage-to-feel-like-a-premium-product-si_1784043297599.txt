@@ -1,0 +1,125 @@
+Redesign the homepage to feel like a premium product similar to Stripe, Linear, Notion, or Canva.
+Do NOT remove any existing tools or functionality. Improve the design while keeping everything responsive and mobile-first.
+HERO SECTION
+Replace the current hero with:
+Headline
+Everything You Need. One Website. Free Forever. 💙
+Subtitle
+116+ free online tools for students, creators, businesses, developers, and everyday users. No sign-up. No downloads. Fast, secure, and works on every device.
+Buttons
+🔵 Explore Tools
+⚪ Surprise Me 🎲
+Use a beautiful blue gradient background with subtle floating shapes and soft animations.
+STATS SECTION
+Add four animated statistic cards.
+🛠️ 116+ Free Tools
+⚡ Instant Results
+🔒 Secure & Private
+📱 Mobile Friendly
+Animate the numbers when they appear on screen.
+POPULAR TOOLS
+Create a "🔥 Most Popular" section showing:
+• QR Code Generator
+• Resume Builder
+• Certificate Generator
+• Logo Generator
+• Password Generator
+• PDF Tools
+• Image Compressor
+• Invoice Generator
+Each card should have an icon, short description, hover animation, and "Open Tool" button.
+TOOL CATEGORIES
+Display beautiful rounded category cards.
+📄 PDF
+🖼 Images
+💻 Developer
+💼 Business
+✍ Writing
+🎨 Design
+🎓 Student
+😂 Fun
+❤️ Lifestyle
+Use colorful gradients.
+WHY TOOLBOX HUB
+Create a premium section with four feature cards.
+⚡ Fast
+Generate results instantly.
+🔒 Secure
+Everything runs safely.
+📱 Mobile Friendly
+Perfect on phones and desktops.
+💙 Free Forever
+No sign-up. No hidden fees.
+TOOL OF THE DAY
+Automatically highlight one random tool every day.
+Show:
+Tool icon
+Tool name
+Description
+Try Now button
+RECENTLY ADDED
+Display newest tools.
+Include:
+Resume Builder
+Logo Generator
+Invoice Generator
+Business Name Generator
+Birthday Reminder
+Daily Fortune
+OUR JOURNEY
+Create a beautiful timeline.
+💡 The Idea
+↓
+🛠 First Tool
+↓
+🚀 116+ Tools
+↓
+🌍 Growing Every Day
+Use the brand story:
+ToolBox Hub started as a simple idea:
+What if one website could provide hundreds of useful tools for everyone—for free?
+Today that idea is becoming reality.
+Every tool we build brings us closer to becoming one of the world's most trusted collections of free online tools.
+Everything You Need.
+One Website.
+Free Forever.
+FEEDBACK
+At the bottom add:
+⭐ Was this page helpful?
+😀 Yes
+😐 Maybe
+🙁 No
+Also include:
+Suggest a Tool button
+Report a Bug button
+FOOTER
+Professional footer containing:
+About
+Our Journey
+Suggest Tool
+Contact
+Privacy Policy
+Terms
+GitHub
+Version
+Copyright ToolBox Hub
+DESIGN IMPROVEMENTS
+Improve spacing.
+Use larger headings.
+Reduce empty white space.
+Use premium shadows.
+Rounded corners.
+Smooth scrolling.
+Subtle animations.
+Glassmorphism where appropriate.
+Professional gradients.
+Mobile-first.
+Fast loading.
+Accessibility friendly.
+IMPORTANT
+Do NOT remove existing features.
+Do NOT break routing.
+Do NOT remove search.
+Do NOT remove categories.
+Keep performance fast.
+The final homepage should feel like a premium SaaS product and create a strong "wow" first impression.
