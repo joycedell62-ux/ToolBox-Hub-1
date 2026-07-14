@@ -16,7 +16,7 @@ import {
   Code, Binary, Link2, Shield, Fingerprint,
   // Writing Generators + Fun & Lifestyle icons
   Briefcase, Megaphone, Sparkles, AtSign, Target, Mail, Cake, CalendarHeart,
-  Send, Feather, MessageCircle, Wand2, Laugh, Dice5, Scale, MessageSquare,
+  Send, Feather, MessageCircle, Wand2, Laugh, Scale, MessageSquare,
   Snowflake, Brain, ListChecks,
   // Sprint — Branding, Marketing, Writing V2, Utility V2 icons
   Clapperboard, Mic, BookText, BookMarked, MessagesSquare, GraduationCap,
@@ -563,7 +563,7 @@ export const TOOLS: Tool[] = [
   { title: 'Ask Abigail', description: 'A friendly chat companion for fun questions and inspiration.', icon: MessageCircle, href: '/ask-abigail', category: 'Fun & Lifestyle', isNew: true },
   { title: 'Daily Fortune', description: 'Your light-hearted fortune of the day, with lucky numbers.', icon: Wand2, href: '/daily-fortune', category: 'Fun & Lifestyle', isNew: true },
   { title: 'Random Joke Generator', description: 'Family-friendly jokes: puns, dad jokes, and one-liners.', icon: Laugh, href: '/random-joke-generator', category: 'Fun & Lifestyle', isNew: true },
-  { title: 'Truth or Dare Generator', description: 'Party-ready truths and dares with difficulty levels.', icon: Dice5, href: '/truth-or-dare', category: 'Fun & Lifestyle', isNew: true },
+  { title: 'Word & Meaning Generator', description: 'Discover new words with meanings, examples and synonyms.', icon: BookOpen, href: '/word-meaning-generator', category: 'Fun & Lifestyle', isNew: true },
   { title: 'Would You Rather', description: 'Endless would-you-rather questions for groups and games.', icon: Scale, href: '/would-you-rather', category: 'Fun & Lifestyle', isNew: true },
   { title: 'Conversation Starter Generator', description: 'Great questions for dates, parties, work, and family.', icon: MessageSquare, href: '/conversation-starter-generator', category: 'Fun & Lifestyle', isNew: true },
   { title: 'Icebreaker Questions', description: 'Icebreakers for meetings, classrooms, and workshops.', icon: Snowflake, href: '/icebreaker-questions', category: 'Fun & Lifestyle', isNew: true },

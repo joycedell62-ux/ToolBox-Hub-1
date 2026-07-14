@@ -94,7 +94,7 @@ import ApologyLetterGenerator from './pages/ApologyLetterGenerator';
 import AskAbigail from './pages/AskAbigail';
 import DailyFortune from './pages/DailyFortune';
 import RandomJokeGenerator from './pages/RandomJokeGenerator';
-import TruthOrDareGenerator from './pages/TruthOrDareGenerator';
+import WordMeaningGenerator from './pages/WordMeaningGenerator';
 import WouldYouRatherGenerator from './pages/WouldYouRatherGenerator';
 import ConversationStarterGenerator from './pages/ConversationStarterGenerator';
 import IcebreakerGenerator from './pages/IcebreakerGenerator';
@@ -234,7 +234,7 @@ function Router() {
         <Route path="/ask-abigail" component={AskAbigail} />
         <Route path="/daily-fortune" component={DailyFortune} />
         <Route path="/random-joke-generator" component={RandomJokeGenerator} />
-        <Route path="/truth-or-dare" component={TruthOrDareGenerator} />
+        <Route path="/word-meaning-generator" component={WordMeaningGenerator} />
         <Route path="/would-you-rather" component={WouldYouRatherGenerator} />
         <Route path="/conversation-starter-generator" component={ConversationStarterGenerator} />
         <Route path="/icebreaker-questions" component={IcebreakerGenerator} />

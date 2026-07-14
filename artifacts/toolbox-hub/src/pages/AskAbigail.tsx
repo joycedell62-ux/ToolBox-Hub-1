@@ -214,7 +214,7 @@ export default function AskAbigail() {
           <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
             <h3 className="font-bold text-gray-900 text-sm mb-3">Related Tools</h3>
             <div className="grid grid-cols-2 gap-3">
-              {[{ label: 'Daily Fortune', href: '/daily-fortune' }, { label: 'Random Joke', href: '/random-joke-generator' }, { label: 'Truth or Dare', href: '/truth-or-dare' }, { label: 'Would You Rather', href: '/would-you-rather' }].map(r => (
+              {[{ label: 'Daily Fortune', href: '/daily-fortune' }, { label: 'Random Joke', href: '/random-joke-generator' }, { label: 'Word & Meaning', href: '/word-meaning-generator' }, { label: 'Would You Rather', href: '/would-you-rather' }].map(r => (
                 <Link key={r.href} href={r.href} className="flex items-center gap-2 text-sm text-blue-600 hover:text-blue-800 bg-blue-50 hover:bg-blue-100 rounded-xl px-3 py-2 transition-colors font-medium">→ {r.label}</Link>
               ))}
             </div>

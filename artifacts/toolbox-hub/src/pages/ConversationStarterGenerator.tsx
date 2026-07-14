@@ -161,7 +161,7 @@ const FAQS = [
 const RELATED = [
   { label: 'Icebreaker Questions', href: '/icebreaker-questions' },
   { label: 'Would You Rather', href: '/would-you-rather' },
-  { label: 'Truth or Dare', href: '/truth-or-dare' },
+  { label: 'Word & Meaning', href: '/word-meaning-generator' },
   { label: 'Random Fact Generator', href: '/random-fact-generator' },
 ];
 
