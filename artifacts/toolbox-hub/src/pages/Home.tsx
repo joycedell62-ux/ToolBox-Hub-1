@@ -304,14 +304,11 @@ export default function Home() {
 
   return (
     <>
-      {/* floating-shape keyframes */}
       <style>{`
         @keyframes floatA{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-24px) rotate(6deg)}}
         @keyframes floatB{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-16px) rotate(-5deg)}}
-        @keyframes floatC{0%,100%{transform:translateY(0)}33%{transform:translateY(-12px)}66%{transform:translateY(-22px)}}
         .fA{animation:floatA 7s ease-in-out infinite}
         .fB{animation:floatB 9s ease-in-out infinite 1.5s}
-        .fC{animation:floatC 8s ease-in-out infinite 3s}
         .scrollbar-hide::-webkit-scrollbar{display:none}
         .scrollbar-hide{-ms-overflow-style:none;scrollbar-width:none}
       `}</style>
@@ -322,40 +319,32 @@ export default function Home() {
             1 ▸ HERO
         ══════════════════════════════════════════════════════ */}
         <section
-          className="relative px-4 sm:px-6 lg:px-8 pt-14 pb-12 md:pt-20 md:pb-16 text-center overflow-hidden"
-          style={{ background: 'linear-gradient(145deg,#1d4ed8 0%,#2563eb 40%,#4f46e5 75%,#7c3aed 100%)' }}
+          className="relative px-4 sm:px-6 lg:px-8 pt-12 pb-10 md:pt-16 md:pb-12 text-center overflow-hidden"
+          style={{ background: 'linear-gradient(160deg,#dbeafe 0%,#eff6ff 35%,#ffffff 65%)' }}
         >
-          {/* Floating shapes */}
-          <div className="fA absolute top-8  left-6  w-20 h-20 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20 rotate-12 pointer-events-none" />
-          <div className="fB absolute top-12 right-8 w-14 h-14 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 pointer-events-none" />
-          <div className="fC absolute bottom-10 left-[12%] w-10 h-10 rounded-xl bg-blue-300/30 border border-white/15 rotate-45 pointer-events-none" />
-          <div className="fA absolute bottom-8 right-[10%] w-16 h-16 rounded-2xl bg-indigo-300/20 border border-white/15 -rotate-12 pointer-events-none" />
-          <div className="fB absolute top-1/2 left-[5%]  w-8  h-8  rounded-full bg-violet-300/25 border border-white/10 pointer-events-none hidden lg:block" />
-          <div className="fC absolute top-1/3 right-[6%] w-12 h-12 rounded-xl bg-blue-200/20 border border-white/15 rotate-[20deg] pointer-events-none hidden lg:block" />
+          {/* Subtle ambient blobs */}
+          <div className="fA absolute -top-24 -left-24 w-80 h-80 bg-blue-200/25 rounded-full blur-3xl pointer-events-none" />
+          <div className="fB absolute -top-12 -right-24 w-64 h-64 bg-indigo-200/20 rounded-full blur-3xl pointer-events-none" />
 
           <div className="relative max-w-2xl mx-auto">
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 bg-white/15 backdrop-blur-sm border border-white/30 rounded-full px-4 py-1.5 text-xs font-semibold text-white mb-6">
+            <div className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm border border-blue-100 shadow-sm rounded-full px-4 py-1.5 text-xs font-semibold text-blue-700 mb-5">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse inline-block" />
-              116+ free tools &nbsp;·&nbsp; No sign-up needed
+              116+ free tools &nbsp;·&nbsp; No account needed
             </div>
 
             {/* Headline */}
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.1] mb-4">
-              Everything You Need.<br />
-              <span className="text-blue-200">One Website. Free Forever.</span>
-              <span className="ml-2">💙</span>
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight leading-[1.1] mb-2">
+              Your free toolkit<br />
+              <span className="text-blue-600">for everything.</span>
             </h1>
-
-            {/* Subtitle */}
-            <p className="text-blue-100 text-sm md:text-base lg:text-lg mb-8 max-w-xl mx-auto leading-relaxed">
-              116+ free online tools for students, creators, businesses, developers, and everyday users.
-              No sign-up. No downloads. Fast, secure, and works on every device.
+            <p className="text-slate-500 text-sm md:text-base mb-8 max-w-sm mx-auto leading-relaxed">
+              Writing, PDF, design, code & more — runs in your browser, free forever.
             </p>
 
             {/* Search bar */}
-            <div className="relative group mb-5">
-              <div className="flex items-center bg-white rounded-2xl shadow-2xl shadow-blue-900/30 border border-transparent group-focus-within:border-blue-300 transition-all duration-300">
+            <div className="relative group mb-4">
+              <div className="flex items-center bg-white rounded-2xl border border-slate-200 shadow-[0_4px_32px_rgba(37,99,235,0.14)] group-focus-within:border-blue-400 group-focus-within:shadow-[0_4px_40px_rgba(37,99,235,0.22)] transition-all duration-300">
                 <Search className="ml-5 flex-shrink-0 w-5 h-5 text-slate-400" />
                 <input
                   ref={searchRef}
@@ -363,7 +352,7 @@ export default function Home() {
                   value={query}
                   onChange={e => { setQuery(e.target.value); setActiveCat(null); }}
                   onKeyDown={e => e.key === 'Escape' && setQuery('')}
-                  placeholder="Search 116+ tools — try 'PDF', 'resume', 'password'…"
+                  placeholder="Search 116+ tools — try 'PDF', 'password', 'resume'…"
                   aria-label="Search tools"
                   className="flex-1 px-4 py-4 md:py-4.5 text-sm md:text-base bg-transparent focus:outline-none text-slate-800 placeholder:text-slate-400"
                 />
@@ -380,30 +369,32 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Hero CTAs */}
-            <div className="flex flex-wrap justify-center gap-3 mb-8">
-              <button onClick={() => scrollTo('sec-popular')}
-                className="flex items-center gap-2 bg-white text-blue-700 font-bold px-6 py-3 rounded-xl hover:bg-blue-50 transition-all hover:scale-[1.03] shadow-lg text-sm">
-                🔵 Explore Tools
-              </button>
-              <button onClick={surpriseMe}
-                className="flex items-center gap-2 bg-white/15 hover:bg-white/25 border border-white/30 text-white font-bold px-6 py-3 rounded-xl transition-all text-sm backdrop-blur-sm">
-                ⚪ Surprise Me 🎲
-              </button>
+            {/* Quick actions */}
+            <div className="flex flex-wrap justify-center gap-2">
+              {[
+                { label: '🔥 Trending',    fn: () => scrollTo('sec-popular') },
+                { label: '🆕 New Tools',   fn: () => scrollTo('sec-new') },
+                { label: '🎲 Surprise Me', fn: surpriseMe },
+              ].map(q => (
+                <button key={q.label} onClick={q.fn}
+                  className="px-3.5 py-1.5 text-xs font-medium text-slate-600 hover:text-blue-700 bg-white/70 hover:bg-white border border-slate-200 hover:border-blue-200 rounded-xl shadow-sm hover:shadow transition-all">
+                  {q.label}
+                </button>
+              ))}
             </div>
           </div>
 
           {/* Category chips */}
-          <div className="-mx-4 sm:-mx-6 lg:-mx-8">
+          <div className="mt-8 -mx-4 sm:-mx-6 lg:-mx-8">
             <div className="px-4 sm:px-6 lg:px-8 overflow-x-auto scrollbar-hide" style={{ WebkitOverflowScrolling: 'touch' }}>
               <div className="flex gap-2 w-max mx-auto pb-1">
                 {CHIPS.map(c => (
                   <button key={c.label}
                     onClick={() => activeCat === c.cat ? setActiveCat(null) : pickCat(c.cat)}
-                    className={`flex items-center gap-1.5 px-4 py-2 rounded-full border text-sm font-semibold whitespace-nowrap transition-all duration-200 hover:scale-105 select-none ${
+                    className={`flex items-center gap-1.5 px-4 py-2 rounded-full border text-sm font-semibold whitespace-nowrap transition-all duration-200 hover:scale-105 hover:shadow-sm select-none ${
                       activeCat === c.cat
-                        ? 'bg-white text-blue-700 border-white shadow-md'
-                        : 'bg-white/10 text-white border-white/20 hover:bg-white/20 backdrop-blur-sm'
+                        ? 'bg-blue-600 text-white border-blue-600 shadow-md'
+                        : c.chip
                     }`}>
                     <span className="text-base leading-none">{c.emoji}</span>
                     {c.label}
