@@ -513,8 +513,8 @@ export default function Home() {
                   sub="The tools people open every single day."
                   badge="Trending"
                 />
-                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-                  {popularTools.map(t => <PopularCard key={t.href} tool={t} />)}
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3">
+                  {popularTools.map(t => <FeedCard key={t.href} tool={t} />)}
                 </div>
               </div>
             </section>
