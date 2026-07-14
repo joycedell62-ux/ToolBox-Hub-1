@@ -17,8 +17,10 @@ import {
 } from 'lucide-react';
 import { LucideIcon } from 'lucide-react';
 import ToolCard from '../components/ToolCard';
-import { TOOLS, CATEGORIES } from '../lib/tools';
+import { useLocation } from 'wouter';
+import { TOOLS, CATEGORIES, getToolByHref } from '../lib/tools';
 import type { Tool } from '../lib/tools';
+import { useFavorites, useRecentlyUsed } from '../lib/toolPrefs';
 
 // ─── Tool registry ────────────────────────────────────────────────────────────
 
@@ -30,7 +32,7 @@ const DOT_PATTERN = `url("data:image/svg+xml,%3Csvg width='20' height='20' xmlns
 // ─── Stat items ───────────────────────────────────────────────────────────────
 
 const STATS = [
-  { icon: Gift,       label: '63+ Free Tools',  sub: 'Always free, no limits' },
+  { icon: Gift,       label: '82+ Free Tools',  sub: 'Always free, no limits' },
   { icon: Lock,       label: 'No Sign-up',       sub: 'Use instantly, no account' },
   { icon: Zap,        label: 'Instant Results',  sub: 'Everything runs in browser' },
   { icon: Smartphone, label: 'Mobile Ready',     sub: 'Works on any device' },
@@ -41,6 +43,17 @@ const STATS = [
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState('');
   const toolsSectionRef = useRef<HTMLElement>(null);
+  const [, navigate] = useLocation();
+  const { favorites } = useFavorites();
+  const recentHrefs = useRecentlyUsed();
+
+  const favoriteTools = favorites.map(getToolByHref).filter(Boolean) as Tool[];
+  const recentlyUsedTools = recentHrefs.map(getToolByHref).filter(Boolean) as Tool[];
+
+  const surpriseMe = () => {
+    const t = TOOLS[Math.floor(Math.random() * TOOLS.length)];
+    navigate(t.href);
+  };
 
   const isSearching = searchQuery.trim().length > 0;
 
@@ -90,7 +103,7 @@ export default function Home() {
           {/* Badge */}
           <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 text-blue-100 text-xs font-semibold px-4 py-2 rounded-full mb-8 animate-in fade-in slide-in-from-bottom-2 duration-500">
             <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" aria-hidden="true" />
-            63+ Free Tools Available — No sign-up required
+            82+ Free Tools Available — No sign-up required
           </div>
 
           {/* Title */}
@@ -157,6 +170,13 @@ export default function Home() {
                            rounded-xl hover:bg-white/20 transition-all duration-200 text-sm"
               >
                 Browse All Tools
+              </button>
+              <button
+                onClick={surpriseMe}
+                className="px-7 py-3.5 bg-white/10 backdrop-blur-sm border border-white/25 text-white font-semibold
+                           rounded-xl hover:bg-white/20 transition-all duration-200 text-sm"
+              >
+                🎲 Surprise Me
               </button>
             </div>
           )}
@@ -233,6 +253,50 @@ export default function Home() {
               </div>
             ))}
           </div>
+
+          {/* ── Your Favorites ── */}
+          {favoriteTools.length > 0 && (
+            <section>
+              <SectionHeader
+                title="Your Favorites"
+                subtitle="Tools you starred for quick access"
+                emoji="⭐"
+              />
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-6">
+                {favoriteTools.map((t) => (
+                  <ToolCard
+                    key={t.href}
+                    title={t.title}
+                    description={t.description}
+                    icon={t.icon}
+                    href={t.href}
+                  />
+                ))}
+              </div>
+            </section>
+          )}
+
+          {/* ── Recently Used ── */}
+          {recentlyUsedTools.length > 0 && (
+            <section>
+              <SectionHeader
+                title="Recently Used"
+                subtitle="Pick up where you left off"
+                emoji="🕘"
+              />
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-6">
+                {recentlyUsedTools.slice(0, 4).map((t) => (
+                  <ToolCard
+                    key={t.href}
+                    title={t.title}
+                    description={t.description}
+                    icon={t.icon}
+                    href={t.href}
+                  />
+                ))}
+              </div>
+            </section>
+          )}
 
           {/* ── Popular Tools ── */}
           <section>

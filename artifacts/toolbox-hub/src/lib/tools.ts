@@ -14,10 +14,14 @@ import {
   ShoppingBag, Utensils, CalendarDays, CheckSquare, ListTodo, Clipboard, Star,
   BookOpen, Replace, Filter, ArrowUpDown, StickyNote, FileText as FileText2,
   Code, Binary, Link2, Shield, Fingerprint,
+  // Writing Generators + Fun & Lifestyle icons
+  Briefcase, Megaphone, Sparkles, AtSign, Target, Mail, Cake, CalendarHeart,
+  Send, Feather, MessageCircle, Wand2, Laugh, Dice5, Scale, MessageSquare,
+  Snowflake, Brain, ListChecks,
 } from 'lucide-react';
 import { LucideIcon } from 'lucide-react';
 
-export type Category = 'Text Tools' | 'Calculators' | 'Utility Tools' | 'Developer Tools' | 'PDF Tools' | 'Image Tools' | 'Daily Life';
+export type Category = 'Text Tools' | 'Calculators' | 'Utility Tools' | 'Developer Tools' | 'PDF Tools' | 'Image Tools' | 'Daily Life' | 'Writing Generators' | 'Fun & Lifestyle';
 
 export interface Tool {
   title: string;
@@ -538,6 +542,27 @@ export const TOOLS: Tool[] = [
     category: 'Developer Tools',
     isNew: true,
   },
+  // ── Writing Generators ──
+  { title: 'Business Name Generator', description: 'Generate unique business name ideas by industry and keywords.', icon: Briefcase, href: '/business-name-generator', category: 'Writing Generators', isNew: true },
+  { title: 'Slogan Generator', description: 'Create memorable slogans for businesses and brands.', icon: Megaphone, href: '/slogan-generator', category: 'Writing Generators', isNew: true },
+  { title: 'Brand Name Generator', description: 'Generate modern brand names with domain-style ideas.', icon: Sparkles, href: '/brand-name-generator', category: 'Writing Generators', isNew: true },
+  { title: 'Username Generator', description: 'Create usernames based on your name, interests, or keywords.', icon: AtSign, href: '/username-generator', category: 'Writing Generators', isNew: true },
+  { title: 'Mission Statement Generator', description: 'Draft a clear company mission statement in seconds.', icon: Target, href: '/mission-statement-generator', category: 'Writing Generators', isNew: true },
+  { title: 'Love Letter Generator', description: 'Write a heartfelt love letter with your choice of tone.', icon: Mail, href: '/love-letter-generator', category: 'Writing Generators', isNew: true },
+  { title: 'Birthday Message Generator', description: 'Craft the perfect birthday message for cards or texts.', icon: Cake, href: '/birthday-message-generator', category: 'Writing Generators', isNew: true },
+  { title: 'Anniversary Message Generator', description: 'Personalized anniversary messages by years together.', icon: CalendarHeart, href: '/anniversary-message-generator', category: 'Writing Generators', isNew: true },
+  { title: 'Thank You Letter Generator', description: 'Thank-you letters for gifts, help, interviews, and more.', icon: Send, href: '/thank-you-letter-generator', category: 'Writing Generators', isNew: true },
+  { title: 'Apology Letter Generator', description: 'Write a sincere apology letter for any situation.', icon: Feather, href: '/apology-letter-generator', category: 'Writing Generators', isNew: true },
+  // ── Fun & Lifestyle ──
+  { title: 'Ask Abigail', description: 'A friendly chat companion for fun questions and inspiration.', icon: MessageCircle, href: '/ask-abigail', category: 'Fun & Lifestyle', isNew: true },
+  { title: 'Daily Fortune', description: 'Your light-hearted fortune of the day, with lucky numbers.', icon: Wand2, href: '/daily-fortune', category: 'Fun & Lifestyle', isNew: true },
+  { title: 'Random Joke Generator', description: 'Family-friendly jokes: puns, dad jokes, and one-liners.', icon: Laugh, href: '/random-joke-generator', category: 'Fun & Lifestyle', isNew: true },
+  { title: 'Truth or Dare Generator', description: 'Party-ready truths and dares with difficulty levels.', icon: Dice5, href: '/truth-or-dare', category: 'Fun & Lifestyle', isNew: true },
+  { title: 'Would You Rather', description: 'Endless would-you-rather questions for groups and games.', icon: Scale, href: '/would-you-rather', category: 'Fun & Lifestyle', isNew: true },
+  { title: 'Conversation Starter Generator', description: 'Great questions for dates, parties, work, and family.', icon: MessageSquare, href: '/conversation-starter-generator', category: 'Fun & Lifestyle', isNew: true },
+  { title: 'Icebreaker Questions', description: 'Icebreakers for meetings, classrooms, and workshops.', icon: Snowflake, href: '/icebreaker-questions', category: 'Fun & Lifestyle', isNew: true },
+  { title: 'Random Fact Generator', description: 'Surprising facts about science, history, space, and more.', icon: Brain, href: '/random-fact-generator', category: 'Fun & Lifestyle', isNew: true },
+  { title: 'Bucket List Generator', description: 'Build your bucket list with curated adventure ideas.', icon: ListChecks, href: '/bucket-list-generator', category: 'Fun & Lifestyle', isNew: true },
 ];
 
 // ─── Category config ──────────────────────────────────────────────────────────
@@ -550,6 +575,8 @@ export const CATEGORIES: { name: Category; emoji: string; color: string; bg: str
   { name: 'Developer Tools', emoji: '💻', color: 'text-orange-700', bg: 'bg-orange-50',  border: 'border-orange-100' },
   { name: 'PDF Tools',       emoji: '📑', color: 'text-red-700',    bg: 'bg-red-50',     border: 'border-red-100' },
   { name: 'Image Tools',     emoji: '🖼️', color: 'text-pink-700',   bg: 'bg-pink-50',    border: 'border-pink-100' },
+  { name: 'Writing Generators', emoji: '✍️', color: 'text-indigo-700', bg: 'bg-indigo-50',  border: 'border-indigo-100' },
+  { name: 'Fun & Lifestyle',    emoji: '🎉', color: 'text-amber-700',  bg: 'bg-amber-50',   border: 'border-amber-100' },
 ];
 
     // ─── Helpers ────────────────────────────────────────────────────────────────

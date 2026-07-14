@@ -1,0 +1,50 @@
+Build these as part of the existing ToolBox Hub platform. Follow the ToolBox Hub Master Blueprint, use the same design system, dashboard, search, categories, and responsive layout. Ensure each tool works offline where technically possible and follows the ToolBox Hub Gold Standard.
+AI & Writing
+1. Business Name Generator
+Generate unique business name ideas by industry and keywords.
+2. Slogan Generator
+Create memorable slogans for businesses and brands.
+3. Brand Name Generator
+Generate modern brand names with optional domain availability suggestions (without claiming registration).
+4. Username Generator
+Create usernames based on names, interests, or keywords.
+5. Company Mission Statement Generator
+Help businesses draft a mission statement.
+Personal Writing
+6. Love Letter Generator
+7. Birthday Message Generator
+8. Anniversary Message Generator
+9. Thank You Letter Generator
+10. Apology Letter Generator
+Allow users to choose tone (formal, friendly, heartfelt) and copy or download the result.
+Fun & Entertainment
+11. Ask Abigail (Entertainment Companion)
+A friendly entertainment chatbot for fun questions and inspirational responses.
+Include a clear notice: "Responses are for entertainment and inspiration only."
+12. Daily Fortune
+Generate light-hearted daily fortunes.
+13. Random Joke Generator
+14. Truth or Dare Generator
+15. Would You Rather Generator
+Community & Lifestyle
+16. Conversation Starter Generator
+17. Icebreaker Questions Generator
+18. Random Fact Generator
+19. Bucket List Generator
+20. Gift Idea Generator
+Generate gift suggestions by age, budget, relationship, and occasion.
+🌟 Requirements
+Every tool must:
+Match ToolBox Hub branding.
+Work on mobile, tablet, and desktop.
+Work offline where technically possible.
+Include Helpful Tips.
+Include FAQs.
+Suggest Related Tools.
+Include "Was this tool helpful?" feedback.
+Be fast, accessible, and privacy-friendly.
+Integrate into the existing ToolBox Hub navigation and categories.
+Support copy, share, and print where appropriate.
+💙 Product Planner Note
+These 20 tools make ToolBox Hub more than a utility website—they add creativity, communication, and light entertainment while staying useful.
+One small recommendation: for tools like Ask Abigail and Daily Fortune, always present them as fun or inspirational experiences, not as giving real predictions or professional advice. That keeps the experience enjoyable and sets the right expectations.

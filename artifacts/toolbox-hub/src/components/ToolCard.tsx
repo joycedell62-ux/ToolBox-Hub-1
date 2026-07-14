@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'wouter';
-import { LucideIcon, ArrowRight } from 'lucide-react';
+import { LucideIcon, ArrowRight, Star } from 'lucide-react';
+import { useFavorites } from '../lib/toolPrefs';
 
 interface ToolCardProps {
   title: string;
@@ -20,31 +21,55 @@ export default function ToolCard({
   size = 'default',
 }: ToolCardProps) {
   const isFeatured = size === 'featured';
+  const { isFavorite, toggleFavorite } = useFavorites();
+  const fav = isFavorite(href);
 
   return (
-    <Link href={href} className="group block h-full">
+    <div className="group relative block h-full">
       <div
         className={`relative bg-white h-full rounded-2xl border border-gray-100 transition-all duration-300 ease-out
-          hover:-translate-y-1.5 hover:shadow-xl hover:shadow-blue-100/60 hover:border-blue-200
-          active:translate-y-0 active:shadow-md
+          group-hover:-translate-y-1.5 group-hover:shadow-xl group-hover:shadow-blue-100/60 group-hover:border-blue-200
+          group-active:translate-y-0 group-active:shadow-md
           ${isFeatured ? 'p-7' : 'p-6'}
           shadow-sm flex flex-col overflow-hidden`}
       >
+        {/* Stretched link — covers the whole card without nesting the star button */}
+        <Link
+          href={href}
+          aria-label={`Open ${title}`}
+          className="absolute inset-0 z-[1] rounded-2xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-500"
+        />
         {/* Subtle gradient shine on hover */}
         <div className="absolute inset-0 bg-gradient-to-br from-blue-50/0 to-blue-50/0 group-hover:from-blue-50/40 group-hover:to-indigo-50/20 transition-all duration-300 rounded-2xl pointer-events-none" />
 
-        {/* Badge */}
-        {badge && (
-          <span
-            className={`absolute top-4 right-4 text-xs font-semibold px-2.5 py-1 rounded-full
-              ${badge === 'Popular'
-                ? 'bg-amber-50 text-amber-700 border border-amber-200'
-                : 'bg-green-50 text-green-700 border border-green-200'
-              }`}
+        {/* Badge + favorite star (above the stretched link) */}
+        <div className="absolute top-4 right-4 z-[2] flex items-center gap-1.5">
+          {badge && (
+            <span
+              className={`text-xs font-semibold px-2.5 py-1 rounded-full
+                ${badge === 'Popular'
+                  ? 'bg-amber-50 text-amber-700 border border-amber-200'
+                  : 'bg-green-50 text-green-700 border border-green-200'
+                }`}
+            >
+              {badge === 'Popular' ? '★ Popular' : '✦ New'}
+            </span>
+          )}
+          <button
+            aria-label={fav ? `Remove ${title} from favorites` : `Add ${title} to favorites`}
+            aria-pressed={fav}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              toggleFavorite(href);
+            }}
+            className={`p-1 rounded-md transition-colors ${
+              fav ? 'text-amber-400 hover:text-amber-500' : 'text-gray-300 hover:text-amber-400'
+            }`}
           >
-            {badge === 'Popular' ? '★ Popular' : '✦ New'}
-          </span>
-        )}
+            <Star className={`w-4 h-4 ${fav ? 'fill-amber-400' : ''}`} />
+          </button>
+        </div>
 
         {/* Icon */}
         <div
@@ -70,6 +95,6 @@ export default function ToolCard({
           Open tool <ArrowRight className="w-3.5 h-3.5" />
         </div>
       </div>
-    </Link>
+    </div>
   );
 }

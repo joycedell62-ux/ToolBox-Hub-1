@@ -20,6 +20,8 @@ import CertificateGenerator from './pages/CertificateGenerator';
 import ResumeBuilder from './pages/ResumeBuilder';
 import InvoiceGenerator from './pages/InvoiceGenerator';
 import About from './pages/About';
+import Privacy from './pages/Privacy';
+import Terms from './pages/Terms';
 // PDF Tools
 import PdfMerge from './pages/PdfMerge';
 import PdfSplit from './pages/PdfSplit';
@@ -76,6 +78,27 @@ import Base64Tool from './pages/Base64Tool';
 import UrlEncoder from './pages/UrlEncoder';
 import HashGenerator from './pages/HashGenerator';
 import UuidGenerator from './pages/UuidGenerator';
+// Writing Generators
+import BusinessNameGenerator from './pages/BusinessNameGenerator';
+import SloganGenerator from './pages/SloganGenerator';
+import BrandNameGenerator from './pages/BrandNameGenerator';
+import UsernameGenerator from './pages/UsernameGenerator';
+import MissionStatementGenerator from './pages/MissionStatementGenerator';
+import LoveLetterGenerator from './pages/LoveLetterGenerator';
+import BirthdayMessageGenerator from './pages/BirthdayMessageGenerator';
+import AnniversaryMessageGenerator from './pages/AnniversaryMessageGenerator';
+import ThankYouLetterGenerator from './pages/ThankYouLetterGenerator';
+import ApologyLetterGenerator from './pages/ApologyLetterGenerator';
+// Fun & Lifestyle
+import AskAbigail from './pages/AskAbigail';
+import DailyFortune from './pages/DailyFortune';
+import RandomJokeGenerator from './pages/RandomJokeGenerator';
+import TruthOrDareGenerator from './pages/TruthOrDareGenerator';
+import WouldYouRatherGenerator from './pages/WouldYouRatherGenerator';
+import ConversationStarterGenerator from './pages/ConversationStarterGenerator';
+import IcebreakerGenerator from './pages/IcebreakerGenerator';
+import RandomFactGenerator from './pages/RandomFactGenerator';
+import BucketListGenerator from './pages/BucketListGenerator';
 
 const queryClient = new QueryClient();
 
@@ -84,6 +107,8 @@ function Router() {
     <Layout>
       <Switch>
         <Route path="/" component={Home} />
+        <Route path="/privacy" component={Privacy} />
+        <Route path="/terms" component={Terms} />
         <Route path="/password-generator" component={PasswordGenerator} />
         <Route path="/qr-code-generator" component={QrCodeGenerator} />
         <Route path="/word-counter" component={WordCounter} />
@@ -154,6 +179,27 @@ function Router() {
         <Route path="/url-encoder" component={UrlEncoder} />
         <Route path="/hash-generator" component={HashGenerator} />
         <Route path="/uuid-generator" component={UuidGenerator} />
+        {/* Writing Generators */}
+        <Route path="/business-name-generator" component={BusinessNameGenerator} />
+        <Route path="/slogan-generator" component={SloganGenerator} />
+        <Route path="/brand-name-generator" component={BrandNameGenerator} />
+        <Route path="/username-generator" component={UsernameGenerator} />
+        <Route path="/mission-statement-generator" component={MissionStatementGenerator} />
+        <Route path="/love-letter-generator" component={LoveLetterGenerator} />
+        <Route path="/birthday-message-generator" component={BirthdayMessageGenerator} />
+        <Route path="/anniversary-message-generator" component={AnniversaryMessageGenerator} />
+        <Route path="/thank-you-letter-generator" component={ThankYouLetterGenerator} />
+        <Route path="/apology-letter-generator" component={ApologyLetterGenerator} />
+        {/* Fun & Lifestyle */}
+        <Route path="/ask-abigail" component={AskAbigail} />
+        <Route path="/daily-fortune" component={DailyFortune} />
+        <Route path="/random-joke-generator" component={RandomJokeGenerator} />
+        <Route path="/truth-or-dare" component={TruthOrDareGenerator} />
+        <Route path="/would-you-rather" component={WouldYouRatherGenerator} />
+        <Route path="/conversation-starter-generator" component={ConversationStarterGenerator} />
+        <Route path="/icebreaker-questions" component={IcebreakerGenerator} />
+        <Route path="/random-fact-generator" component={RandomFactGenerator} />
+        <Route path="/bucket-list-generator" component={BucketListGenerator} />
         <Route component={NotFound} />
       </Switch>
     </Layout>
