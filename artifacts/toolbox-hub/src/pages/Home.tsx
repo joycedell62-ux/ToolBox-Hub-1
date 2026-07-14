@@ -1,11 +1,14 @@
-import React, { useState, useMemo, useRef } from 'react';
-import { Search, X, ChevronRight, ArrowRight, Star, Flame, Clock } from 'lucide-react';
+import React, { useState, useMemo, useRef, useEffect } from 'react';
+import {
+  Search, X, ChevronRight, ArrowRight, Star,
+  Flame, Clock, LayoutGrid, Command,
+} from 'lucide-react';
 import { Link, useLocation } from 'wouter';
 import { TOOLS, getToolByHref } from '../lib/tools';
 import type { Tool, Category } from '../lib/tools';
 import { useFavorites, useRecentlyUsed } from '../lib/toolPrefs';
 
-/* ─── Per-category icon gradient ─────────────────────────────────────────── */
+/* ─── Per-category gradient ──────────────────────────────────────────────── */
 const CAT_COLOR: Record<Category, string> = {
   'PDF Tools':          'from-red-400    to-orange-500',
   'Image Tools':        'from-violet-400 to-purple-600',
@@ -20,21 +23,27 @@ const CAT_COLOR: Record<Category, string> = {
   'Marketing Tools':    'from-cyan-400   to-sky-600',
 };
 
+const CAT_SHORT: Record<Category, string> = {
+  'PDF Tools': 'PDF', 'Image Tools': 'Images', 'Developer Tools': 'Dev',
+  'Calculators': 'Finance', 'Text Tools': 'Text', 'Utility Tools': 'Utility',
+  'Daily Life': 'Daily', 'Writing Generators': 'Writing',
+  'Fun & Lifestyle': 'Fun', 'Branding & Design': 'Design', 'Marketing Tools': 'Business',
+};
+
 /* ─── Category chips ─────────────────────────────────────────────────────── */
 const CHIPS: { label: string; emoji: string; cat: Category; chip: string }[] = [
-  { label: 'PDF',        emoji: '📄', cat: 'PDF Tools',          chip: 'bg-red-50    text-red-700    border-red-200    hover:bg-red-100'        },
-  { label: 'Images',     emoji: '🖼️', cat: 'Image Tools',         chip: 'bg-violet-50 text-violet-700 border-violet-200 hover:bg-violet-100'    },
-  { label: 'Developer',  emoji: '💻', cat: 'Developer Tools',     chip: 'bg-slate-50  text-slate-700  border-slate-200  hover:bg-slate-100'      },
-  { label: 'Writing',    emoji: '✍️', cat: 'Writing Generators',  chip: 'bg-pink-50   text-pink-700   border-pink-200   hover:bg-pink-100'        },
-  { label: 'Finance',    emoji: '💰', cat: 'Calculators',         chip: 'bg-green-50  text-green-700  border-green-200  hover:bg-green-100'      },
-  { label: 'Design',     emoji: '🎨', cat: 'Branding & Design',   chip: 'bg-fuchsia-50 text-fuchsia-700 border-fuchsia-200 hover:bg-fuchsia-100' },
-  { label: 'Business',   emoji: '💼', cat: 'Marketing Tools',     chip: 'bg-cyan-50   text-cyan-700   border-cyan-200   hover:bg-cyan-100'        },
-  { label: 'Security',   emoji: '🛡️', cat: 'Utility Tools',       chip: 'bg-indigo-50 text-indigo-700 border-indigo-200 hover:bg-indigo-100'    },
-  { label: 'Daily Life', emoji: '🌟', cat: 'Daily Life',          chip: 'bg-teal-50   text-teal-700   border-teal-200   hover:bg-teal-100'        },
-  { label: 'Fun',        emoji: '🎉', cat: 'Fun & Lifestyle',     chip: 'bg-amber-50  text-amber-700  border-amber-200  hover:bg-amber-100'      },
+  { label: 'PDF',        emoji: '📄', cat: 'PDF Tools',          chip: 'bg-red-50    text-red-700    border-red-200    hover:bg-red-100'         },
+  { label: 'Images',     emoji: '🖼️', cat: 'Image Tools',         chip: 'bg-violet-50 text-violet-700 border-violet-200 hover:bg-violet-100'     },
+  { label: 'Developer',  emoji: '💻', cat: 'Developer Tools',     chip: 'bg-slate-50  text-slate-700  border-slate-200  hover:bg-slate-100'       },
+  { label: 'Writing',    emoji: '✍️', cat: 'Writing Generators',  chip: 'bg-pink-50   text-pink-700   border-pink-200   hover:bg-pink-100'         },
+  { label: 'Finance',    emoji: '💰', cat: 'Calculators',         chip: 'bg-green-50  text-green-700  border-green-200  hover:bg-green-100'       },
+  { label: 'Design',     emoji: '🎨', cat: 'Branding & Design',   chip: 'bg-fuchsia-50 text-fuchsia-700 border-fuchsia-200 hover:bg-fuchsia-100'  },
+  { label: 'Business',   emoji: '💼', cat: 'Marketing Tools',     chip: 'bg-cyan-50   text-cyan-700   border-cyan-200   hover:bg-cyan-100'         },
+  { label: 'Security',   emoji: '🛡️', cat: 'Utility Tools',       chip: 'bg-indigo-50 text-indigo-700 border-indigo-200 hover:bg-indigo-100'     },
+  { label: 'Daily Life', emoji: '🌟', cat: 'Daily Life',          chip: 'bg-teal-50   text-teal-700   border-teal-200   hover:bg-teal-100'         },
+  { label: 'Fun',        emoji: '🎉', cat: 'Fun & Lifestyle',     chip: 'bg-amber-50  text-amber-700  border-amber-200  hover:bg-amber-100'       },
 ];
 
-/* ─── Popular & new tool hrefs ───────────────────────────────────────────── */
 const POPULAR_HREFS = [
   '/qr-code-generator', '/resume-builder', '/certificate-generator', '/logo-generator',
   '/password-generator', '/pdf-merge', '/image-compressor', '/invoice-generator',
@@ -45,7 +54,6 @@ const RECENT_HREFS = [
   '/business-name-generator', '/birthday-reminder', '/daily-fortune',
 ];
 
-/* ─── Tool of the Day (daily seed) ──────────────────────────────────────── */
 const POP = TOOLS.filter(t => t.popular);
 const TOD = POP[Math.floor(Date.now() / 86_400_000) % POP.length];
 
@@ -65,7 +73,6 @@ function ToolCard({ tool }: { tool: Tool }) {
       >
         <Star className={`w-4 h-4 ${fav ? 'fill-amber-400' : ''}`} />
       </button>
-
       <div className="p-5 flex flex-col gap-3 flex-1">
         <div className={`w-11 h-11 rounded-xl bg-gradient-to-br ${grad} flex items-center justify-center shadow-sm flex-shrink-0 group-hover:scale-110 transition-transform duration-300`}>
           <tool.icon className="w-5 h-5 text-white" />
@@ -113,11 +120,14 @@ function SectionHead({ icon, label, sub, badge, action, onAction }: {
 
 /* ─── Main ───────────────────────────────────────────────────────────────── */
 export default function Home() {
-  const [query,     setQuery]     = useState('');
-  const [activeCat, setActiveCat] = useState<Category | null>(null);
-  const [showAll,   setShowAll]   = useState(false);
+  const [query,       setQuery]       = useState('');
+  const [activeCat,   setActiveCat]   = useState<Category | null>(null);
+  const [showAll,     setShowAll]     = useState(false);
+  const [browseAll,   setBrowseAll]   = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
   const [, navigate] = useLocation();
-  const searchRef = useRef<HTMLInputElement>(null);
+  const searchRef    = useRef<HTMLInputElement>(null);
+  const searchWrapRef = useRef<HTMLDivElement>(null);
 
   const { favorites } = useFavorites();
   const recentHrefs   = useRecentlyUsed();
@@ -126,32 +136,79 @@ export default function Home() {
 
   const isSearching = query.trim().length > 0;
 
+  /* Instant dropdown results — top 6 */
+  const dropdownResults = useMemo(() =>
+    isSearching ? TOOLS.filter(t =>
+      t.title.toLowerCase().includes(query.toLowerCase()) ||
+      t.description.toLowerCase().includes(query.toLowerCase()) ||
+      t.category.toLowerCase().includes(query.toLowerCase())
+    ).slice(0, 6) : [],
+  [query, isSearching]);
+
+  /* Full results grid */
   const searchResults = useMemo(() =>
     isSearching ? TOOLS.filter(t =>
       t.title.toLowerCase().includes(query.toLowerCase()) ||
       t.description.toLowerCase().includes(query.toLowerCase()) ||
       t.category.toLowerCase().includes(query.toLowerCase())
-    ) : [], [query]);
+    ) : [],
+  [query, isSearching]);
 
   const popularTools = useMemo(
     () => POPULAR_HREFS.map(h => getToolByHref(h)).filter(Boolean) as Tool[], []);
 
   const newTools = useMemo(() => {
-    const spec    = RECENT_HREFS.map(h => getToolByHref(h)).filter(Boolean) as Tool[];
-    const extras  = TOOLS.filter(t => t.isNew && !RECENT_HREFS.includes(t.href));
-    const merged  = [...spec, ...extras.filter(t => !spec.find(x => x.href === t.href))];
+    const spec   = RECENT_HREFS.map(h => getToolByHref(h)).filter(Boolean) as Tool[];
+    const extras = TOOLS.filter(t => t.isNew && !RECENT_HREFS.includes(t.href));
+    const merged = [...spec, ...extras.filter(t => !spec.find(x => x.href === t.href))];
     return showAll ? merged : merged.slice(0, 6);
   }, [showAll]);
 
   const catTools = useMemo(() =>
     activeCat ? TOOLS.filter(t => t.category === activeCat) : [], [activeCat]);
 
+  const allToolsSorted = useMemo(() =>
+    [...TOOLS].sort((a, b) => a.title.localeCompare(b.title)), []);
+
   const surpriseMe = () => navigate(TOOLS[Math.floor(Math.random() * TOOLS.length)].href);
 
   const scrollTo = (id: string) =>
     setTimeout(() => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 30);
 
-  const pickCat = (cat: Category) => { setActiveCat(cat); setQuery(''); scrollTo('cat-results'); };
+  const pickCat = (cat: Category) => {
+    setActiveCat(cat); setQuery(''); setDropdownOpen(false); scrollTo('cat-results');
+  };
+
+  /* ── Keyboard shortcut: "/" to focus search ──────────────────────────── */
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      const tag = (e.target as HTMLElement).tagName;
+      if (e.key === '/' && tag !== 'INPUT' && tag !== 'TEXTAREA' && !e.metaKey && !e.ctrlKey) {
+        e.preventDefault();
+        searchRef.current?.focus();
+        setDropdownOpen(true);
+      }
+    };
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
+  }, []);
+
+  /* ── Click outside → close dropdown ─────────────────────────────────── */
+  useEffect(() => {
+    const onDown = (e: MouseEvent) => {
+      if (searchWrapRef.current && !searchWrapRef.current.contains(e.target as Node)) {
+        setDropdownOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', onDown);
+    return () => document.removeEventListener('mousedown', onDown);
+  }, []);
+
+  const clearSearch = () => {
+    setQuery('');
+    setDropdownOpen(false);
+    searchRef.current?.focus();
+  };
 
   return (
     <>
@@ -162,7 +219,7 @@ export default function Home() {
 
       <div className="flex flex-col -mx-4 sm:-mx-6 lg:-mx-8 -mt-8 md:-mt-12">
 
-        {/* ── HERO ──────────────────────────────────────────────────────────── */}
+        {/* ── HERO ─────────────────────────────────────────────────────────── */}
         <section
           className="relative px-4 sm:px-6 lg:px-8 pt-12 pb-10 md:pt-16 md:pb-12 text-center overflow-hidden"
           style={{ background: 'linear-gradient(160deg,#dbeafe 0%,#eff6ff 35%,#ffffff 65%)' }}
@@ -186,38 +243,101 @@ export default function Home() {
               Writing, PDF, design, code & more — runs in your browser, free forever.
             </p>
 
-            {/* Search bar */}
-            <div className="relative group mb-4">
-              <div className="flex items-center bg-white rounded-2xl border border-slate-200 shadow-[0_4px_32px_rgba(37,99,235,0.12)] group-focus-within:border-blue-400 group-focus-within:shadow-[0_4px_40px_rgba(37,99,235,0.20)] transition-all duration-300">
+            {/* ── Search bar + instant dropdown ──────────────────────────── */}
+            <div ref={searchWrapRef} className="relative mb-4 text-left">
+              <div className={`flex items-center bg-white rounded-2xl border shadow-[0_4px_32px_rgba(37,99,235,0.12)] transition-all duration-300 ${
+                dropdownOpen && isSearching
+                  ? 'border-blue-400 shadow-[0_4px_40px_rgba(37,99,235,0.20)] rounded-b-none border-b-slate-100'
+                  : 'border-slate-200 focus-within:border-blue-400 focus-within:shadow-[0_4px_40px_rgba(37,99,235,0.20)]'
+              }`}>
                 <Search className="ml-5 flex-shrink-0 w-5 h-5 text-slate-400" />
                 <input
                   ref={searchRef}
                   type="search"
                   value={query}
-                  onChange={e => { setQuery(e.target.value); setActiveCat(null); }}
-                  onKeyDown={e => e.key === 'Escape' && setQuery('')}
-                  placeholder="Search 116+ tools — try 'PDF', 'password', 'resume'…"
+                  onFocus={() => { if (isSearching) setDropdownOpen(true); }}
+                  onChange={e => {
+                    setQuery(e.target.value);
+                    setActiveCat(null);
+                    setDropdownOpen(e.target.value.trim().length > 0);
+                  }}
+                  onKeyDown={e => {
+                    if (e.key === 'Escape') clearSearch();
+                    if (e.key === 'Enter' && dropdownResults.length > 0) {
+                      navigate(dropdownResults[0].href);
+                      clearSearch();
+                    }
+                  }}
+                  placeholder="Search 116+ tools…"
                   aria-label="Search tools"
                   className="flex-1 px-4 py-4 text-sm md:text-base bg-transparent focus:outline-none text-slate-800 placeholder:text-slate-400"
                 />
                 {query ? (
-                  <button onClick={() => { setQuery(''); searchRef.current?.focus(); }}
+                  <button onClick={clearSearch}
                     className="mr-3 p-1.5 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100 transition-colors" aria-label="Clear">
                     <X className="w-4 h-4" />
                   </button>
                 ) : (
-                  <span className="mr-3 bg-blue-600 text-white text-sm font-bold px-5 py-2 rounded-xl hidden sm:block select-none">
-                    Search
-                  </span>
+                  <div className="mr-3 hidden sm:flex items-center gap-1.5">
+                    <kbd className="inline-flex items-center gap-1 bg-slate-100 text-slate-400 text-[11px] font-medium px-2 py-1 rounded-lg border border-slate-200 select-none">
+                      <span className="text-[10px]">/</span>
+                    </kbd>
+                  </div>
                 )}
               </div>
+
+              {/* ── Instant dropdown ───────────────────────────────────────── */}
+              {dropdownOpen && isSearching && (
+                <div className="absolute left-0 right-0 top-full bg-white border border-blue-400 border-t-slate-100 rounded-b-2xl shadow-2xl shadow-blue-100/50 z-50 overflow-hidden">
+                  {dropdownResults.length === 0 ? (
+                    <div className="px-5 py-4 text-sm text-slate-400 text-center">
+                      No tools matched "{query}"
+                    </div>
+                  ) : (
+                    <>
+                      <ul>
+                        {dropdownResults.map((t, i) => {
+                          const grad = CAT_COLOR[t.category] ?? 'from-blue-400 to-blue-700';
+                          return (
+                            <li key={t.href}>
+                              <button
+                                onMouseDown={e => { e.preventDefault(); navigate(t.href); clearSearch(); }}
+                                className={`w-full flex items-center gap-3 px-4 py-3 hover:bg-blue-50 transition-colors text-left ${i > 0 ? 'border-t border-slate-50' : ''}`}
+                              >
+                                <div className={`w-8 h-8 rounded-lg bg-gradient-to-br ${grad} flex items-center justify-center flex-shrink-0 shadow-sm`}>
+                                  <t.icon className="w-4 h-4 text-white" />
+                                </div>
+                                <div className="flex-1 min-w-0">
+                                  <p className="text-sm font-semibold text-slate-900 truncate">{t.title}</p>
+                                  <p className="text-xs text-slate-400 truncate">{t.description}</p>
+                                </div>
+                                <span className="text-[10px] font-bold bg-slate-100 text-slate-500 px-2 py-0.5 rounded-full whitespace-nowrap flex-shrink-0">
+                                  {CAT_SHORT[t.category] ?? t.category}
+                                </span>
+                              </button>
+                            </li>
+                          );
+                        })}
+                      </ul>
+                      {searchResults.length > 6 && (
+                        <button
+                          onMouseDown={e => { e.preventDefault(); setDropdownOpen(false); }}
+                          className="w-full flex items-center justify-center gap-2 px-4 py-3 text-xs font-semibold text-blue-600 hover:text-blue-800 bg-blue-50/60 hover:bg-blue-50 border-t border-slate-100 transition-colors">
+                          See all {searchResults.length} results for "{query}" <ArrowRight className="w-3.5 h-3.5" />
+                        </button>
+                      )}
+                    </>
+                  )}
+                </div>
+              )}
             </div>
 
             {/* Quick pills */}
             <div className="flex flex-wrap justify-center gap-2">
               {[
-                { label: '🔥 Popular',    fn: () => scrollTo('sec-popular') },
-                { label: '🆕 New Tools',  fn: () => scrollTo('sec-new') },
+                { label: '🔥 Popular',     fn: () => scrollTo('sec-popular') },
+                { label: '🆕 New Tools',   fn: () => scrollTo('sec-new') },
+                { label: '📋 All Tools',   fn: () => { setBrowseAll(true); scrollTo('sec-browse'); } },
                 { label: '🎲 Surprise Me', fn: surpriseMe },
               ].map(q => (
                 <button key={q.label} onClick={q.fn}
@@ -249,14 +369,20 @@ export default function Home() {
 
         <div className="h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent" />
 
-        {/* ── SEARCH RESULTS ────────────────────────────────────────────────── */}
-        {isSearching && (
+        {/* ── FULL SEARCH RESULTS (grid, shown when dropdown dismissed) ──── */}
+        {isSearching && !dropdownOpen && (
           <section className="px-4 sm:px-6 lg:px-8 py-8 bg-white">
             <div className="max-w-6xl mx-auto">
-              <p className="font-bold text-slate-900 text-sm mb-4">
-                {searchResults.length} result{searchResults.length !== 1 ? 's' : ''} for{' '}
-                <span className="text-blue-600">"{query}"</span>
-              </p>
+              <div className="flex items-center gap-3 mb-5 flex-wrap">
+                <p className="font-bold text-slate-900 text-sm flex-1">
+                  {searchResults.length} result{searchResults.length !== 1 ? 's' : ''} for{' '}
+                  <span className="text-blue-600">"{query}"</span>
+                </p>
+                <button onClick={clearSearch}
+                  className="flex items-center gap-1.5 text-xs text-slate-500 hover:text-slate-800 bg-white border border-slate-200 px-3 py-1.5 rounded-xl transition-colors">
+                  <X className="w-3 h-3" /> Clear
+                </button>
+              </div>
               {searchResults.length === 0 ? (
                 <div className="text-center py-12">
                   <div className="text-4xl mb-3">🔍</div>
@@ -272,14 +398,13 @@ export default function Home() {
           </section>
         )}
 
-        {/* ── CATEGORY FILTER ───────────────────────────────────────────────── */}
+        {/* ── CATEGORY FILTER ──────────────────────────────────────────────── */}
         {!isSearching && activeCat && (
           <section id="cat-results" className="px-4 sm:px-6 lg:px-8 py-8 bg-white">
             <div className="max-w-6xl mx-auto">
               <div className="flex items-center gap-3 mb-5 flex-wrap">
                 <p className="font-bold text-slate-900 text-sm flex-1">
-                  {activeCat}{' '}
-                  <span className="text-slate-400 font-normal">({catTools.length} tools)</span>
+                  {activeCat} <span className="text-slate-400 font-normal">({catTools.length} tools)</span>
                 </p>
                 <button onClick={() => setActiveCat(null)}
                   className="flex items-center gap-1.5 text-xs text-slate-500 hover:text-slate-800 bg-white border border-slate-200 px-3 py-1.5 rounded-xl transition-colors">
@@ -293,11 +418,11 @@ export default function Home() {
           </section>
         )}
 
-        {/* ── MAIN ──────────────────────────────────────────────────────────── */}
+        {/* ── MAIN CONTENT ─────────────────────────────────────────────────── */}
         {!isSearching && !activeCat && (
           <div className="bg-white">
 
-            {/* Favourites + Recently Used (personal, only when data exists) */}
+            {/* Favourites + Recently Used */}
             {(favTools.length > 0 || recentTools.length > 0) && (
               <section className="px-4 sm:px-6 lg:px-8 pt-8 pb-4">
                 <div className="max-w-6xl mx-auto space-y-6">
@@ -321,7 +446,7 @@ export default function Home() {
               </section>
             )}
 
-            {/* Popular Tools */}
+            {/* Popular */}
             <section id="sec-popular" className="px-4 sm:px-6 lg:px-8 py-8">
               <div className="max-w-6xl mx-auto">
                 <SectionHead
@@ -354,7 +479,7 @@ export default function Home() {
                         Try it free <ArrowRight className="w-3.5 h-3.5" />
                       </Link>
                     </div>
-                    <div className="hidden md:flex md:col-span-2 items-center justify-center p-8 relative overflow-hidden"
+                    <div className="hidden md:flex md:col-span-2 items-center justify-center p-8 overflow-hidden"
                       style={{ backgroundImage: 'linear-gradient(135deg,#2563eb 0%,#4f46e5 100%)' }}>
                       <div className="w-20 h-20 bg-white/15 rounded-2xl flex items-center justify-center shadow-xl ring-1 ring-white/20">
                         <TOD.icon className="w-10 h-10 text-white" />
@@ -392,8 +517,49 @@ export default function Home() {
               </div>
             </section>
 
+            <div className="h-px mx-4 sm:mx-6 lg:mx-8 bg-slate-100" />
+
+            {/* ── BROWSE ALL ─────────────────────────────────────────────── */}
+            <section id="sec-browse" className="px-4 sm:px-6 lg:px-8 py-8">
+              <div className="max-w-6xl mx-auto">
+                {!browseAll ? (
+                  <button
+                    onClick={() => setBrowseAll(true)}
+                    className="w-full flex items-center justify-center gap-3 py-5 rounded-2xl border-2 border-dashed border-slate-200 hover:border-blue-300 hover:bg-blue-50/30 text-slate-500 hover:text-blue-700 transition-all group">
+                    <LayoutGrid className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                    <span className="font-semibold text-sm">Browse all {TOOLS.length} tools A–Z</span>
+                    <ChevronRight className="w-4 h-4" />
+                  </button>
+                ) : (
+                  <>
+                    <SectionHead
+                      icon={<LayoutGrid className="w-4 h-4 text-slate-500" />}
+                      label={`All ${TOOLS.length} Tools`}
+                      sub="Every tool, sorted A–Z."
+                      action="Collapse"
+                      onAction={() => setBrowseAll(false)}
+                    />
+                    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3">
+                      {allToolsSorted.map(t => <ToolCard key={t.href} tool={t} />)}
+                    </div>
+                  </>
+                )}
+              </div>
+            </section>
+
           </div>
         )}
+
+        {/* ── Keyboard hint strip ────────────────────────────────────────── */}
+        {!isSearching && !activeCat && (
+          <div className="px-4 sm:px-6 lg:px-8 py-3 bg-slate-50 border-t border-slate-100">
+            <p className="text-center text-xs text-slate-400 flex items-center justify-center gap-2">
+              <Command className="w-3 h-3" />
+              Press <kbd className="inline-flex items-center bg-white border border-slate-200 rounded px-1.5 py-0.5 text-[10px] font-mono text-slate-600 shadow-sm">/</kbd> to search · <kbd className="inline-flex items-center bg-white border border-slate-200 rounded px-1.5 py-0.5 text-[10px] font-mono text-slate-600 shadow-sm">Esc</kbd> to clear
+            </p>
+          </div>
+        )}
+
       </div>
     </>
   );
