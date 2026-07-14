@@ -139,7 +139,7 @@ export default function About() {
         {/* ── Stats ─────────────────────────────────────────────────────────── */}
         <section className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-100 rounded-3xl py-10 px-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 divide-x-0 md:divide-x divide-blue-200">
-            <Stat value="13+" label="Free Tools" sub="& counting" />
+            <Stat value="116+" label="Free Tools" sub="& counting" />
             <Stat value="0" label="Sign-ups Required" sub="ever" />
             <Stat value="100%" label="Free Forever" sub="no hidden fees" />
             <Stat value="Any" label="Device" sub="phone, tablet, desktop" />
