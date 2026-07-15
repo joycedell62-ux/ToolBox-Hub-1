@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BookOpen, ThumbsUp, ThumbsDown, Lightbulb, HelpCircle, ChevronDown, ChevronUp, Copy, Check, RefreshCw } from 'lucide-react';
+import { BookOpen, ThumbsUp, ThumbsDown, Lightbulb, HelpCircle, ChevronDown, ChevronUp, Copy, Check, RefreshCw, Download } from 'lucide-react';
 import { Link } from 'wouter';
 
 const FAQS = [
@@ -72,6 +72,15 @@ export default function StoryGenerator() {
   const generate = () => { setTick(x => x + 1); setStory(build()); };
   const copy = async () => { await navigator.clipboard.writeText(story); setCopied(true); setTimeout(() => setCopied(false), 2000); };
 
+  const download = () => {
+    if (!story) return;
+    const blob = new Blob([story], { type: 'text/plain' });
+    const url  = URL.createObjectURL(blob);
+    const a    = document.createElement('a');
+    a.href = url; a.download = 'story.txt'; a.click();
+    URL.revokeObjectURL(url);
+  };
+
   return (
     <div className="flex flex-col gap-10">
       <div className="rounded-2xl text-white p-8" style={{ background: 'linear-gradient(135deg,#1e3a8a 0%,#2563eb 100%)' }}>
@@ -82,8 +91,8 @@ export default function StoryGenerator() {
         <p className="text-blue-100 text-sm max-w-xl">Spin up a complete short-story draft from a handful of choices. Pick a genre, name your hero and villain, set the scene, and let the curated banks weave a beginning, twist, and ending.</p>
       </div>
 
-      <div className="grid lg:grid-cols-5 gap-8">
-        <div className="lg:col-span-2 space-y-5">
+      <div className="space-y-5">
+        <div className="contents">
           <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 space-y-4">
             <div>
               <label htmlFor="st-genre" className="block text-xs font-semibold text-gray-500 mb-1">Genre</label>
@@ -111,6 +120,23 @@ export default function StoryGenerator() {
               <RefreshCw className="w-4 h-4" /> Generate Story
             </button>
           </div>
+        </div>
+
+        <div className="contents">
+          <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+            <div className="flex items-center justify-between px-5 py-3 border-b border-gray-100">
+              <h2 className="font-bold text-gray-900 text-sm">Your Story</h2>
+              <div className="flex gap-2">
+                <button onClick={copy} className="flex items-center gap-1.5 text-xs font-semibold text-blue-600 hover:text-blue-800 bg-blue-50 hover:bg-blue-100 px-3 py-1.5 rounded-lg transition-colors">
+                  {copied ? <><Check className="w-3.5 h-3.5 text-emerald-500" /> Copied</> : <><Copy className="w-3.5 h-3.5" /> Copy</>}
+                </button>
+                <button onClick={download} disabled={!story} className="flex items-center gap-1.5 text-xs font-semibold text-blue-600 hover:text-blue-800 bg-blue-50 hover:bg-blue-100 px-3 py-1.5 rounded-lg transition-colors disabled:opacity-40">
+                  <Download className="w-3.5 h-3.5" /> Download
+                </button>
+              </div>
+            </div>
+            <div className="whitespace-pre-wrap text-sm text-gray-700 leading-relaxed max-h-[500px] overflow-y-auto p-5">{story}</div>
+          </div>
           <div className="bg-blue-50 rounded-2xl p-5 border border-blue-100">
             <div className="flex items-center gap-2 mb-3"><Lightbulb className="w-4 h-4 text-blue-600" /><span className="font-bold text-blue-900 text-sm">Pro Tips</span></div>
             <ul className="space-y-2 text-sm text-blue-800">
@@ -120,18 +146,6 @@ export default function StoryGenerator() {
               <li>• Regenerate a few drafts and stitch the best lines together.</li>
               <li>• End on an image, not an explanation.</li>
             </ul>
-          </div>
-        </div>
-
-        <div className="lg:col-span-3 space-y-4">
-          <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="font-bold text-gray-900 text-sm">Your Story</h2>
-              <button onClick={copy} className="flex items-center gap-1.5 text-xs font-semibold text-blue-600 hover:text-blue-800 bg-blue-50 hover:bg-blue-100 px-3 py-1.5 rounded-lg transition-colors">
-                {copied ? <><Check className="w-3.5 h-3.5 text-emerald-500" /> Copied</> : <><Copy className="w-3.5 h-3.5" /> Copy</>}
-              </button>
-            </div>
-            <pre className="whitespace-pre-wrap text-sm text-gray-700 leading-relaxed max-h-[520px] overflow-y-auto bg-gray-50 rounded-xl p-4 border border-gray-100">{story}</pre>
           </div>
           <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
             <h3 className="font-bold text-gray-900 text-sm mb-3">Related Tools</h3>

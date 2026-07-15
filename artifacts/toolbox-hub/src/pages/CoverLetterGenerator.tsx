@@ -124,9 +124,9 @@ export default function CoverLetterGenerator() {
         <p className="text-blue-100 max-w-xl mx-auto">Create a professional, personalised cover letter in seconds. Choose a template and download as PDF or print.</p>
       </div>
 
-      <div className="max-w-6xl mx-auto px-4 py-8 grid lg:grid-cols-5 gap-6">
+      <div className="max-w-6xl mx-auto px-4 py-8 space-y-5">
         {/* Controls */}
-        <div className="lg:col-span-2 space-y-5">
+        <div className="contents">
           <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-5">
             <h2 className="font-semibold text-slate-800 mb-3">Template Style</h2>
             <div className="space-y-2">
@@ -183,7 +183,7 @@ export default function CoverLetterGenerator() {
         </div>
 
         {/* Preview */}
-        <div className="lg:col-span-3 space-y-4">
+        <div className="contents">
           <div className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
             {/* Letter header */}
             {(template === 'modern' || template === 'creative') && (

@@ -135,8 +135,8 @@ export default function ThankYouLetterGenerator() {
         <p className="text-blue-100 text-sm max-w-xl">Say thank you the right way. Pick an occasion, choose a tone, and generate a polished, heartfelt note in seconds.</p>
       </div>
 
-      <div className="grid lg:grid-cols-5 gap-8">
-        <div className="lg:col-span-2 space-y-5">
+      <div className="space-y-5">
+        <div className="contents">
           <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 space-y-4">
             <div>
               <label className="block text-xs font-semibold text-gray-500 mb-1.5">Tone</label>
@@ -178,7 +178,7 @@ export default function ThankYouLetterGenerator() {
           </div>
         </div>
 
-        <div className="lg:col-span-3 space-y-4">
+        <div className="contents">
           <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
             <div className="flex items-center justify-between mb-4">
               <h2 className="font-bold text-gray-900 text-sm">Your Thank You Letter</h2>
