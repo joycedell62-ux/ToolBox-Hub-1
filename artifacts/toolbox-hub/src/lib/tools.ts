@@ -558,16 +558,17 @@ export const TOOLS: Tool[] = [
     isNew: true,
   },
   // ── Writing Generators ──
-  { title: 'Business Name Generator', description: 'Generate unique business name ideas by industry and keywords.', icon: Briefcase, href: '/business-name-generator', category: 'Writing Generators', isNew: true },
-  { title: 'Slogan Generator', description: 'Create memorable slogans for businesses and brands.', icon: Megaphone, href: '/slogan-generator', category: 'Writing Generators', isNew: true },
-  { title: 'Brand Name Generator', description: 'Generate modern brand names with domain-style ideas.', icon: Sparkles, href: '/brand-name-generator', category: 'Writing Generators', isNew: true },
-  { title: 'Username Generator', description: 'Create usernames based on your name, interests, or keywords.', icon: AtSign, href: '/username-generator', category: 'Writing Generators', isNew: true },
-  { title: 'Mission Statement Generator', description: 'Draft a clear company mission statement in seconds.', icon: Target, href: '/mission-statement-generator', category: 'Writing Generators', isNew: true },
   { title: 'Love Letter Generator', description: 'Write a heartfelt love letter with your choice of tone.', icon: Mail, href: '/love-letter-generator', category: 'Writing Generators', isNew: true },
   { title: 'Birthday Message Generator', description: 'Craft the perfect birthday message for cards or texts.', icon: Cake, href: '/birthday-message-generator', category: 'Writing Generators', isNew: true },
   { title: 'Anniversary Message Generator', description: 'Personalized anniversary messages by years together.', icon: CalendarHeart, href: '/anniversary-message-generator', category: 'Writing Generators', isNew: true },
   { title: 'Thank You Letter Generator', description: 'Thank-you letters for gifts, help, interviews, and more.', icon: Send, href: '/thank-you-letter-generator', category: 'Writing Generators', isNew: true },
   { title: 'Apology Letter Generator', description: 'Write a sincere apology letter for any situation.', icon: Feather, href: '/apology-letter-generator', category: 'Writing Generators', isNew: true },
+  // ── Branding naming tools ──
+  { title: 'Business Name Generator', description: 'Generate unique business name ideas by industry and keywords.', icon: Briefcase, href: '/business-name-generator', category: 'Branding & Design', isNew: true },
+  { title: 'Slogan Generator', description: 'Create memorable slogans for businesses and brands.', icon: Megaphone, href: '/slogan-generator', category: 'Branding & Design', isNew: true },
+  { title: 'Brand Name Generator', description: 'Generate modern brand names with domain-style ideas.', icon: Sparkles, href: '/brand-name-generator', category: 'Branding & Design', isNew: true },
+  { title: 'Username Generator', description: 'Create usernames based on your name, interests, or keywords.', icon: AtSign, href: '/username-generator', category: 'Branding & Design', isNew: true },
+  { title: 'Mission Statement Generator', description: 'Draft a clear company mission statement in seconds.', icon: Target, href: '/mission-statement-generator', category: 'Branding & Design', isNew: true },
   // ── Fun & Lifestyle ──
   { title: 'Ask Abigail', description: 'A friendly chat companion for fun questions and inspiration.', icon: MessageCircle, href: '/ask-abigail', category: 'Fun & Lifestyle', isNew: true },
   { title: 'Daily Fortune', description: 'Your light-hearted fortune of the day, with lucky numbers.', icon: Wand2, href: '/daily-fortune', category: 'Fun & Lifestyle', isNew: true },
@@ -578,16 +579,17 @@ export const TOOLS: Tool[] = [
   { title: 'Icebreaker Questions', description: 'Icebreakers for meetings, classrooms, and workshops.', icon: Snowflake, href: '/icebreaker-questions', category: 'Fun & Lifestyle', isNew: true },
   { title: 'Random Fact Generator', description: 'Surprising facts about science, history, space, and more.', icon: Brain, href: '/random-fact-generator', category: 'Fun & Lifestyle', isNew: true },
   { title: 'Bucket List Generator', description: 'Build your bucket list with curated adventure ideas.', icon: ListChecks, href: '/bucket-list-generator', category: 'Fun & Lifestyle', isNew: true },
-  // ── Writing Generators V2 ──
+  // ── Writing Generators V2 — content & professional ──
+  { title: 'Cover Letter Generator', description: 'Professional cover letters in formal, modern, and creative styles. Export to PDF.', icon: FileSignature, href: '/cover-letter-generator', category: 'Writing Generators', isNew: true, tags: ['cover letter', 'resume', 'cv', 'job application', 'career', 'pdf', 'generator'] },
   { title: 'Script Generator', description: 'Script outlines for YouTube, movies, podcasts, and plays.', icon: Clapperboard, href: '/script-generator', category: 'Writing Generators', isNew: true },
   { title: 'Speech Generator', description: 'Speeches for weddings, graduations, business, and more.', icon: Mic, href: '/speech-generator', category: 'Writing Generators', isNew: true },
+  { title: 'Essay Generator', description: 'Structured essays: argumentative, expository, and more.', icon: GraduationCap, href: '/essay-generator', category: 'Writing Generators', isNew: true },
+  { title: 'Proposal Generator', description: 'Business and project proposals with scope and budget.', icon: FileSignature, href: '/proposal-generator', category: 'Writing Generators', isNew: true },
+  { title: 'Press Release Generator', description: 'Standard-format press releases from your announcement.', icon: Newspaper, href: '/press-release-generator', category: 'Writing Generators', isNew: true },
   { title: 'Story Generator', description: 'Short stories from your genre, characters, and setting.', icon: BookText, href: '/story-generator', category: 'Writing Generators', isNew: true },
   { title: 'Book Outline Generator', description: 'Chapter-by-chapter outlines from your genre and premise.', icon: BookMarked, href: '/book-outline-generator', category: 'Writing Generators', isNew: true },
   { title: 'Book Chapter Generator', description: 'Chapter draft scaffolds with beats, POV, and style.', icon: BookOpen, href: '/book-chapter-generator', category: 'Writing Generators', isNew: true },
   { title: 'Dialogue Generator', description: 'Character dialogue from relationship, conflict, and tone.', icon: MessagesSquare, href: '/dialogue-generator', category: 'Writing Generators', isNew: true },
-  { title: 'Essay Generator', description: 'Structured essays: argumentative, expository, and more.', icon: GraduationCap, href: '/essay-generator', category: 'Writing Generators', isNew: true },
-  { title: 'Proposal Generator', description: 'Business and project proposals with scope and budget.', icon: FileSignature, href: '/proposal-generator', category: 'Writing Generators', isNew: true },
-  { title: 'Press Release Generator', description: 'Standard-format press releases from your announcement.', icon: Newspaper, href: '/press-release-generator', category: 'Writing Generators', isNew: true },
   // ── Branding & Design ──
   { title: 'Logo Generator', description: 'Design a simple logo with icons, shapes, colors, and text.', icon: Palette, href: '/logo-generator', category: 'Branding & Design', isNew: true },
   { title: 'Logo Idea Generator', description: 'Logo concepts with icon, color, and typography ideas.', icon: Lightbulb, href: '/logo-idea-generator', category: 'Branding & Design', isNew: true },
@@ -619,7 +621,6 @@ export const TOOLS: Tool[] = [
   // ── Professional & Identity ──
   { title: 'ID Card Generator', description: 'Employee, student, visitor and event ID cards with photo, QR code and barcode.', icon: CreditCard, href: '/id-card-generator', category: 'Branding & Design', isNew: true, tags: ['id', 'identity', 'badge', 'employee id', 'student id', 'event pass', 'qr', 'barcode', 'generator'] },
   { title: 'Email Signature Generator', description: 'Generate professional HTML email signatures for Gmail, Outlook and Apple Mail.', icon: AtSign, href: '/email-signature-generator', category: 'Branding & Design', isNew: true, tags: ['email', 'signature', 'gmail', 'outlook', 'html', 'generator'] },
-  { title: 'Cover Letter Generator', description: 'Professional cover letters in formal, modern, and creative styles. Export to PDF.', icon: FileSignature, href: '/cover-letter-generator', category: 'Writing Generators', isNew: true, tags: ['cover letter', 'resume', 'cv', 'job application', 'career', 'pdf', 'generator'] },
   { title: 'Passport Photo Maker', description: 'Resize and crop photos to passport standards for US, UK, EU, India and more.', icon: ScanLine, href: '/passport-photo-maker', category: 'Image Tools', isNew: true, tags: ['passport', 'photo', 'id photo', 'visa', 'crop', 'resize'] },
   { title: 'Appointment Card Generator', description: 'Hospital, salon, clinic and business appointment cards with QR code.', icon: CalendarRange, href: '/appointment-card-generator', category: 'Branding & Design', isNew: true, tags: ['appointment', 'booking', 'qr', 'salon', 'clinic', 'hospital', 'card', 'generator'] },
   { title: 'Shipping Label Generator', description: 'Shipping labels with sender, receiver, barcode and tracking number. Print-ready.', icon: Package, href: '/shipping-label-generator', category: 'Utility Tools', isNew: true, tags: ['shipping', 'label', 'barcode', 'qr', 'tracking', 'package', 'generator'] },

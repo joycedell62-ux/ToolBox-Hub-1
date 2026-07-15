@@ -145,8 +145,8 @@ export default function AnniversaryMessageGenerator() {
         <p className="text-blue-100 text-sm max-w-xl">Celebrate years of love with a personalized anniversary message. Enter the years together and watch the words adapt to your milestone.</p>
       </div>
 
-      <div className="grid lg:grid-cols-5 gap-8">
-        <div className="lg:col-span-2 space-y-5">
+      <div className="space-y-5">
+        <div className="contents">
           <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 space-y-4">
             <div>
               <label className="block text-xs font-semibold text-gray-500 mb-1.5">Tone</label>
@@ -185,7 +185,7 @@ export default function AnniversaryMessageGenerator() {
           </div>
         </div>
 
-        <div className="lg:col-span-3 space-y-4">
+        <div className="contents">
           <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
             <div className="flex items-center justify-between mb-4">
               <h2 className="font-bold text-gray-900 text-sm">Your Anniversary Message</h2>
