@@ -8,7 +8,11 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
-import { PDFDocument } from 'pdf-lib';
+import * as pdfjsLib from 'pdfjs-dist';
+import workerUrl from 'pdfjs-dist/build/pdf.worker.mjs?url';
+import jsPDF from 'jspdf';
+
+pdfjsLib.GlobalWorkerOptions.workerSrc = workerUrl;
 
 function formatBytes(bytes: number) {
   if (bytes === 0) return '0 B';
@@ -53,20 +57,51 @@ export default function UnlockPdf() {
     if (!file) return;
     setProcessing(true);
     try {
-      const bytes = await file.arrayBuffer();
-      let pdfDoc: PDFDocument;
+      const arrayBuffer = await file.arrayBuffer();
+      const data = new Uint8Array(arrayBuffer);
+
+      // pdfjs-dist supports encrypted PDFs with a password — pdf-lib does not
+      let pdfJsDoc: pdfjsLib.PDFDocumentProxy;
       try {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        pdfDoc = await PDFDocument.load(bytes, { password } as any);
-      } catch {
-        toast({ title: 'Incorrect password', description: 'Could not unlock the PDF. Please check your password.', variant: 'destructive' });
-        setProcessing(false);
-        return;
+        pdfJsDoc = await pdfjsLib.getDocument({ data, password }).promise;
+      } catch (err: unknown) {
+        const name = (err as { name?: string })?.name ?? '';
+        if (name === 'PasswordException' || String(err).toLowerCase().includes('password')) {
+          toast({ title: 'Incorrect password', description: 'Could not unlock the PDF. Please check your password.', variant: 'destructive' });
+          setProcessing(false);
+          return;
+        }
+        throw err;
       }
-      const outBytes = await pdfDoc.save();
-      const blob = new Blob([outBytes.slice()], { type: 'application/pdf' });
+
+      const numPages = pdfJsDoc.numPages;
+      const firstPage = await pdfJsDoc.getPage(1);
+      const vp0 = firstPage.getViewport({ scale: 1 });
+
+      // Re-create as a new unencrypted PDF via jsPDF
+      const pdf = new jsPDF({ unit: 'pt', format: [vp0.width, vp0.height] });
+
+      for (let i = 1; i <= numPages; i++) {
+        const page = await pdfJsDoc.getPage(i);
+        const vpPt     = page.getViewport({ scale: 1 });
+        const vpRender = page.getViewport({ scale: 2 });
+
+        if (i > 1) pdf.addPage([vpPt.width, vpPt.height]);
+
+        const canvas = document.createElement('canvas');
+        canvas.width  = vpRender.width;
+        canvas.height = vpRender.height;
+        const ctx = canvas.getContext('2d')!;
+        await page.render({ canvasContext: ctx, viewport: vpRender, canvas }).promise;
+
+        const imgData = canvas.toDataURL('image/jpeg', 0.92);
+        pdf.addImage(imgData, 'JPEG', 0, 0, vpPt.width, vpPt.height);
+      }
+
+      const outBytes = pdf.output('arraybuffer');
+      const blob = new Blob([outBytes], { type: 'application/pdf' });
       setUnlocked(blob);
-      toast({ title: 'PDF Unlocked!', description: 'Your PDF has been successfully unlocked.' });
+      toast({ title: 'PDF Unlocked!', description: `${numPages} page(s) — password removed successfully.` });
     } catch (err) {
       toast({ title: 'Failed to unlock', description: String(err), variant: 'destructive' });
     } finally {
