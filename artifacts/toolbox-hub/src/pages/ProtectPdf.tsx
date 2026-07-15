@@ -93,7 +93,7 @@ export default function ProtectPdf() {
         userPassword,
         ownerPassword: ownerPw,
       });
-      const blob = new Blob([(outBytes as Uint8Array).buffer as ArrayBuffer], { type: 'application/pdf' });
+      const blob = new Blob([(outBytes as Uint8Array).slice()], { type: 'application/pdf' });
       setResult(blob);
       toast({ title: 'PDF Protected!', description: 'Your PDF has been password protected.' });
     } catch (err) {

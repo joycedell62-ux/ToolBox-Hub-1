@@ -64,7 +64,7 @@ export default function UnlockPdf() {
         return;
       }
       const outBytes = await pdfDoc.save();
-      const blob = new Blob([outBytes.buffer as ArrayBuffer], { type: 'application/pdf' });
+      const blob = new Blob([outBytes.slice()], { type: 'application/pdf' });
       setUnlocked(blob);
       toast({ title: 'PDF Unlocked!', description: 'Your PDF has been successfully unlocked.' });
     } catch (err) {

@@ -67,7 +67,7 @@ export default function PdfCompressor() {
       }
 
       const outBytes = await pdfDoc.save({ useObjectStreams: level !== 'low', addDefaultPage: false });
-      const blob = new Blob([outBytes.buffer as ArrayBuffer], { type: 'application/pdf' });
+      const blob = new Blob([outBytes.slice()], { type: 'application/pdf' });
       setResult({ blob, originalSize: file.size, compressedSize: blob.size });
 
       toast({ title: 'Compression complete!', description: `Saved ${formatBytes(file.size - blob.size)}` });

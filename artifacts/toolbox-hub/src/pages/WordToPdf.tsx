@@ -54,7 +54,6 @@ export default function WordToPdf() {
   const [status, setStatus] = useState<Status>('idle');
   const [htmlContent, setHtmlContent] = useState('');
 
-  const captureRef = useRef<HTMLDivElement>(null);
 
   const [feedback, setFeedback] = useState<FBState>(loadFeedback);
   const [fbForm, setFbForm] = useState(false);
@@ -85,16 +84,40 @@ export default function WordToPdf() {
   }, [toast]);
 
   const handleConvert = async () => {
-    if (!htmlContent || !captureRef.current) return;
+    if (!htmlContent) return;
     setStatus('converting');
-    try {
-      // Small delay to let the hidden div render
-      await new Promise(r => setTimeout(r, 100));
 
-      const canvas = await html2canvas(captureRef.current, {
+    // Create a temporary off-screen div appended directly to document.body
+    // so html2canvas can reliably capture it regardless of parent CSS.
+    const capture = document.createElement('div');
+    Object.assign(capture.style, {
+      position: 'absolute',
+      top: '0',
+      left: '-9999px',
+      width: '794px',
+      backgroundColor: '#ffffff',
+      padding: '48px',
+      fontFamily: 'serif',
+      fontSize: '14px',
+      lineHeight: '1.6',
+      color: '#000',
+      boxSizing: 'border-box',
+    });
+    capture.innerHTML = htmlContent;
+    document.body.appendChild(capture);
+
+    try {
+      // Let the browser paint the element before capturing
+      await new Promise(r => setTimeout(r, 150));
+
+      const canvas = await html2canvas(capture, {
         scale: 2,
         useCORS: true,
         backgroundColor: '#ffffff',
+        logging: false,
+        width: 794,
+        scrollX: 0,
+        scrollY: 0,
       });
 
       const imgData = canvas.toDataURL('image/png');
@@ -118,6 +141,8 @@ export default function WordToPdf() {
       console.error(err);
       setStatus('error');
       toast({ title: 'Conversion failed', description: String(err), variant: 'destructive' });
+    } finally {
+      document.body.removeChild(capture);
     }
   };
 
@@ -142,24 +167,6 @@ export default function WordToPdf() {
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-8 space-y-6">
-      {/* Hidden capture div — A4 at 96dpi = 794px */}
-      <div
-        ref={captureRef}
-        style={{
-          position: 'fixed',
-          left: '-9999px',
-          top: 0,
-          width: '794px',
-          backgroundColor: '#ffffff',
-          padding: '48px',
-          fontFamily: 'serif',
-          fontSize: '14px',
-          lineHeight: '1.6',
-          color: '#000',
-        }}
-        dangerouslySetInnerHTML={{ __html: htmlContent }}
-      />
-
       {/* Hero */}
       <div className="bg-gradient-to-r from-blue-700 to-blue-500 rounded-2xl p-8 text-white">
         <div className="flex items-center gap-3 mb-2">
