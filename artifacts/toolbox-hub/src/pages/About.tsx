@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'wouter';
+import { TOOLS } from '@/lib/tools';
 import {
   Target, Eye, Zap, Star, Globe, Users, Wrench,
   CheckCircle, ArrowRight, Sparkles, Shield, Heart,
@@ -139,7 +140,7 @@ export default function About() {
         {/* ── Stats ─────────────────────────────────────────────────────────── */}
         <section className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-100 rounded-3xl py-10 px-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 divide-x-0 md:divide-x divide-blue-200">
-            <Stat value="116+" label="Free Tools" sub="& counting" />
+            <Stat value={`${TOOLS.length}+`} label="Free Tools" sub="& counting" />
             <Stat value="0" label="Sign-ups Required" sub="ever" />
             <Stat value="100%" label="Free Forever" sub="no hidden fees" />
             <Stat value="Any" label="Device" sub="phone, tablet, desktop" />
@@ -286,7 +287,7 @@ export default function About() {
           </div>
           <h2 className="text-3xl font-black text-gray-900">Ready to explore?</h2>
           <p className="text-gray-500 max-w-md mx-auto">
-            Browse all 13+ free tools — no account, no downloads, no strings attached.
+            Browse all {TOOLS.length}+ free tools — no account, no downloads, no strings attached.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center pt-2">
             <Link href="/">

@@ -50,7 +50,7 @@ function LaunchBanner() {
       <span className="tracking-wide">
         <span className="font-extrabold">TOOLBOX HUB IS LIVE!</span>
         <span className="mx-2 opacity-60">·</span>
-        <span className="font-medium opacity-90">116+ FREE TOOLS</span>
+        <span className="font-medium opacity-90">{TOOLS.length}+ FREE TOOLS</span>
       </span>
 
       <button

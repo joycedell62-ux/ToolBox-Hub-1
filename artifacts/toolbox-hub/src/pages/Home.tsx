@@ -350,7 +350,7 @@ export default function Home() {
             {/* Badge */}
             <div className="inline-flex items-center gap-2 bg-white/90 border border-blue-100 shadow-sm rounded-full px-4 py-1.5 text-xs font-semibold text-blue-700 mb-5">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse inline-block" />
-              116+ free tools · No account needed
+              {TOOLS.length}+ free tools · No account needed
             </div>
 
             {/* Headline */}
@@ -393,7 +393,7 @@ export default function Home() {
                       }
                     }
                   }}
-                  placeholder="Search 116+ tools…"
+                  placeholder={`Search ${TOOLS.length}+ tools…`}
                   aria-label="Search tools"
                   className="flex-1 px-4 py-4 text-sm md:text-base bg-transparent focus:outline-none text-slate-800 placeholder:text-slate-400"
                 />
