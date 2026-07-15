@@ -8,11 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
-import * as pdfjsLib from 'pdfjs-dist';
-import workerUrl from 'pdfjs-dist/build/pdf.worker.mjs?url';
-import jsPDF from 'jspdf';
-
-pdfjsLib.GlobalWorkerOptions.workerSrc = workerUrl;
+import { protectPdf } from '@/lib/pdfCrypto';
 
 function formatBytes(bytes: number) {
   if (bytes === 0) return '0 B';
@@ -90,51 +86,10 @@ export default function ProtectPdf() {
     setProcessing(true);
     try {
       const arrayBuffer = await file.arrayBuffer();
-      const data = new Uint8Array(arrayBuffer);
-      const pdfJsDoc = await pdfjsLib.getDocument({ data }).promise;
-      const numPages = pdfJsDoc.numPages;
-
-      // Build jsPDF permissions — list what the user IS allowed to do
-      const userPermissions: ('print' | 'modify' | 'copy' | 'annot-forms')[] = [];
-      if (!restrictions.printing) userPermissions.push('print');
-      if (!restrictions.copying)  userPermissions.push('copy');
-      if (!restrictions.editing)  userPermissions.push('modify', 'annot-forms');
-
-      // Use first page dimensions for jsPDF format
-      const firstPage = await pdfJsDoc.getPage(1);
-      const vp0 = firstPage.getViewport({ scale: 1 });
-
-      const pdf = new jsPDF({
-        unit: 'pt',
-        format: [vp0.width, vp0.height],
-        encryption: {
-          userPassword,
-          ownerPassword: ownerPassword || userPassword + '_owner',
-          userPermissions,
-        },
-      });
-
-      for (let i = 1; i <= numPages; i++) {
-        const page = await pdfJsDoc.getPage(i);
-        const vpPt     = page.getViewport({ scale: 1 });   // points — for jsPDF sizing
-        const vpRender = page.getViewport({ scale: 2 });   // 2× — for canvas quality
-
-        if (i > 1) pdf.addPage([vpPt.width, vpPt.height]);
-
-        const canvas = document.createElement('canvas');
-        canvas.width  = vpRender.width;
-        canvas.height = vpRender.height;
-        const ctx = canvas.getContext('2d')!;
-        await page.render({ canvasContext: ctx, viewport: vpRender, canvas }).promise;
-
-        const imgData = canvas.toDataURL('image/jpeg', 0.92);
-        pdf.addImage(imgData, 'JPEG', 0, 0, vpPt.width, vpPt.height);
-      }
-
-      const outBytes = pdf.output('arraybuffer');
-      const blob = new Blob([outBytes], { type: 'application/pdf' });
+      const outBytes = await protectPdf(arrayBuffer, userPassword, ownerPassword, restrictions);
+      const blob = new Blob([outBytes.slice()], { type: 'application/pdf' });
       setResult(blob);
-      toast({ title: 'PDF Protected!', description: `${numPages} page(s) protected with password.` });
+      toast({ title: 'PDF Protected!', description: 'Password protection applied. Text remains fully selectable.' });
     } catch (err) {
       toast({ title: 'Protection failed', description: String(err), variant: 'destructive' });
     } finally {

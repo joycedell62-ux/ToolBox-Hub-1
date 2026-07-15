@@ -11,6 +11,7 @@ import { useToast } from '@/hooks/use-toast';
 import * as pdfjsLib from 'pdfjs-dist';
 import workerUrl from 'pdfjs-dist/build/pdf.worker.mjs?url';
 import jsPDF from 'jspdf';
+import { unlockPdf as unlockPdfCrypto } from '@/lib/pdfCrypto';
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = workerUrl;
 
@@ -60,7 +61,7 @@ export default function UnlockPdf() {
       const arrayBuffer = await file.arrayBuffer();
       const data = new Uint8Array(arrayBuffer);
 
-      // pdfjs-dist supports encrypted PDFs with a password — pdf-lib does not
+      // Step 1 — validate password with pdfjs-dist (supports all encryption types)
       let pdfJsDoc: pdfjsLib.PDFDocumentProxy;
       try {
         pdfJsDoc = await pdfjsLib.getDocument({ data, password }).promise;
@@ -74,34 +75,43 @@ export default function UnlockPdf() {
         throw err;
       }
 
+      // Step 2 — try RC4 path: produces a text-based, fully selectable PDF
+      const unlockedBytes = await unlockPdfCrypto(arrayBuffer, password);
+
+      if (unlockedBytes) {
+        const blob = new Blob([unlockedBytes.slice()], { type: 'application/pdf' });
+        setUnlocked(blob);
+        toast({ title: 'PDF Unlocked!', description: 'Password removed. Text is fully selectable and searchable.' });
+        return;
+      }
+
+      // Step 3 — AES fallback: render to images via pdfjs-dist + jsPDF
+      // (AES-encrypted PDFs cannot be re-serialised without a native AES library)
       const numPages = pdfJsDoc.numPages;
       const firstPage = await pdfJsDoc.getPage(1);
       const vp0 = firstPage.getViewport({ scale: 1 });
-
-      // Re-create as a new unencrypted PDF via jsPDF
       const pdf = new jsPDF({ unit: 'pt', format: [vp0.width, vp0.height] });
 
       for (let i = 1; i <= numPages; i++) {
         const page = await pdfJsDoc.getPage(i);
         const vpPt     = page.getViewport({ scale: 1 });
         const vpRender = page.getViewport({ scale: 2 });
-
         if (i > 1) pdf.addPage([vpPt.width, vpPt.height]);
-
         const canvas = document.createElement('canvas');
         canvas.width  = vpRender.width;
         canvas.height = vpRender.height;
         const ctx = canvas.getContext('2d')!;
         await page.render({ canvasContext: ctx, viewport: vpRender, canvas }).promise;
-
-        const imgData = canvas.toDataURL('image/jpeg', 0.92);
-        pdf.addImage(imgData, 'JPEG', 0, 0, vpPt.width, vpPt.height);
+        pdf.addImage(canvas.toDataURL('image/jpeg', 0.92), 'JPEG', 0, 0, vpPt.width, vpPt.height);
       }
 
       const outBytes = pdf.output('arraybuffer');
       const blob = new Blob([outBytes], { type: 'application/pdf' });
       setUnlocked(blob);
-      toast({ title: 'PDF Unlocked!', description: `${numPages} page(s) — password removed successfully.` });
+      toast({
+        title: 'PDF Unlocked (image mode)',
+        description: 'This PDF uses AES encryption. Visual content is preserved but text selection requires a desktop PDF tool.',
+      });
     } catch (err) {
       toast({ title: 'Failed to unlock', description: String(err), variant: 'destructive' });
     } finally {
