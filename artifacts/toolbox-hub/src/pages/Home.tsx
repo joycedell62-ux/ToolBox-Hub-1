@@ -164,8 +164,26 @@ function SectionHead({ icon, label, sub, badge, action, onAction }: {
 }
 
 /* ─── Main ───────────────────────────────────────────────────────────────── */
+/** Match a tool against a query string, checking title → tags → desc/category. */
+function toolMatches(t: Tool, q: string): boolean {
+  const lq = q.toLowerCase();
+  return (
+    t.title.toLowerCase().includes(lq) ||
+    (t.tags ?? []).some(tag => tag.toLowerCase().includes(lq)) ||
+    t.description.toLowerCase().includes(lq) ||
+    t.category.toLowerCase().includes(lq)
+  );
+}
+
 export default function Home() {
-  const [query,        setQuery]        = useState('');
+  // Pre-fill search from ?q= URL param (e.g. "See all results" link in header)
+  const initialQuery = useMemo(() => {
+    try {
+      return new URLSearchParams(window.location.search).get('q') ?? '';
+    } catch { return ''; }
+  }, []);
+
+  const [query,        setQuery]        = useState(initialQuery);
   const [activeCat,    setActiveCat]    = useState<Category | null>(null);
   const [showAll,      setShowAll]      = useState(false);
   const [browseAll,    setBrowseAll]    = useState(false);
@@ -190,19 +208,11 @@ export default function Home() {
   const isSearching = query.trim().length > 0;
 
   const dropdownResults = useMemo(() =>
-    isSearching ? TOOLS.filter(t =>
-      t.title.toLowerCase().includes(query.toLowerCase()) ||
-      t.description.toLowerCase().includes(query.toLowerCase()) ||
-      t.category.toLowerCase().includes(query.toLowerCase())
-    ).slice(0, 7) : [],
+    isSearching ? TOOLS.filter(t => toolMatches(t, query)).slice(0, 8) : [],
   [query, isSearching]);
 
   const searchResults = useMemo(() =>
-    isSearching ? TOOLS.filter(t =>
-      t.title.toLowerCase().includes(query.toLowerCase()) ||
-      t.description.toLowerCase().includes(query.toLowerCase()) ||
-      t.category.toLowerCase().includes(query.toLowerCase())
-    ) : [],
+    isSearching ? TOOLS.filter(t => toolMatches(t, query)) : [],
   [query, isSearching]);
 
   const newTools = useMemo(() => {

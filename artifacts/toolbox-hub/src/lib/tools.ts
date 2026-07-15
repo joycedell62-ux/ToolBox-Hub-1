@@ -37,6 +37,8 @@ export interface Tool {
   category: Category;
   popular?: boolean;
   isNew?: boolean;
+  /** Search synonym keywords — matched after title, before description. */
+  tags?: string[];
 }
 
 export const TOOLS: Tool[] = [
@@ -55,6 +57,7 @@ export const TOOLS: Tool[] = [
     href: '/qr-code-generator',
     category: 'Developer Tools',
     popular: true,
+    tags: ['qr', 'qrcode', 'scan', 'link', 'barcode'],
   },
   {
     title: 'Word Counter',
@@ -71,6 +74,7 @@ export const TOOLS: Tool[] = [
     href: '/bmi-calculator',
     category: 'Calculators',
     popular: true,
+    tags: ['bmi', 'body mass', 'weight', 'health', 'fitness', 'calculator'],
   },
   {
     title: 'Age Calculator',
@@ -124,6 +128,7 @@ export const TOOLS: Tool[] = [
     href: '/certificate-generator',
     category: 'Utility Tools',
     isNew: true,
+    tags: ['certificate', 'award', 'diploma', 'pdf', 'generator'],
   },
   {
     title: 'Resume Builder',
@@ -132,6 +137,7 @@ export const TOOLS: Tool[] = [
     href: '/resume-builder',
     category: 'Utility Tools',
     isNew: true,
+    tags: ['resume', 'cv', 'curriculum vitae', 'job', 'career', 'pdf', 'job application', 'work'],
   },
   {
     title: 'Invoice Generator',
@@ -140,6 +146,7 @@ export const TOOLS: Tool[] = [
     href: '/invoice-generator',
     category: 'Utility Tools',
     isNew: true,
+    tags: ['invoice', 'billing', 'receipt', 'pdf', 'payment', 'generator', 'freelance'],
   },
   // ── PDF Tools ──────────────────────────────────────────────────────────────
   {
@@ -599,21 +606,21 @@ export const TOOLS: Tool[] = [
   { title: 'Content Calendar Generator', description: 'A 4-week content calendar of post ideas per platform.', icon: CalendarRange, href: '/content-calendar-generator', category: 'Marketing Tools', isNew: true },
   { title: 'Product Description Generator', description: 'Benefit-driven product descriptions in your tone.', icon: PenLine, href: '/product-description-generator', category: 'Marketing Tools', isNew: true },
   // ── Utility V2 ──
-  { title: 'QR Scanner', description: 'Scan QR codes with your device camera — fully private.', icon: ScanLine, href: '/qr-scanner', category: 'Utility Tools', isNew: true },
-  { title: 'Barcode Generator', description: 'Generate CODE128, EAN-13, UPC, and CODE39 barcodes.', icon: Barcode, href: '/barcode-generator', category: 'Utility Tools', isNew: true },
-  { title: 'Barcode Scanner', description: 'Scan product barcodes with your camera, offline.', icon: ScanBarcode, href: '/barcode-scanner', category: 'Utility Tools', isNew: true },
-  { title: 'Signature Generator', description: 'Typed signature styles in cursive fonts, PNG download.', icon: PenTool, href: '/signature-generator', category: 'Utility Tools', isNew: true },
-  { title: 'Digital Signature Creator', description: 'Draw your signature and download a transparent PNG.', icon: Pen, href: '/digital-signature-creator', category: 'Utility Tools', isNew: true },
+  { title: 'QR Scanner', description: 'Scan QR codes with your device camera — fully private.', icon: ScanLine, href: '/qr-scanner', category: 'Utility Tools', isNew: true, tags: ['qr', 'qrcode', 'scan', 'camera', 'reader'] },
+  { title: 'Barcode Generator', description: 'Generate CODE128, EAN-13, UPC, and CODE39 barcodes.', icon: Barcode, href: '/barcode-generator', category: 'Utility Tools', isNew: true, tags: ['barcode', 'qr', 'ean', 'upc', 'code128', 'scan', 'generator'] },
+  { title: 'Barcode Scanner', description: 'Scan product barcodes with your camera, offline.', icon: ScanBarcode, href: '/barcode-scanner', category: 'Utility Tools', isNew: true, tags: ['barcode', 'scan', 'camera', 'qr', 'reader'] },
+  { title: 'Signature Generator', description: 'Typed signature styles in cursive fonts, PNG download.', icon: PenTool, href: '/signature-generator', category: 'Utility Tools', isNew: true, tags: ['signature', 'sign', 'cursive', 'handwriting', 'generator'] },
+  { title: 'Digital Signature Creator', description: 'Draw your signature and download a transparent PNG.', icon: Pen, href: '/digital-signature-creator', category: 'Utility Tools', isNew: true, tags: ['signature', 'sign', 'draw', 'handwriting', 'esign'] },
   { title: 'Invoice Number Generator', description: 'Sequential invoice numbers with custom prefix format.', icon: Hash, href: '/invoice-number-generator', category: 'Utility Tools', isNew: true },
   { title: 'Password Strength Checker', description: 'Check password strength and crack time — private.', icon: ShieldCheck, href: '/password-strength-checker', category: 'Utility Tools', isNew: true },
   { title: 'File Checksum Generator', description: 'MD5, SHA-1, and SHA-256 checksums for any file.', icon: FileCheck, href: '/file-checksum-generator', category: 'Utility Tools', isNew: true },
   // ── Professional & Identity ──
-  { title: 'ID Card Generator', description: 'Employee, student, visitor and event ID cards with photo, QR code and barcode.', icon: CreditCard, href: '/id-card-generator', category: 'Branding & Design', isNew: true },
-  { title: 'Email Signature Generator', description: 'Generate professional HTML email signatures for Gmail, Outlook and Apple Mail.', icon: AtSign, href: '/email-signature-generator', category: 'Branding & Design', isNew: true },
-  { title: 'Cover Letter Generator', description: 'Professional cover letters in formal, modern, and creative styles. Export to PDF.', icon: FileSignature, href: '/cover-letter-generator', category: 'Writing Generators', isNew: true },
-  { title: 'Passport Photo Maker', description: 'Resize and crop photos to passport standards for US, UK, EU, India and more.', icon: ScanLine, href: '/passport-photo-maker', category: 'Image Tools', isNew: true },
-  { title: 'Appointment Card Generator', description: 'Hospital, salon, clinic and business appointment cards with QR code.', icon: CalendarRange, href: '/appointment-card-generator', category: 'Branding & Design', isNew: true },
-  { title: 'Shipping Label Generator', description: 'Shipping labels with sender, receiver, barcode and tracking number. Print-ready.', icon: Package, href: '/shipping-label-generator', category: 'Utility Tools', isNew: true },
+  { title: 'ID Card Generator', description: 'Employee, student, visitor and event ID cards with photo, QR code and barcode.', icon: CreditCard, href: '/id-card-generator', category: 'Branding & Design', isNew: true, tags: ['id', 'identity', 'badge', 'employee id', 'student id', 'event pass', 'qr', 'barcode', 'generator'] },
+  { title: 'Email Signature Generator', description: 'Generate professional HTML email signatures for Gmail, Outlook and Apple Mail.', icon: AtSign, href: '/email-signature-generator', category: 'Branding & Design', isNew: true, tags: ['email', 'signature', 'gmail', 'outlook', 'html', 'generator'] },
+  { title: 'Cover Letter Generator', description: 'Professional cover letters in formal, modern, and creative styles. Export to PDF.', icon: FileSignature, href: '/cover-letter-generator', category: 'Writing Generators', isNew: true, tags: ['cover letter', 'resume', 'cv', 'job application', 'career', 'pdf', 'generator'] },
+  { title: 'Passport Photo Maker', description: 'Resize and crop photos to passport standards for US, UK, EU, India and more.', icon: ScanLine, href: '/passport-photo-maker', category: 'Image Tools', isNew: true, tags: ['passport', 'photo', 'id photo', 'visa', 'crop', 'resize'] },
+  { title: 'Appointment Card Generator', description: 'Hospital, salon, clinic and business appointment cards with QR code.', icon: CalendarRange, href: '/appointment-card-generator', category: 'Branding & Design', isNew: true, tags: ['appointment', 'booking', 'qr', 'salon', 'clinic', 'hospital', 'card', 'generator'] },
+  { title: 'Shipping Label Generator', description: 'Shipping labels with sender, receiver, barcode and tracking number. Print-ready.', icon: Package, href: '/shipping-label-generator', category: 'Utility Tools', isNew: true, tags: ['shipping', 'label', 'barcode', 'qr', 'tracking', 'package', 'generator'] },
 ];
 
 // ─── Category config ──────────────────────────────────────────────────────────
