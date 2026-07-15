@@ -27,8 +27,8 @@ import Terms from './pages/Terms';
 import PdfMerge from './pages/PdfMerge';
 import PdfSplit from './pages/PdfSplit';
 import PdfCompressor from './pages/PdfCompressor';
-import WordToPdf from './pages/WordToPdf';
-import PdfToWord from './pages/PdfToWord';
+import TextDiff from './pages/TextDiff';
+import JsonCsvConverter from './pages/JsonCsvConverter';
 import JpgToPdf from './pages/JpgToPdf';
 import PdfToJpg from './pages/PdfToJpg';
 import RotatePdf from './pages/RotatePdf';
@@ -174,8 +174,8 @@ function Router() {
         <Route path="/pdf-merge" component={PdfMerge} />
         <Route path="/pdf-split" component={PdfSplit} />
         <Route path="/pdf-compressor" component={PdfCompressor} />
-        <Route path="/word-to-pdf" component={WordToPdf} />
-        <Route path="/pdf-to-word" component={PdfToWord} />
+        <Route path="/text-diff" component={TextDiff} />
+        <Route path="/json-csv" component={JsonCsvConverter} />
         <Route path="/jpg-to-pdf" component={JpgToPdf} />
         <Route path="/pdf-to-jpg" component={PdfToJpg} />
         <Route path="/rotate-pdf" component={RotatePdf} />
