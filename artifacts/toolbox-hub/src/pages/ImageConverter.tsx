@@ -31,13 +31,12 @@ function loadImageFromFile(file: File): Promise<HTMLImageElement> {
   });
 }
 
-type TargetFormat = 'image/jpeg' | 'image/png' | 'image/webp' | 'image/bmp';
+type TargetFormat = 'image/jpeg' | 'image/png' | 'image/webp';
 
 const FORMAT_OPTIONS: { label: string; value: TargetFormat; ext: string }[] = [
   { label: 'JPG', value: 'image/jpeg', ext: 'jpg' },
   { label: 'PNG', value: 'image/png', ext: 'png' },
   { label: 'WebP', value: 'image/webp', ext: 'webp' },
-  { label: 'BMP', value: 'image/bmp', ext: 'bmp' },
 ];
 
 interface ImageItem {
@@ -57,8 +56,8 @@ const RELATED = [
 ];
 
 const FAQ = [
-  { q: 'Which formats can I convert to?', a: 'You can convert to JPG, PNG, WebP, and BMP. GIF output is not supported because the Canvas API cannot encode animated GIF frames.' },
-  { q: 'Why is GIF output not supported?', a: 'The HTML5 Canvas API encodes images as static frames. Animated GIF encoding requires a specialized library not included here. You can convert GIFs to other formats (they become static).' },
+  { q: 'Which formats can I convert to?', a: 'You can convert to JPG, PNG, and WebP. GIF and BMP output are not supported because the Canvas API cannot encode those formats.' },
+  { q: 'Why are GIF and BMP output not supported?', a: 'The HTML5 Canvas API can only encode JPEG, PNG, and WebP. BMP and animated GIF encoding require specialized libraries not included here. You can still convert GIFs or BMPs as input — they become static images in the output format.' },
   { q: 'Can I convert multiple images at once?', a: 'Yes! Upload multiple files and click "Convert All" to batch-convert them. Use "Download All as ZIP" to get them in one file.' },
   { q: 'Will the quality slider affect PNG output?', a: 'No — PNG is a lossless format. The quality slider only affects JPG and WebP output.' },
   { q: 'Is my data safe?', a: 'All conversion happens locally in your browser via the Canvas API. Your images are never uploaded to any server.' },
@@ -210,7 +209,7 @@ export default function ImageConverter() {
                   >{f.label}</button>
                 ))}
               </div>
-              <p className="text-xs text-gray-400">GIF output is not supported — the Canvas API cannot encode animated GIFs.</p>
+              <p className="text-xs text-gray-400">GIF and BMP output are not supported by the browser Canvas API.</p>
             </div>
 
             {/* Quality */}

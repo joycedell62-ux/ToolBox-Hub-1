@@ -39,6 +39,15 @@ function downloadBlob(blob: Blob, filename: string) {
   setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 
+function dataUrlToBlob(dataUrl: string): Blob {
+  const [header, b64] = dataUrl.split(',');
+  const mime = header.match(/:(.*?);/)?.[1] ?? 'image/png';
+  const binary = atob(b64);
+  const u8 = new Uint8Array(binary.length);
+  for (let i = 0; i < binary.length; i++) u8[i] = binary.charCodeAt(i);
+  return new Blob([u8], { type: mime });
+}
+
 function getPositionCoords(
   pos: Position, imgW: number, imgH: number,
   wmW: number, wmH: number, margin = 20
@@ -182,8 +191,7 @@ export default function WatermarkImage() {
       toast({ title: 'Please upload an image first', variant: 'destructive' });
       return;
     }
-    const res = await fetch(previewDataUrl);
-    const blob = await res.blob();
+    const blob = dataUrlToBlob(previewDataUrl);
     downloadBlob(blob, `watermarked-${baseFile.name}`);
     toast({ title: 'Watermarked image downloaded!' });
   }, [baseFile, previewDataUrl, toast]);

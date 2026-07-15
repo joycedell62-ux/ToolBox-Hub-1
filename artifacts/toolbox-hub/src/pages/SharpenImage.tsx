@@ -25,6 +25,15 @@ function downloadBlob(blob: Blob, filename: string) {
   setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 
+function dataUrlToBlob(dataUrl: string): Blob {
+  const [header, b64] = dataUrl.split(',');
+  const mime = header.match(/:(.*?);/)?.[1] ?? 'image/png';
+  const binary = atob(b64);
+  const u8 = new Uint8Array(binary.length);
+  for (let i = 0; i < binary.length; i++) u8[i] = binary.charCodeAt(i);
+  return new Blob([u8], { type: mime });
+}
+
 function applyConvolution(
   ctx: CanvasRenderingContext2D,
   w: number,
@@ -147,8 +156,7 @@ export default function SharpenImage() {
       toast({ title: 'Apply sharpening first', variant: 'destructive' });
       return;
     }
-    const res = await fetch(sharpenedDataUrl);
-    const blob = await res.blob();
+    const blob = dataUrlToBlob(sharpenedDataUrl);
     downloadBlob(blob, `sharpened-${imageFile?.name ?? 'image.png'}`);
     toast({ title: 'Sharpened image downloaded!' });
   }, [sharpenedDataUrl, imageFile, toast]);
