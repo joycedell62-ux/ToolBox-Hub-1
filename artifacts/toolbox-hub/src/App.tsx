@@ -8,6 +8,7 @@ import { useState, useEffect } from 'react';
 import Layout from './components/Layout';
 import WelcomeModal from './components/WelcomeModal';
 import HelpFAB from './components/HelpFAB';
+import PWAInstallPrompt from './components/PWAInstallPrompt';
 import Home from './pages/Home';
 import PasswordGenerator from './pages/PasswordGenerator';
 import QrCodeGenerator from './pages/QrCodeGenerator';
@@ -335,6 +336,7 @@ function App() {
           {showWelcome && <WelcomeModal onDismiss={handleDismiss} />}
           {welcomeToast && <WelcomeToast msg={welcomeToast} />}
           <HelpFAB />
+          <PWAInstallPrompt />
         </WouterRouter>
         <Toaster />
       </TooltipProvider>

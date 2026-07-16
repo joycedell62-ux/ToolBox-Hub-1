@@ -1,4 +1,5 @@
 import React, { useState, useMemo, useRef, useEffect, useCallback } from 'react';
+import DailyTip from '../components/DailyTip';
 import {
   Search, X, ChevronRight, ArrowRight, Star,
   Flame, Clock, LayoutGrid, Command, Copy, Check,
@@ -387,8 +388,7 @@ export default function Home() {
 
         {/* ── HERO ─────────────────────────────────────────────────────────── */}
         <section
-          className="relative px-4 sm:px-6 lg:px-8 pt-12 pb-10 md:pt-16 md:pb-12 text-center overflow-hidden"
-          style={{ background: 'linear-gradient(160deg,#dbeafe 0%,#eff6ff 35%,#ffffff 65%)' }}
+          className="hero-gradient relative px-4 sm:px-6 lg:px-8 pt-12 pb-10 md:pt-16 md:pb-12 text-center overflow-hidden"
         >
           <div className="absolute -top-24 -left-24 w-80 h-80 bg-blue-200/20 rounded-full blur-3xl pointer-events-none" />
           <div className="absolute -top-12 -right-24 w-64 h-64 bg-indigo-200/15 rounded-full blur-3xl pointer-events-none" />
@@ -408,8 +408,8 @@ export default function Home() {
               Your free toolkit<br />
               <span className="text-blue-600">for everything.</span>
             </h1>
-            <p className="text-slate-500 text-sm md:text-base mb-8 max-w-xs mx-auto leading-relaxed">
-              Writing, PDF, design, code & more — runs in your browser, free forever.
+            <p className="text-slate-500 text-sm md:text-base mb-8 max-w-sm mx-auto leading-relaxed">
+              One website. Endless possibilities. 122+ free tools to help you work smarter, faster, and better.
             </p>
 
             {/* ── Search + Dropdown ──────────────────────────────────────── */}
@@ -699,6 +699,13 @@ export default function Home() {
                 <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3">
                   {popularTools.map(t => <ToolCard key={t.href} tool={t} onToast={showToast} />)}
                 </div>
+              </div>
+            </section>
+
+            {/* Daily Productivity Tip */}
+            <section className="px-4 sm:px-6 lg:px-8 pb-6">
+              <div className="max-w-6xl mx-auto">
+                <DailyTip />
               </div>
             </section>
 

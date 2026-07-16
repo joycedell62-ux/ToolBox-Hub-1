@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'wouter';
-import { Wrench, Home, ChevronRight, Info, Shuffle } from 'lucide-react';
+import { Wrench, Home, ChevronRight, Info, Shuffle, Sun, Moon } from 'lucide-react';
 import { getToolByHref, TOOLS } from '../lib/tools';
-import { pushRecent } from '../lib/toolPrefs';
+import { pushRecent, checkAchievement, ACHIEVEMENT_LABELS } from '../lib/toolPrefs';
+import { useTheme } from '../lib/theme';
 import GlobalSearch from './GlobalSearch';
 import ToolActionBar from './ToolActionBar';
+import NotificationBell from './NotificationBell';
 
 const APP_VERSION = 'v2.0';
 
@@ -108,8 +110,17 @@ export default function Layout({ children }: LayoutProps) {
   const tool    = getToolByHref(location);
   const pageTitle = tool?.title ?? STATIC_TITLES[location] ?? 'Tool';
 
+  const { theme, toggle } = useTheme();
+  const [badge, setBadge] = useState<number | null>(null);
+
   useEffect(() => {
-    if (getToolByHref(location)) pushRecent(location);
+    if (!getToolByHref(location)) return;
+    pushRecent(location);
+    const milestone = checkAchievement(location);
+    if (milestone) {
+      setBadge(milestone);
+      setTimeout(() => setBadge(null), 5000);
+    }
   }, [location]);
 
   return (
@@ -134,6 +145,21 @@ export default function Layout({ children }: LayoutProps) {
             </div>
 
             <nav className="flex items-center gap-0.5 sm:gap-1 flex-shrink-0">
+              {/* Notification bell */}
+              <NotificationBell />
+
+              {/* Dark / light toggle */}
+              <button
+                onClick={toggle}
+                aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+                className="flex items-center justify-center w-9 h-9 rounded-xl text-blue-100 hover:text-white hover:bg-white/10 transition-colors"
+              >
+                {theme === 'dark'
+                  ? <Sun className="w-4 h-4" />
+                  : <Moon className="w-4 h-4" />
+                }
+              </button>
+
               {!isHome && (
                 <Link href="/"
                   className="flex items-center gap-1.5 text-blue-50 hover:text-white hover:bg-white/10 transition-colors text-sm font-medium px-2 sm:px-3 py-2 rounded-lg"
@@ -258,6 +284,25 @@ export default function Layout({ children }: LayoutProps) {
 
       {/* Global floating Surprise Me button */}
       <FloatButton />
+
+      {/* Achievement badge toast */}
+      {badge && (() => {
+        const a = ACHIEVEMENT_LABELS[badge];
+        return (
+          <div className="fixed bottom-24 left-1/2 -translate-x-1/2 z-[700] pointer-events-none animate-in fade-in slide-in-from-bottom-3 duration-300">
+            <div
+              className="flex items-center gap-4 px-6 py-4 rounded-2xl shadow-2xl text-white min-w-[280px]"
+              style={{ backgroundImage: 'linear-gradient(135deg,#d97706 0%,#f97316 100%)' }}
+            >
+              <span className="text-4xl leading-none">{a.emoji}</span>
+              <div>
+                <p className="font-extrabold text-sm">{a.title}</p>
+                <p className="text-xs text-amber-100 mt-0.5">{a.sub}</p>
+              </div>
+            </div>
+          </div>
+        );
+      })()}
     </div>
   );
 }

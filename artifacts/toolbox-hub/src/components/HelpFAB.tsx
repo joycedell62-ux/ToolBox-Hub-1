@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, ChevronDown, ChevronUp, MessageCircle } from 'lucide-react';
+import { X, ChevronDown, ChevronUp, MessageCircle, Send, Lightbulb } from 'lucide-react';
 
 const FAQS: { q: string; a: string }[] = [
   {
@@ -65,8 +65,21 @@ function FAQItem({ item, open, onToggle }: {
 }
 
 export default function HelpFAB() {
-  const [open, setOpen]     = useState(false);
+  const [open, setOpen]         = useState(false);
   const [expanded, setExpanded] = useState<number | null>(null);
+  const [showRequest, setShowRequest] = useState(false);
+  const [toolName, setToolName]       = useState('');
+  const [toolDesc, setToolDesc]       = useState('');
+  const [sent, setSent]               = useState(false);
+
+  const handleSubmitRequest = (e: React.FormEvent) => {
+    e.preventDefault();
+    const subject = encodeURIComponent(`Tool Request: ${toolName}`);
+    const body    = encodeURIComponent(`Tool Name: ${toolName}\n\nDescription:\n${toolDesc}`);
+    window.open(`mailto:hello@toolboxhub.app?subject=${subject}&body=${body}`);
+    setSent(true);
+    setTimeout(() => { setSent(false); setShowRequest(false); setToolName(''); setToolDesc(''); }, 3000);
+  };
 
   return (
     <>
@@ -108,7 +121,7 @@ export default function HelpFAB() {
           </div>
 
           {/* FAQ list — scrollable */}
-          <div className="max-h-80 overflow-y-auto">
+          <div className="max-h-64 overflow-y-auto">
             {FAQS.map((item, i) => (
               <FAQItem
                 key={i}
@@ -117,6 +130,64 @@ export default function HelpFAB() {
                 onToggle={() => setExpanded(expanded === i ? null : i)}
               />
             ))}
+          </div>
+
+          {/* Request a Tool */}
+          <div className="border-t border-slate-100">
+            <button
+              onClick={() => setShowRequest(r => !r)}
+              className="w-full flex items-center justify-between gap-3 px-5 py-3.5 hover:bg-slate-50 transition-colors text-left"
+            >
+              <div className="flex items-center gap-2">
+                <Lightbulb className="w-4 h-4 text-amber-500" />
+                <span className="text-sm font-semibold text-slate-800">Request a Tool</span>
+              </div>
+              {showRequest
+                ? <ChevronUp className="w-4 h-4 text-slate-400" />
+                : <ChevronDown className="w-4 h-4 text-slate-400" />
+              }
+            </button>
+
+            {showRequest && (
+              <form onSubmit={handleSubmitRequest} className="px-5 pb-4 space-y-3">
+                {sent ? (
+                  <div className="py-3 text-center">
+                    <p className="text-emerald-600 font-semibold text-sm">✅ Request sent! Thank you.</p>
+                  </div>
+                ) : (
+                  <>
+                    <div>
+                      <label className="text-xs font-semibold text-slate-500 uppercase tracking-wide">Tool Name</label>
+                      <input
+                        type="text"
+                        required
+                        placeholder="e.g. Markdown to PDF"
+                        value={toolName}
+                        onChange={e => setToolName(e.target.value)}
+                        className="mt-1 w-full rounded-xl border border-slate-200 px-3 py-2 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent bg-white placeholder:text-slate-300"
+                      />
+                    </div>
+                    <div>
+                      <label className="text-xs font-semibold text-slate-500 uppercase tracking-wide">What should it do?</label>
+                      <textarea
+                        required
+                        rows={2}
+                        placeholder="Briefly describe the tool..."
+                        value={toolDesc}
+                        onChange={e => setToolDesc(e.target.value)}
+                        className="mt-1 w-full rounded-xl border border-slate-200 px-3 py-2 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent bg-white placeholder:text-slate-300 resize-none"
+                      />
+                    </div>
+                    <button
+                      type="submit"
+                      className="w-full flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm py-2.5 rounded-xl transition-colors"
+                    >
+                      <Send className="w-3.5 h-3.5" /> Send Request
+                    </button>
+                  </>
+                )}
+              </form>
+            )}
           </div>
 
           {/* Footer CTA */}

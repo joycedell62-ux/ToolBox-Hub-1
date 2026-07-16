@@ -76,3 +76,39 @@ export function pushRecent(href: string) {
   if (cur[0] === href) return;
   writeList(RECENT_KEY, [href, ...cur.filter((h) => h !== href)].slice(0, RECENT_MAX));
 }
+
+// ── Achievement tracking ──────────────────────────────────────────────────────
+const UNIQUE_KEY     = 'tbh_unique_visited';
+const ACHIEVED_KEY   = 'tbh_achievements_done';
+const MILESTONES     = [5, 10, 25, 50] as const;
+
+export const ACHIEVEMENT_LABELS: Record<number, { emoji: string; title: string; sub: string }> = {
+  5:  { emoji: '🏅', title: 'Explorer Badge',        sub: 'You\'ve tried 5 different tools!' },
+  10: { emoji: '🥈', title: 'Power User Badge',      sub: '10 tools explored — you\'re on a roll!' },
+  25: { emoji: '🥇', title: 'Productivity Pro Badge', sub: '25 tools! You\'re a Toolbox Pro.' },
+  50: { emoji: '🏆', title: 'Toolbox Master Badge',  sub: 'Incredible — 50 tools explored!' },
+};
+
+/**
+ * Call when a tool page is visited.
+ * Returns the milestone number just reached (5 / 10 / 25 / 50), or null.
+ */
+export function checkAchievement(href: string): number | null {
+  try {
+    const raw     = localStorage.getItem(UNIQUE_KEY) || '[]';
+    const visited = JSON.parse(raw) as string[];
+    if (visited.includes(href)) return null;                    // already counted
+
+    const updated = [...visited, href];
+    localStorage.setItem(UNIQUE_KEY, JSON.stringify(updated));
+
+    const count = updated.length;
+    const done  = JSON.parse(localStorage.getItem(ACHIEVED_KEY) || '[]') as number[];
+    const hit   = MILESTONES.find(m => m === count && !done.includes(m));
+    if (hit !== undefined) {
+      localStorage.setItem(ACHIEVED_KEY, JSON.stringify([...done, hit]));
+      return hit;
+    }
+  } catch {}
+  return null;
+}
