@@ -18,7 +18,7 @@ const STATIC_TITLES: Record<string, string> = {
 };
 
 const mailto = (subject: string) =>
-  `mailto:hello@toolboxhub.app?subject=${encodeURIComponent(subject)}`;
+  `mailto:toolboxhub2@gmail.com?subject=${encodeURIComponent(subject)}`;
 
 // ─── Launch banner ────────────────────────────────────────────────────────────
 const BANNER_KEY = 'tbh_launch_v2_dismissed';

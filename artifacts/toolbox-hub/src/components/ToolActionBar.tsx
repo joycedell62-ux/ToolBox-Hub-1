@@ -44,7 +44,7 @@ export default function ToolActionBar({ href, title }: ToolActionBarProps) {
     setTimeout(() => setSharing('idle'), 2000);
   };
 
-  const reportHref = `mailto:hello@toolboxhub.app?subject=${encodeURIComponent(`Issue report: ${title}`)}&body=${encodeURIComponent(`Tool: ${title}\nPage: ${pageUrl()}\n\nWhat went wrong?\n`)}`;
+  const reportHref = `mailto:toolboxhub2@gmail.com?subject=${encodeURIComponent(`Issue report: ${title}`)}&body=${encodeURIComponent(`Tool: ${title}\nPage: ${pageUrl()}\n\nWhat went wrong?\n`)}`;
 
   const btn =
     'inline-flex items-center gap-1.5 h-8 px-2.5 rounded-lg border text-xs font-semibold transition-colors';

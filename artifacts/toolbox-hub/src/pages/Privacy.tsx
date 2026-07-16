@@ -34,7 +34,7 @@ export default function Privacy() {
         <section>
           <h2 className="text-base font-bold text-gray-900 mb-2">Questions?</h2>
           <p>
-            Email us at <a href="mailto:hello@toolboxhub.app" className="text-blue-600 hover:underline">hello@toolboxhub.app</a>.
+            Email us at <a href="mailto:toolboxhub2@gmail.com" className="text-blue-600 hover:underline">toolboxhub2@gmail.com</a>.
           </p>
         </section>
       </div>

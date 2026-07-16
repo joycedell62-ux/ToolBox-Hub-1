@@ -76,7 +76,7 @@ export default function HelpFAB() {
     e.preventDefault();
     const subject = encodeURIComponent(`Tool Request: ${toolName}`);
     const body    = encodeURIComponent(`Tool Name: ${toolName}\n\nDescription:\n${toolDesc}`);
-    window.open(`mailto:hello@toolboxhub.app?subject=${subject}&body=${body}`);
+    window.open(`mailto:toolboxhub2@gmail.com?subject=${subject}&body=${body}`);
     setSent(true);
     setTimeout(() => { setSent(false); setShowRequest(false); setToolName(''); setToolDesc(''); }, 3000);
   };
@@ -194,7 +194,7 @@ export default function HelpFAB() {
           <div className="px-5 py-3 bg-slate-50 border-t border-slate-100 flex items-center justify-between">
             <p className="text-xs text-slate-400">Still need help?</p>
             <a
-              href="mailto:hello@toolboxhub.app?subject=Help — ToolBox Hub"
+              href="mailto:toolboxhub2@gmail.com?subject=Help — ToolBox Hub"
               className="text-xs font-semibold text-blue-600 hover:text-blue-800 transition-colors"
             >
               Email us →
