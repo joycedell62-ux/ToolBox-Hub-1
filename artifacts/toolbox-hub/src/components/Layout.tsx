@@ -465,7 +465,7 @@ export default function Layout({ children }: LayoutProps) {
             <div className="text-center">
               <p className="text-sm text-slate-400">
                 Made with <span className="text-rose-400">❤️</span> by{' '}
-                <span className="font-semibold text-slate-300">Oluwatobi Ayodele</span>{' '}
+                <span className="font-semibold text-slate-300">Oluwatobi</span>{' '}
                 in Nigeria 🇳🇬
               </p>
               <p className="text-xs text-slate-600 mt-1 max-w-lg mx-auto leading-relaxed">
