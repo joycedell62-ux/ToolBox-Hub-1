@@ -3,8 +3,11 @@ import { Toaster } from '@/components/ui/toaster';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import NotFound from '@/pages/not-found';
 import { Route, Switch, Router as WouterRouter } from 'wouter';
+import { useState, useEffect } from 'react';
 
 import Layout from './components/Layout';
+import WelcomeModal from './components/WelcomeModal';
+import HelpFAB from './components/HelpFAB';
 import Home from './pages/Home';
 import PasswordGenerator from './pages/PasswordGenerator';
 import QrCodeGenerator from './pages/QrCodeGenerator';
@@ -147,6 +150,19 @@ import AppointmentCardGenerator from './pages/AppointmentCardGenerator';
 import ShippingLabelGenerator from './pages/ShippingLabelGenerator';
 
 const queryClient = new QueryClient();
+
+const WELCOME_KEY = 'tbh_welcomed_v1';
+
+/* 5-second thank-you toast that appears after the welcome modal closes */
+function WelcomeToast({ msg }: { msg: string }) {
+  return (
+    <div className="fixed bottom-10 left-1/2 -translate-x-1/2 z-[700] pointer-events-none">
+      <div className="animate-in fade-in slide-in-from-bottom-3 duration-300 flex items-center gap-2.5 bg-slate-900/95 backdrop-blur text-white text-sm font-medium px-5 py-3 rounded-2xl shadow-2xl whitespace-nowrap">
+        {msg}
+      </div>
+    </div>
+  );
+}
 
 function Router() {
   return (
@@ -299,11 +315,26 @@ function Router() {
 }
 
 function App() {
+  const [showWelcome, setShowWelcome] = useState(() => {
+    try { return !localStorage.getItem(WELCOME_KEY); } catch { return false; }
+  });
+  const [welcomeToast, setWelcomeToast] = useState<string | null>(null);
+
+  const handleDismiss = (msg: string) => {
+    try { localStorage.setItem(WELCOME_KEY, '1'); } catch {}
+    setShowWelcome(false);
+    setWelcomeToast(msg);
+    setTimeout(() => setWelcomeToast(null), 5000);
+  };
+
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, '')}>
           <Router />
+          {showWelcome && <WelcomeModal onDismiss={handleDismiss} />}
+          {welcomeToast && <WelcomeToast msg={welcomeToast} />}
+          <HelpFAB />
         </WouterRouter>
         <Toaster />
       </TooltipProvider>

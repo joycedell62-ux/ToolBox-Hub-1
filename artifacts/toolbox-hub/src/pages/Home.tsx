@@ -4,6 +4,46 @@ import {
   Flame, Clock, LayoutGrid, Command, Copy, Check,
   ChevronUp, Link as LinkIcon,
 } from 'lucide-react';
+
+/* ─── Animated count-up ─────────────────────────────────────────────────── */
+function useCountUp(target: number, duration = 1400) {
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    const start = Date.now();
+    const tick = () => {
+      const p = Math.min((Date.now() - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      setCount(Math.round(eased * target));
+      if (p < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }, [target, duration]);
+  return count;
+}
+
+function StatPill({ value, label }: { value: string; label: string }) {
+  return (
+    <div className="flex flex-col items-center">
+      <span className="text-lg sm:text-xl font-extrabold text-slate-900 leading-none">{value}</span>
+      <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider mt-0.5">{label}</span>
+    </div>
+  );
+}
+
+function HeroStats() {
+  const processed = useCountUp(500000);
+  const fmt = (n: number) =>
+    n >= 1000 ? `${Math.floor(n / 1000)}K+` : `${n}+`;
+  return (
+    <div className="flex items-center justify-center gap-5 mb-6 flex-wrap">
+      <StatPill value={fmt(processed)} label="tools processed" />
+      <div className="w-px h-8 bg-slate-200" />
+      <StatPill value="122+" label="free tools" />
+      <div className="w-px h-8 bg-slate-200" />
+      <StatPill value="0" label="logins needed" />
+    </div>
+  );
+}
 import { Link, useLocation } from 'wouter';
 import { TOOLS, getToolByHref } from '../lib/tools';
 import type { Tool, Category } from '../lib/tools';
@@ -119,7 +159,14 @@ function ToolCard({ tool, onToast }: { tool: Tool; onToast?: (msg: string) => vo
       </button>
 
       <div className="p-5 flex flex-col gap-3 flex-1">
-        <div className={`w-11 h-11 rounded-xl bg-gradient-to-br ${grad} flex items-center justify-center shadow-sm flex-shrink-0 group-hover:scale-110 transition-transform duration-300`}>
+        {/* "New" badge — top-left corner */}
+      {tool.isNew && (
+        <span className="absolute top-3 left-3 z-[3] text-[9px] font-extrabold uppercase tracking-wider bg-emerald-500 text-white px-2 py-0.5 rounded-full pointer-events-none shadow-sm">
+          New
+        </span>
+      )}
+
+      <div className={`w-11 h-11 rounded-xl bg-gradient-to-br ${grad} flex items-center justify-center shadow-sm flex-shrink-0 group-hover:scale-110 transition-transform duration-300`}>
           <tool.icon className="w-5 h-5 text-white" />
         </div>
         <div className="flex-1">
@@ -352,6 +399,9 @@ export default function Home() {
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse inline-block" />
               {TOOLS.length}+ free tools · No account needed
             </div>
+
+            {/* Live stats counter */}
+            <HeroStats />
 
             {/* Headline */}
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight leading-[1.1] mb-2">
@@ -705,16 +755,7 @@ export default function Home() {
                   onAction={() => setShowAll(true)}
                 />
                 <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3">
-                  {newTools.map(t => (
-                    <div key={t.href} className="relative">
-                      <ToolCard tool={t} onToast={showToast} />
-                      {t.isNew && (
-                        <span className="absolute top-3 left-3 z-[3] text-[9px] font-extrabold uppercase tracking-wider bg-emerald-500 text-white px-2 py-0.5 rounded-full pointer-events-none">
-                          New
-                        </span>
-                      )}
-                    </div>
-                  ))}
+                  {newTools.map(t => <ToolCard key={t.href} tool={t} onToast={showToast} />)}
                 </div>
               </div>
             </section>
