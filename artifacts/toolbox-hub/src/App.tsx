@@ -325,7 +325,7 @@ function App() {
     try { localStorage.setItem(WELCOME_KEY, '1'); } catch {}
     setShowWelcome(false);
     setWelcomeToast(msg);
-    setTimeout(() => setWelcomeToast(null), 5000);
+    setTimeout(() => setWelcomeToast(null), 6000);
   };
 
   return (

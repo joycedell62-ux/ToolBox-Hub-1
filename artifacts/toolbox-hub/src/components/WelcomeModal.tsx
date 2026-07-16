@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { X } from 'lucide-react';
+import { X, Smartphone } from 'lucide-react';
 
 /* ─── Pure-canvas confetti ───────────────────────────────────────────────── */
 function fireConfetti() {
@@ -22,7 +22,7 @@ function fireConfetti() {
     rotV: number; alpha: number; shape: number;
   };
 
-  const particles: Particle[] = Array.from({ length: 150 }, () => ({
+  const particles: Particle[] = Array.from({ length: 160 }, () => ({
     x:        Math.random() * canvas.width,
     y:        -20 - Math.random() * 200,
     vx:       (Math.random() - 0.5) * 5,
@@ -32,158 +32,173 @@ function fireConfetti() {
     rotation: Math.random() * Math.PI * 2,
     rotV:     (Math.random() - 0.5) * 0.25,
     alpha:    1,
-    shape:    Math.floor(Math.random() * 3), // 0=rect 1=circle 2=triangle
+    shape:    Math.floor(Math.random() * 3),
   }));
 
   let frame = 0;
   const animate = () => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     let alive = 0;
-
     for (const p of particles) {
-      p.x  += p.vx;
-      p.y  += p.vy;
-      p.vy += 0.12;
+      p.x += p.vx; p.y += p.vy; p.vy += 0.12;
       p.rotation += p.rotV;
       if (p.y > canvas.height * 0.75) p.alpha -= 0.025;
       if (p.alpha <= 0) continue;
       alive++;
-
       ctx.save();
       ctx.globalAlpha = Math.max(0, p.alpha);
       ctx.fillStyle   = p.color;
       ctx.translate(p.x, p.y);
       ctx.rotate(p.rotation);
-
-      if (p.shape === 0) {
-        ctx.fillRect(-p.size / 2, -p.size / 4, p.size, p.size / 2);
-      } else if (p.shape === 1) {
-        ctx.beginPath();
-        ctx.arc(0, 0, p.size / 2, 0, Math.PI * 2);
-        ctx.fill();
-      } else {
-        ctx.beginPath();
-        ctx.moveTo(0, -p.size / 2);
-        ctx.lineTo(p.size / 2, p.size / 2);
-        ctx.lineTo(-p.size / 2, p.size / 2);
-        ctx.closePath();
-        ctx.fill();
-      }
+      if (p.shape === 0)      { ctx.fillRect(-p.size/2, -p.size/4, p.size, p.size/2); }
+      else if (p.shape === 1) { ctx.beginPath(); ctx.arc(0,0,p.size/2,0,Math.PI*2); ctx.fill(); }
+      else                    { ctx.beginPath(); ctx.moveTo(0,-p.size/2); ctx.lineTo(p.size/2,p.size/2); ctx.lineTo(-p.size/2,p.size/2); ctx.closePath(); ctx.fill(); }
       ctx.restore();
     }
-
     frame++;
-    if (alive > 0 && frame < 350) requestAnimationFrame(animate);
+    if (alive > 0 && frame < 360) requestAnimationFrame(animate);
     else canvas.remove();
   };
-
   requestAnimationFrame(animate);
 }
 
 /* ─── Component ──────────────────────────────────────────────────────────── */
 interface WelcomeModalProps {
-  /** Called when the modal closes — pass the thank-you message to show. */
   onDismiss: (msg: string) => void;
 }
+
+const FEATURES = [
+  '116+ Free Tools',
+  'No Sign-up Required',
+  'Fast & Secure',
+  'Mobile Friendly',
+  'Works in Your Browser',
+];
+
+const TOAST_MSG = '💙 Thanks for visiting ToolBox Hub! We hope you enjoy using our tools.';
 
 export default function WelcomeModal({ onDismiss }: WelcomeModalProps) {
   const [visible, setVisible] = useState(false);
 
-  /* slight delay so the page renders first, then modal fades in */
   useEffect(() => {
-    const t = setTimeout(() => {
-      setVisible(true);
-      fireConfetti(); // 🎊 confetti on first visit
-    }, 400);
+    const t = setTimeout(() => { setVisible(true); fireConfetti(); }, 400);
     return () => clearTimeout(t);
   }, []);
 
   const close = (withConfetti = false) => {
     setVisible(false);
     if (withConfetti) fireConfetti();
-    setTimeout(
-      () => onDismiss('👋 Thanks for visiting Toolbox Hub. Have an amazing day!'),
-      280,
-    );
+    setTimeout(() => onDismiss(TOAST_MSG), 280);
   };
 
-  const FEATURES = [
-    'No signup required',
-    'Completely free',
-    'Fast & Secure — runs in your browser',
-  ];
+  const handleInstall = () => {
+    close();
+    // Give PWAInstallPrompt time to appear naturally,
+    // or open the site in a new tab so the browser offers install
+    setTimeout(() => {
+      const url = window.location.origin + window.location.pathname;
+      window.open(url, '_blank');
+    }, 400);
+  };
 
   return (
     <div
-      className={`fixed inset-0 z-[600] flex items-center justify-center p-4 transition-opacity duration-300 ${
-        visible ? 'opacity-100' : 'opacity-0 pointer-events-none'
-      }`}
+      className={`fixed inset-0 z-[600] flex items-center justify-center p-4
+        transition-opacity duration-300 ${visible ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
     >
       {/* Backdrop */}
-      <div
-        className="absolute inset-0 bg-black/50 backdrop-blur-sm"
-        onClick={() => close()}
-      />
+      <div className="absolute inset-0 bg-black/55 backdrop-blur-sm" onClick={() => close()} />
 
       {/* Card */}
       <div
-        className={`relative bg-white rounded-3xl shadow-2xl max-w-md w-full overflow-hidden transition-all duration-300 ${
-          visible ? 'scale-100 translate-y-0' : 'scale-95 translate-y-4'
-        }`}
+        className={`relative bg-white rounded-3xl shadow-2xl w-full max-w-lg overflow-hidden
+          transition-all duration-300 ${visible ? 'scale-100 translate-y-0' : 'scale-95 translate-y-6'}`}
       >
-        {/* ── Gradient header ── */}
+        {/* ── Gradient header ─────────────────────────────────── */}
         <div
           className="relative px-8 pt-8 pb-10 text-center overflow-hidden"
-          style={{ backgroundImage: 'linear-gradient(135deg,#1d4ed8 0%,#4f46e5 100%)' }}
+          style={{ backgroundImage: 'linear-gradient(135deg,#1d4ed8 0%,#3b82f6 50%,#4f46e5 100%)' }}
         >
-          <div className="absolute -top-10 -right-10 w-36 h-36 bg-white/10 rounded-full pointer-events-none" />
-          <div className="absolute -bottom-6 -left-10 w-28 h-28 bg-white/10 rounded-full pointer-events-none" />
+          {/* Decorative orbs */}
+          <div className="absolute -top-12 -right-12 w-40 h-40 bg-white/10 rounded-full pointer-events-none" />
+          <div className="absolute -bottom-8 -left-12 w-32 h-32 bg-white/10 rounded-full pointer-events-none" />
+          <div className="absolute top-4 left-8 w-12 h-12 bg-white/5 rounded-full pointer-events-none" />
+
           <div className="relative">
-            <div className="text-5xl mb-3 drop-shadow-md">🚀</div>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-white leading-tight">
-              Welcome to Toolbox Hub!
+            <div className="text-5xl mb-3 drop-shadow-lg select-none">👋</div>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-white leading-tight tracking-tight">
+              Welcome to ToolBox Hub!
             </h2>
-            <p className="text-blue-200 text-sm mt-1.5 font-medium">
-              Your all-in-one collection of 122+ free online tools
+            <p className="text-blue-200 text-sm mt-2 font-medium">
+              Hello and welcome! 💙
             </p>
           </div>
         </div>
 
-        {/* ── Body ── */}
-        <div className="px-8 py-6">
-          <p className="text-slate-600 text-sm leading-relaxed mb-4">
-            Whether you're a student, developer, business owner, designer, creator, or professional —
-            we've built these tools to help you work faster and smarter.
+        {/* ── Body ────────────────────────────────────────────── */}
+        <div className="px-7 sm:px-8 py-6 max-h-[60vh] overflow-y-auto">
+
+          <p className="text-slate-600 text-sm leading-relaxed mb-3">
+            We're delighted to have you here. <strong className="text-slate-800">ToolBox Hub</strong> is
+            your all-in-one platform with{' '}
+            <span className="font-bold text-blue-600">116+ free online tools</span> designed to help
+            students, professionals, businesses, creators, developers, teachers, and everyone get more done.
           </p>
 
-          <div className="space-y-2.5 mb-5">
-            {FEATURES.map(f => (
-              <div key={f} className="flex items-center gap-3">
-                <span className="flex-shrink-0 w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center">
-                  <span className="text-emerald-600 text-xs font-extrabold">✓</span>
-                </span>
-                <span className="text-sm text-slate-700 font-medium">{f}</span>
-              </div>
-            ))}
+          <p className="text-slate-500 text-sm leading-relaxed mb-5">
+            Whether you need to edit PDFs, generate QR codes, compress images, create invoices,
+            format code, or use productivity tools — everything is available in one place.
+          </p>
+
+          {/* Why you'll love it */}
+          <div className="bg-blue-50 rounded-2xl px-5 py-4 mb-5 border border-blue-100">
+            <p className="text-xs font-extrabold uppercase tracking-wider text-blue-600 mb-3">
+              Why you'll love ToolBox Hub
+            </p>
+            <ul className="space-y-2">
+              {FEATURES.map(f => (
+                <li key={f} className="flex items-center gap-3">
+                  <span className="flex-shrink-0 w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center">
+                    <span className="text-emerald-600 text-[11px] font-extrabold">✓</span>
+                  </span>
+                  <span className="text-sm text-slate-700 font-medium">{f}</span>
+                </li>
+              ))}
+            </ul>
           </div>
 
-          <p className="text-slate-400 text-xs text-center mb-6 italic">
-            We're excited to have you here. Explore, create, and get more done!
+          {/* Mission */}
+          <div className="border-l-4 border-blue-500 pl-4 mb-5">
+            <p className="text-xs font-extrabold uppercase tracking-wider text-blue-600 mb-1">
+              🚀 Our Mission
+            </p>
+            <p className="text-sm text-slate-600 leading-relaxed italic">
+              "To make everyday tasks easier by providing powerful, free, and accessible
+              online tools for everyone."
+            </p>
+          </div>
+
+          <p className="text-slate-500 text-xs text-center leading-relaxed mb-6">
+            Thank you for visiting, and we hope ToolBox Hub becomes one of your favourite websites.{' '}
+            <span className="font-semibold text-slate-600">Enjoy exploring! 💙</span>
           </p>
 
           {/* Buttons */}
           <div className="flex flex-col sm:flex-row gap-3">
             <button
               onClick={() => close(true)}
-              className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-bold px-6 py-3 rounded-2xl transition-all hover:scale-[1.02] shadow-md hover:shadow-lg text-sm"
+              className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-bold px-6 py-3 rounded-2xl
+                transition-all hover:scale-[1.02] active:scale-[0.98] shadow-md hover:shadow-blue-300/60 hover:shadow-lg text-sm"
             >
               🚀 Start Exploring
             </button>
             <button
-              onClick={() => close()}
-              className="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-600 font-semibold px-6 py-3 rounded-2xl transition-all text-sm"
+              onClick={handleInstall}
+              className="flex-1 flex items-center justify-center gap-2 bg-slate-100 hover:bg-slate-200
+                text-slate-700 font-semibold px-6 py-3 rounded-2xl transition-all text-sm border border-slate-200"
             >
-              Maybe Later
+              <Smartphone className="w-4 h-4 text-slate-500" />
+              Save to Home Screen
             </button>
           </div>
         </div>
@@ -191,8 +206,8 @@ export default function WelcomeModal({ onDismiss }: WelcomeModalProps) {
         {/* Close × */}
         <button
           onClick={() => close()}
-          aria-label="Close welcome"
-          className="absolute top-4 right-4 text-white/70 hover:text-white transition-colors p-1.5 rounded-full hover:bg-white/10"
+          aria-label="Close welcome popup"
+          className="absolute top-4 right-4 text-white/70 hover:text-white transition-colors p-1.5 rounded-full hover:bg-white/15"
         >
           <X className="w-4 h-4" />
         </button>
