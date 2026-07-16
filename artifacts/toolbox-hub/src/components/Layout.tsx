@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'wouter';
-import { Wrench, Home, ChevronRight, Info, Shuffle, Sun, Moon } from 'lucide-react';
+import { Wrench, Home, ChevronRight, Info, Shuffle, Sun, Moon, Share2, Mail, Globe, ExternalLink, ChevronRight as Arr } from 'lucide-react';
 import { getToolByHref, TOOLS } from '../lib/tools';
 import { pushRecent, checkAchievement, ACHIEVEMENT_LABELS } from '../lib/toolPrefs';
 import { useTheme } from '../lib/theme';
@@ -111,7 +111,32 @@ export default function Layout({ children }: LayoutProps) {
   const pageTitle = tool?.title ?? STATIC_TITLES[location] ?? 'Tool';
 
   const { theme, toggle } = useTheme();
-  const [badge, setBadge] = useState<number | null>(null);
+  const [badge, setBadge]           = useState<number | null>(null);
+  const [nlEmail, setNlEmail]       = useState('');
+  const [nlSent, setNlSent]         = useState(false);
+  const [shareMsg, setShareMsg]     = useState('');
+
+  const handleShare = async () => {
+    const url  = window.location.origin + import.meta.env.BASE_URL;
+    const text = '🚀 Check out ToolBox Hub — 122+ free online tools for everyone. No account needed!';
+    if (navigator.share) {
+      try { await navigator.share({ title: 'ToolBox Hub', text, url }); return; } catch {}
+    }
+    try {
+      await navigator.clipboard.writeText(`${text} ${url}`);
+      setShareMsg('🔗 Link copied!');
+      setTimeout(() => setShareMsg(''), 2500);
+    } catch {}
+  };
+
+  const handleNewsletter = (e: React.FormEvent) => {
+    e.preventDefault();
+    const sub = encodeURIComponent(`Newsletter Subscription — ${nlEmail}`);
+    const body = encodeURIComponent(`Please add me to the ToolBox Hub newsletter.\n\nEmail: ${nlEmail}`);
+    window.open(`mailto:toolboxhub2@gmail.com?subject=${sub}&body=${body}`);
+    setNlSent(true);
+    setTimeout(() => { setNlSent(false); setNlEmail(''); }, 4000);
+  };
 
   useEffect(() => {
     if (!getToolByHref(location)) return;
@@ -226,58 +251,247 @@ export default function Layout({ children }: LayoutProps) {
       </main>
 
       {/* ── Footer ── */}
-      <footer className="bg-white border-t mt-auto">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+      <footer className="bg-slate-900 text-slate-300 mt-auto">
 
-            {/* Brand */}
-            <div className="col-span-2 md:col-span-1">
-              <div className="flex items-center gap-2 mb-3">
-                <div className="bg-blue-600 p-1.5 rounded-lg">
-                  <Wrench className="w-4 h-4 text-white" />
+        {/* ── Main grid ───────────────────────────────────────────────── */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 pb-10">
+          <div className="grid grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-8 pb-12 border-b border-slate-700/60">
+
+            {/* Brand col (spans 2) */}
+            <div className="col-span-2 lg:col-span-2 space-y-5">
+              {/* Logo */}
+              <div className="flex items-center gap-2.5">
+                <div className="bg-blue-500 p-2 rounded-xl">
+                  <Wrench className="w-5 h-5 text-white" />
                 </div>
-                <span className="font-bold text-gray-900">ToolBox Hub</span>
+                <div>
+                  <p className="font-extrabold text-white text-lg leading-none">ToolBox Hub</p>
+                  <p className="text-[11px] text-slate-400 mt-0.5">116+ FREE online tools</p>
+                </div>
               </div>
-              <p className="text-sm text-gray-500 leading-relaxed">
-                Free online tools that run entirely in your browser. No downloads, no accounts, no limits.
+
+              <p className="text-sm text-slate-400 leading-relaxed max-w-xs">
+                Built for everyone. Work smarter with powerful browser-based tools for PDFs, images,
+                writing, development, business, education, and more.
               </p>
+
+              {/* Badges */}
+              <div className="flex flex-wrap gap-2">
+                {['⚡ Fast', '🔒 Secure', '💯 Free Forever'].map(b => (
+                  <span key={b} className="text-xs font-semibold bg-slate-800 border border-slate-700 text-slate-300 px-3 py-1 rounded-full">{b}</span>
+                ))}
+              </div>
+
+              {/* Why ToolBox Hub */}
+              <div>
+                <p className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">❤️ Why ToolBox Hub?</p>
+                <ul className="space-y-1.5">
+                  {[
+                    '116+ Free Tools',
+                    'No Account Required',
+                    'No Downloads',
+                    'Works on Mobile & Desktop',
+                    'Fast & Secure',
+                    'Regularly Updated',
+                  ].map(r => (
+                    <li key={r} className="flex items-center gap-2 text-sm text-slate-400">
+                      <span className="text-emerald-400 font-bold">✔</span> {r}
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
 
-            {/* Explore */}
-            <div>
-              <h3 className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-3">Explore</h3>
+            {/* Explore col */}
+            <div className="col-span-1">
+              <p className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-4">🚀 Explore</p>
+              <ul className="space-y-2.5 text-sm">
+                <li><Link href="/" className="text-slate-400 hover:text-blue-400 transition-colors">All Tools</Link></li>
+                <li><Link href="/?q=new" className="text-slate-400 hover:text-blue-400 transition-colors">New Tools</Link></li>
+                <li><Link href="/?q=popular" className="text-slate-400 hover:text-blue-400 transition-colors">Trending</Link></li>
+                <li><Link href="/" className="text-slate-400 hover:text-blue-400 transition-colors">Categories</Link></li>
+                <li><Link href="/about" className="text-slate-400 hover:text-blue-400 transition-colors">Our Journey</Link></li>
+                <li><span className="text-slate-600 text-xs italic">Roadmap — coming soon</span></li>
+              </ul>
+
+              <p className="text-xs font-bold uppercase tracking-wider text-slate-500 mt-6 mb-3">Tool Types</p>
               <ul className="space-y-2 text-sm">
-                <li><Link href="/" className="text-gray-600 hover:text-blue-600 transition-colors">All Tools</Link></li>
-                <li><Link href="/about" className="text-gray-600 hover:text-blue-600 transition-colors">About</Link></li>
-                <li><Link href="/vision" className="text-gray-600 hover:text-blue-600 transition-colors">Our Journey</Link></li>
-                <li><span className="text-gray-400 text-xs italic">Roadmap — coming soon</span></li>
+                {['AI Tools','PDF Tools','Image Tools','Developer Tools','Writing Tools','Business Tools'].map(c => (
+                  <li key={c}><Link href="/" className="text-slate-400 hover:text-blue-400 transition-colors">{c}</Link></li>
+                ))}
               </ul>
             </div>
 
-            {/* Community */}
-            <div>
-              <h3 className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-3">Community</h3>
-              <ul className="space-y-2 text-sm">
-                <li><a href={mailto('Feedback — ToolBox Hub')} className="text-gray-600 hover:text-blue-600 transition-colors">Give Feedback</a></li>
-                <li><a href={mailto('Tool suggestion — ToolBox Hub')} className="text-gray-600 hover:text-blue-600 transition-colors">Suggest a Tool</a></li>
-                <li><a href={mailto('Contact — ToolBox Hub')} className="text-gray-600 hover:text-blue-600 transition-colors">Contact Us</a></li>
-                <li><a href={mailto('Bug Report — ToolBox Hub')} className="text-gray-600 hover:text-blue-600 transition-colors">Report a Bug</a></li>
+            {/* Community col */}
+            <div className="col-span-1">
+              <p className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-4">💙 Community</p>
+              <ul className="space-y-2.5 text-sm">
+                <li><a href={mailto('Feedback — ToolBox Hub')} className="text-slate-400 hover:text-blue-400 transition-colors">Give Feedback</a></li>
+                <li><a href={mailto('Tool Suggestion — ToolBox Hub')} className="text-slate-400 hover:text-blue-400 transition-colors">Suggest a Tool</a></li>
+                <li><a href={mailto('Contact — ToolBox Hub')} className="text-slate-400 hover:text-blue-400 transition-colors">Contact Us</a></li>
+                <li><a href={mailto('Bug Report — ToolBox Hub')} className="text-slate-400 hover:text-blue-400 transition-colors">Report a Bug</a></li>
+                <li><a href={mailto('Partnership Enquiry — ToolBox Hub')} className="text-slate-400 hover:text-blue-400 transition-colors">Become a Partner</a></li>
+                <li><a href={mailto('Feature Request — ToolBox Hub')} className="text-slate-400 hover:text-blue-400 transition-colors">Feature Request</a></li>
               </ul>
             </div>
 
-            {/* Legal */}
-            <div>
-              <h3 className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-3">Legal</h3>
-              <ul className="space-y-2 text-sm">
-                <li><Link href="/privacy" className="text-gray-600 hover:text-blue-600 transition-colors">Privacy Policy</Link></li>
-                <li><Link href="/terms" className="text-gray-600 hover:text-blue-600 transition-colors">Terms of Use</Link></li>
+            {/* Resources col */}
+            <div className="col-span-1">
+              <p className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-4">📚 Resources</p>
+              <ul className="space-y-2.5 text-sm">
+                <li><Link href="/help" className="text-slate-400 hover:text-blue-400 transition-colors">Help Center</Link></li>
+                <li><Link href="/faq" className="text-slate-400 hover:text-blue-400 transition-colors">Frequently Asked Questions</Link></li>
+                <li><span className="text-slate-400">Keyboard Shortcuts</span></li>
+                <li><span className="text-slate-400">Save to Home Screen</span></li>
+                <li><Link href="/privacy" className="text-slate-400 hover:text-blue-400 transition-colors">Privacy Policy</Link></li>
+                <li><Link href="/terms" className="text-slate-400 hover:text-blue-400 transition-colors">Terms of Use</Link></li>
+                <li><span className="text-slate-600 text-xs italic">Blog — Coming Soon</span></li>
               </ul>
             </div>
           </div>
 
-          <div className="mt-8 pt-6 border-t border-gray-100 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-gray-400">
-            <span>© {new Date().getFullYear()} ToolBox Hub — Free tools for everyone.</span>
-            <span>{APP_VERSION} · Made with care, runs entirely in your browser</span>
+          {/* ── Mid strip: Follow · Share · Newsletter ────────────────── */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 py-12 border-b border-slate-700/60">
+
+            {/* Follow */}
+            <div>
+              <p className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-4">🌍 Follow ToolBox Hub</p>
+              <ul className="space-y-3">
+                <li>
+                  <a href="https://x.com/toolboxhub?s=11" target="_blank" rel="noopener noreferrer"
+                    className="flex items-center gap-3 group">
+                    <span className="w-8 h-8 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center text-sm font-extrabold text-white group-hover:bg-blue-600 group-hover:border-blue-600 transition-colors">𝕏</span>
+                    <div>
+                      <p className="text-sm font-semibold text-slate-300 group-hover:text-white transition-colors">X (Twitter)</p>
+                      <p className="text-[11px] text-slate-500">@toolboxhub</p>
+                    </div>
+                    <ExternalLink className="w-3 h-3 text-slate-600 group-hover:text-blue-400 ml-auto transition-colors" />
+                  </a>
+                </li>
+                <li>
+                  <a href="mailto:toolboxhub2@gmail.com" className="flex items-center gap-3 group">
+                    <span className="w-8 h-8 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center group-hover:bg-blue-600 group-hover:border-blue-600 transition-colors">
+                      <Mail className="w-3.5 h-3.5 text-slate-400 group-hover:text-white" />
+                    </span>
+                    <div>
+                      <p className="text-sm font-semibold text-slate-300 group-hover:text-white transition-colors">Email</p>
+                      <p className="text-[11px] text-slate-500">toolboxhub2@gmail.com</p>
+                    </div>
+                  </a>
+                </li>
+                <li>
+                  <a href="https://tool-box-hub-1.replit.app" target="_blank" rel="noopener noreferrer"
+                    className="flex items-center gap-3 group">
+                    <span className="w-8 h-8 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center group-hover:bg-blue-600 group-hover:border-blue-600 transition-colors">
+                      <Globe className="w-3.5 h-3.5 text-slate-400 group-hover:text-white" />
+                    </span>
+                    <div>
+                      <p className="text-sm font-semibold text-slate-300 group-hover:text-white transition-colors">Website</p>
+                      <p className="text-[11px] text-slate-500">tool-box-hub-1.replit.app</p>
+                    </div>
+                    <ExternalLink className="w-3 h-3 text-slate-600 group-hover:text-blue-400 ml-auto transition-colors" />
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            {/* Share + Install */}
+            <div>
+              <p className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">⭐ Love ToolBox Hub?</p>
+              <p className="text-sm text-slate-400 leading-relaxed mb-4">
+                Help us grow by sharing with your friends, classmates, colleagues, and family.
+                Every share helps someone discover free tools.
+              </p>
+              <button
+                onClick={handleShare}
+                className="flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white font-bold text-sm px-5 py-2.5 rounded-xl transition-colors mb-2 w-full justify-center"
+              >
+                <Share2 className="w-4 h-4" />
+                {shareMsg || '🚀 Share ToolBox Hub'}
+              </button>
+              <p className="text-xs font-bold uppercase tracking-wider text-slate-500 mt-5 mb-2">📱 Install ToolBox Hub</p>
+              <p className="text-xs text-slate-500 mb-3">Save to your Home Screen for one-tap access. Works just like a mobile app.</p>
+              <a
+                href="https://tool-box-hub-1.replit.app" target="_blank" rel="noopener noreferrer"
+                className="flex items-center gap-2 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 hover:text-white font-semibold text-sm px-5 py-2.5 rounded-xl transition-colors w-full justify-center"
+              >
+                📌 Add to Home Screen
+              </a>
+            </div>
+
+            {/* Newsletter */}
+            <div>
+              <p className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">🔔 Stay Updated</p>
+              <p className="text-sm text-slate-400 leading-relaxed mb-4">
+                Be the first to know when new tools are released.
+              </p>
+              {nlSent ? (
+                <div className="rounded-xl bg-emerald-900/30 border border-emerald-700/50 px-4 py-3 text-sm text-emerald-400 font-semibold text-center">
+                  ✅ Subscribed! Thank you.
+                </div>
+              ) : (
+                <form onSubmit={handleNewsletter} className="space-y-2">
+                  <input
+                    type="email"
+                    required
+                    placeholder="your@email.com"
+                    value={nlEmail}
+                    onChange={e => setNlEmail(e.target.value)}
+                    className="w-full rounded-xl bg-slate-800 border border-slate-700 text-slate-200 placeholder:text-slate-600 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  />
+                  <button
+                    type="submit"
+                    className="w-full bg-slate-700 hover:bg-blue-600 text-white font-bold text-sm py-2.5 rounded-xl transition-colors"
+                  >
+                    📧 Subscribe to Newsletter
+                  </button>
+                </form>
+              )}
+            </div>
+          </div>
+
+          {/* ── Quote ────────────────────────────────────────────────────── */}
+          <div className="py-10 text-center border-b border-slate-700/60">
+            <p className="text-slate-500 text-xs uppercase tracking-widest font-semibold mb-2">💬 Our Promise</p>
+            <blockquote className="text-xl sm:text-2xl font-extrabold text-white leading-snug max-w-xl mx-auto">
+              "One website. Endless possibilities.<br />
+              <span className="text-blue-400">Every tool you need.</span>"
+            </blockquote>
+          </div>
+
+          {/* ── Bottom bar ───────────────────────────────────────────────── */}
+          <div className="pt-8 space-y-4">
+            {/* Attribution */}
+            <div className="text-center">
+              <p className="text-sm text-slate-400">
+                Made with <span className="text-rose-400">❤️</span> by{' '}
+                <span className="font-semibold text-slate-300">Oluwatobi Ayodele</span>{' '}
+                in Nigeria 🇳🇬
+              </p>
+              <p className="text-xs text-slate-600 mt-1 max-w-lg mx-auto leading-relaxed">
+                Empowering students, creators, developers, businesses, teachers, freelancers,
+                and professionals with free productivity tools.
+              </p>
+            </div>
+
+            {/* Legal links */}
+            <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-1 text-xs text-slate-600">
+              <Link href="/privacy" className="hover:text-slate-400 transition-colors">Privacy Policy</Link>
+              <span>·</span>
+              <Link href="/terms" className="hover:text-slate-400 transition-colors">Terms of Use</Link>
+              <span>·</span>
+              <a href={mailto('Contact — ToolBox Hub')} className="hover:text-slate-400 transition-colors">Contact</a>
+            </div>
+
+            {/* Copyright + version */}
+            <div className="text-center space-y-1">
+              <p className="text-xs text-slate-600">
+                © {new Date().getFullYear()} ToolBox Hub. All Rights Reserved.
+              </p>
+              <p className="text-[11px] text-slate-700">
+                {APP_VERSION} · 116+ Free Tools · Built for Everyone · Growing Every Week 🚀
+              </p>
+            </div>
           </div>
         </div>
       </footer>
